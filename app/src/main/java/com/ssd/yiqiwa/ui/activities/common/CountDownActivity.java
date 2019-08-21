@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.ui.activities.MainActivity;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.utils.Constants;
 
@@ -67,7 +68,7 @@ public class CountDownActivity extends BaseActivity {
     private void checkToJump() {
         int isFirstin = SPStaticUtils.getInt(Constants.LOGIN_VERSION_INDEX);
         if (isFirstin > 0) {
-            startActivity(new Intent(CountDownActivity.this, LoginActivity.class));
+            startActivity(new Intent(CountDownActivity.this, MainActivity.class));
         } else {
             startActivity(new Intent(CountDownActivity.this, GuideActivity.class));
             SPStaticUtils.put( Constants.LOGIN_VERSION_INDEX, 1);

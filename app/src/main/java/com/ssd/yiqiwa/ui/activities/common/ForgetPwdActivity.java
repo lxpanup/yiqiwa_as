@@ -19,7 +19,7 @@ public class ForgetPwdActivity extends BaseActivity {
 
     @Override
     public Object offerLayout() {
-        return R.layout.z_activity_login;
+        return R.layout.z_activity_forgetpwd;
     }
 
     @Override

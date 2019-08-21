@@ -2,18 +2,32 @@ package com.ssd.yiqiwa.ui.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.custom.SpecialTab;
 import com.ssd.yiqiwa.custom.SpecialTabRound;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
+import com.ssd.yiqiwa.ui.activities.common.CityListActivity;
 import com.ssd.yiqiwa.ui.adapter.MyViewPagerAdapter;
 import com.ssd.yiqiwa.ui.adapter.ViewPagerAdapter;
+import com.ssd.yiqiwa.utils.Constants;
+import com.zaaach.citypicker.CityPicker;
+import com.zaaach.citypicker.adapter.OnPickListener;
+import com.zaaach.citypicker.model.City;
+import com.zaaach.citypicker.model.HotCity;
+import com.zaaach.citypicker.model.LocateState;
+import com.zaaach.citypicker.model.LocatedCity;
 //import com.ssd.yiqiwa.utils.StatusBarUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
@@ -106,4 +120,38 @@ public class MainActivity extends BaseActivity {
     public void destory() {
 
     }
+
+
+
+    public void showCityList(TextView textView){
+        CityPicker.from(MainActivity.this)
+                .setHotCities(Constants.getHotCitys())
+                .setOnPickListener(new OnPickListener() {
+                    @Override
+                    public void onPick(int position, City data) {
+                        textView.setText(data.getName());
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Toast.makeText(getApplicationContext(), "取消选择", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onLocate() {
+                        //开始定位，这里模拟一下定位
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                CityPicker.from(MainActivity.this).locateComplete(new LocatedCity("深圳", "广东", "101280601"), LocateState.SUCCESS);
+//                            }
+//                        }, 3000);
+                    }
+                })
+                .show();
+    }
+
+
+
+
 }

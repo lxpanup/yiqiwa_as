@@ -23,6 +23,8 @@ import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Create by luopan on 2019/03/14
@@ -36,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private Unbinder mBinder;
 
     private ProgressDialog dialog;
+    private Retrofit retrofit;
 
     /**
      * 加 final 不让子类 重写 onCreate，让其实现我们想要让他实现的方法
@@ -59,6 +62,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.setMessage("正在请求...");
 
+        retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.BASE_URL) // 设置 网络请求 Url
+                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+                .build();
 
     }
 
@@ -189,4 +196,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
+    /**
+     * 基础请求访问地址
+     * @return
+     */
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
 }

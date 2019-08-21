@@ -25,4 +25,7 @@
 
     <color name="font_gray_color">#C0C0C0</color>
 
+    <color name="color_red">#FD2E4A</color>
+    <color name="color_green">#13D1BE</color>
+
 </resources>

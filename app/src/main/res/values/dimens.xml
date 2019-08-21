@@ -23,4 +23,6 @@
     <dimen name="dimen_border">16dp</dimen>
     <dimen name="dimen_height">46dp</dimen>
 
+    <dimen name="custom_section_height">36dp</dimen>
+
 </resources>

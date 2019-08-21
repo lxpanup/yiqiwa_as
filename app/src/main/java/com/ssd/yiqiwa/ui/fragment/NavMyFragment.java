@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.ui.activities.base.BaseFragment;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.SettingActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.UpdateUserActivity;
 import com.ssd.yiqiwa.ui.adapter.MessageListAdapter;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class NavMyFragment extends Fragment {
+public class NavMyFragment extends BaseFragment {
 
     public static NavMyFragment newInstance() {
         NavMyFragment fragment = new NavMyFragment();
@@ -30,25 +31,36 @@ public class NavMyFragment extends Fragment {
         return fragment;
     }
 
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//    }
+//
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.z_fragment_navigation_my, container, false);
+//        ButterKnife.bind(this, view);
+//        initView();
+//        return view;
+//    }
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int offerLayout() {
+        return R.layout.z_fragment_navigation_my;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.z_fragment_navigation_my, container, false);
-        ButterKnife.bind(this, view);
-        initView();
-        return view;
-    }
-
-    public void initView() {
-
-
+    public void onBindView() {
 
     }
+
+    @Override
+    public void destory() {
+
+    }
+
+
 
 
     @OnClick({R.id.img_my_setting,R.id.img_my_head})

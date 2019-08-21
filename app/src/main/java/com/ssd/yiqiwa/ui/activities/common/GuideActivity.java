@@ -6,6 +6,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.ui.activities.MainActivity;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.widget.GlideImageLoader;
 import com.youth.banner.Banner;
@@ -60,7 +61,7 @@ public class GuideActivity extends BaseActivity {
                     btnStart.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(GuideActivity.this, LoginActivity.class));
+                            startActivity(new Intent(GuideActivity.this, MainActivity.class));
                             finish();
                         }
                     });

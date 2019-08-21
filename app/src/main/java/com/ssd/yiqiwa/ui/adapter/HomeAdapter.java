@@ -2,6 +2,8 @@ package com.ssd.yiqiwa.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -18,10 +21,20 @@ import com.ssd.yiqiwa.base.Type;
 import com.ssd.yiqiwa.model.entity.HomeBannerImages;
 import com.ssd.yiqiwa.model.entity.HomeBase;
 import com.ssd.yiqiwa.model.entity.HomeTop;
+import com.ssd.yiqiwa.ui.activities.MainActivity;
+import com.ssd.yiqiwa.ui.activities.chuzhu.CZListActivity;
+import com.ssd.yiqiwa.ui.activities.common.CityListActivity;
 import com.ssd.yiqiwa.widget.CirclePageIndicator;
 import com.ssd.yiqiwa.widget.FooterLoading;
 import com.ssd.yiqiwa.widget.GlideImageLoader;
 import com.youth.banner.Banner;
+import com.zaaach.citypicker.CityPicker;
+import com.zaaach.citypicker.adapter.OnPickListener;
+import com.zaaach.citypicker.model.City;
+import com.zaaach.citypicker.model.LocateState;
+import com.zaaach.citypicker.model.LocatedCity;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,6 +117,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             holder.rcy_home_special.setLayoutManager(layoutManager);//这里用线性宫格显示 类似于gridview
             holder.rcy_home_special.setAdapter(new HomeProductAdapter(context,listProduct));
+            holder.rcy_home_special.setFocusable(false);
         } else if(viewHolder instanceof RecommendHolder){
 
         }
@@ -133,6 +147,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class CarouselHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.banner)
         Banner banner;
+        @BindView(R.id.txt_city)
+        TextView txt_city;
 
 
         CarouselHolder(View itemView) {
@@ -148,6 +164,18 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .start();
 
         }
+
+        @OnClick({R.id.lil_city_list})
+        public void onViewClick(View v){
+            switch (v.getId()){
+                case R.id.lil_city_list:
+//                    activity.startActivity(new Intent(context, CityListActivity.class));
+                    ((MainActivity)activity).showCityList(txt_city);
+
+
+                    break;
+            }
+        }
     }
 
 
@@ -156,17 +184,16 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         BoutiqueHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
         }
 
         @OnClick({R.id.img_home_woyaochengzhu,R.id.img_home_woyaogoumai})
         public void onViewClick(View v){
             switch (v.getId()){
                 case R.id.img_home_woyaochengzhu:
-                    ToastUtils.showLong("我的承租");
+                    activity.startActivity(new Intent(context, CZListActivity.class));
                     break;
                 case R.id.img_home_woyaogoumai:
-                    ToastUtils.showLong("我的购买");
+                    activity.startActivity(new Intent(context, CZListActivity.class));
                     break;
             }
         }

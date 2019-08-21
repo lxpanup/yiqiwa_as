@@ -1,219 +1,231 @@
 package com.ssd.yiqiwa.model.entity;
 
-/**
- * 创建接收服务器返回数据的类
- *
- * @author Joe
- */
-public class LoginUserBean {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    /**
-     * Code : 1
-     * Msg : 操作成功
-     * Data : null
-     */
+public class LoginUserBean implements Parcelable {
 
-    /**
-     * 状态码
-     */
-    private int code;
-    /**
-     * 提示信息
-     */
-    private String msg;
-    /**
-     * 组合信息
-     */
-    private Data data;
+    private String birthday;
+    private String cardBank;
+    private String cardNumber;
+    private String contactPhone;
+    private String createDate;
+    private String lastLoginTime;
+    private int leftScore;
+    private String loginPhone;
+    private String myCode;
+    private String nickName;
+    private String password;
+    private String portrait;
+    private String recommendCode;
+    private String salt;
+    private int status;
+    private int totalScore;
+    private int type;
+    private int uId;
 
-
-    public int getCode() {
-        return code;
+    protected LoginUserBean(Parcel in) {
+        birthday = in.readString();
+        cardBank = in.readString();
+        cardNumber = in.readString();
+        contactPhone = in.readString();
+        createDate = in.readString();
+        lastLoginTime = in.readString();
+        leftScore = in.readInt();
+        loginPhone = in.readString();
+        myCode = in.readString();
+        nickName = in.readString();
+        password = in.readString();
+        portrait = in.readString();
+        recommendCode = in.readString();
+        salt = in.readString();
+        status = in.readInt();
+        totalScore = in.readInt();
+        type = in.readInt();
+        uId = in.readInt();
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public static final Creator<LoginUserBean> CREATOR = new Creator<LoginUserBean>() {
+        @Override
+        public LoginUserBean createFromParcel(Parcel in) {
+            return new LoginUserBean(in);
+        }
+
+        @Override
+        public LoginUserBean[] newArray(int size) {
+            return new LoginUserBean[size];
+        }
+    };
+
+    public String getBirthday() {
+        return birthday;
     }
 
-    public String getMsg() {
-        return msg;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public String getCardBank() {
+        return cardBank;
     }
 
-    public Data getData() {
-        return data;
+    public void setCardBank(String cardBank) {
+        this.cardBank = cardBank;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public static class Data{
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
 
-        private String birthday;
-        private String cardBank;
-        private String cardNumber;
-        private String contactPhone;
-        private String createDate;
-        private String lastLoginTime;
-        private int leftScore;
-        private String loginPhone;
-        private String myCode;
-        private String nickName;
-        private String password;
-        private String portrait;
-        private String recommendCode;
-        private String salt;
-        private int status;
-        private int totalScore;
-        private int type;
-        private int uId;
+    public String getContactPhone() {
+        return contactPhone;
+    }
 
-        public String getBirthday() {
-            return birthday;
-        }
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
 
-        public void setBirthday(String birthday) {
-            this.birthday = birthday;
-        }
+    public String getCreateDate() {
+        return createDate;
+    }
 
-        public String getCardBank() {
-            return cardBank;
-        }
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
 
-        public void setCardBank(String cardBank) {
-            this.cardBank = cardBank;
-        }
+    public String getLastLoginTime() {
+        return lastLoginTime;
+    }
 
-        public String getCardNumber() {
-            return cardNumber;
-        }
+    public void setLastLoginTime(String lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
-        public void setCardNumber(String cardNumber) {
-            this.cardNumber = cardNumber;
-        }
+    public int getLeftScore() {
+        return leftScore;
+    }
 
-        public String getContactPhone() {
-            return contactPhone;
-        }
+    public void setLeftScore(int leftScore) {
+        this.leftScore = leftScore;
+    }
 
-        public void setContactPhone(String contactPhone) {
-            this.contactPhone = contactPhone;
-        }
+    public String getLoginPhone() {
+        return loginPhone;
+    }
 
-        public String getCreateDate() {
-            return createDate;
-        }
+    public void setLoginPhone(String loginPhone) {
+        this.loginPhone = loginPhone;
+    }
 
-        public void setCreateDate(String createDate) {
-            this.createDate = createDate;
-        }
+    public String getMyCode() {
+        return myCode;
+    }
 
-        public String getLastLoginTime() {
-            return lastLoginTime;
-        }
+    public void setMyCode(String myCode) {
+        this.myCode = myCode;
+    }
 
-        public void setLastLoginTime(String lastLoginTime) {
-            this.lastLoginTime = lastLoginTime;
-        }
+    public String getNickName() {
+        return nickName;
+    }
 
-        public int getLeftScore() {
-            return leftScore;
-        }
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
-        public void setLeftScore(int leftScore) {
-            this.leftScore = leftScore;
-        }
+    public String getPassword() {
+        return password;
+    }
 
-        public String getLoginPhone() {
-            return loginPhone;
-        }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-        public void setLoginPhone(String loginPhone) {
-            this.loginPhone = loginPhone;
-        }
+    public String getPortrait() {
+        return portrait;
+    }
 
-        public String getMyCode() {
-            return myCode;
-        }
+    public void setPortrait(String portrait) {
+        this.portrait = portrait;
+    }
 
-        public void setMyCode(String myCode) {
-            this.myCode = myCode;
-        }
+    public String getRecommendCode() {
+        return recommendCode;
+    }
 
-        public String getNickName() {
-            return nickName;
-        }
+    public void setRecommendCode(String recommendCode) {
+        this.recommendCode = recommendCode;
+    }
 
-        public void setNickName(String nickName) {
-            this.nickName = nickName;
-        }
+    public String getSalt() {
+        return salt;
+    }
 
-        public String getPassword() {
-            return password;
-        }
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
-        public void setPassword(String password) {
-            this.password = password;
-        }
+    public int getStatus() {
+        return status;
+    }
 
-        public String getPortrait() {
-            return portrait;
-        }
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
-        public void setPortrait(String portrait) {
-            this.portrait = portrait;
-        }
+    public int getTotalScore() {
+        return totalScore;
+    }
 
-        public String getRecommendCode() {
-            return recommendCode;
-        }
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
 
-        public void setRecommendCode(String recommendCode) {
-            this.recommendCode = recommendCode;
-        }
+    public int getType() {
+        return type;
+    }
 
-        public String getSalt() {
-            return salt;
-        }
+    public void setType(int type) {
+        this.type = type;
+    }
 
-        public void setSalt(String salt) {
-            this.salt = salt;
-        }
+    public int getuId() {
+        return uId;
+    }
 
-        public int getStatus() {
-            return status;
-        }
+    public void setuId(int uId) {
+        this.uId = uId;
+    }
 
-        public void setStatus(int status) {
-            this.status = status;
-        }
 
-        public int getTotalScore() {
-            return totalScore;
-        }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-        public void setTotalScore(int totalScore) {
-            this.totalScore = totalScore;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public int getuId() {
-            return uId;
-        }
-
-        public void setuId(int uId) {
-            this.uId = uId;
-        }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(birthday);
+        dest.writeString(cardBank);
+        dest.writeString(cardNumber);
+        dest.writeString(contactPhone);
+        dest.writeString(createDate);
+        dest.writeString(lastLoginTime);
+        dest.writeInt(leftScore);
+        dest.writeString(loginPhone);
+        dest.writeString(myCode);
+        dest.writeString(nickName);
+        dest.writeString(password);
+        dest.writeString(portrait);
+        dest.writeString(recommendCode);
+        dest.writeString(salt);
+        dest.writeInt(status);
+        dest.writeInt(totalScore);
+        dest.writeInt(type);
+        dest.writeInt(uId);
     }
 }

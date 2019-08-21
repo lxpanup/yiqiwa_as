@@ -32,9 +32,6 @@
 
 
 
-
-
-
          <!--注册-->
         <LinearLayout
             android:id="@+id/lil_login_register"
@@ -44,8 +41,9 @@
             android:layout_marginTop="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:paddingBottom="30dp"
             android:padding="20dp"
-            android:background="@drawable/bg_write_border">
+            android:background="@drawable/bg_write_boder_2">
 
             <RelativeLayout
                 android:layout_width="match_parent"

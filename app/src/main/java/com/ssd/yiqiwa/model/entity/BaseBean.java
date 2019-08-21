@@ -5,7 +5,7 @@ package com.ssd.yiqiwa.model.entity;
  *
  * @author Joe
  */
-public class BaseBean {
+public class BaseBean<T> {
 
     /**
      * Code : 1
@@ -24,7 +24,7 @@ public class BaseBean {
     /**
      * 组合信息
      */
-    private String data;
+    private T data;
 
 
     public int getCode() {
@@ -43,11 +43,11 @@ public class BaseBean {
         this.msg = msg;
     }
 
-    public String getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

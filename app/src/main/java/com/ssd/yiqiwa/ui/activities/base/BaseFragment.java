@@ -1,7 +1,9 @@
 package com.ssd.yiqiwa.ui.activities.base;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,16 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.utils.Constants;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.blankj.utilcode.util.Utils.runOnUiThread;
 
@@ -30,18 +38,23 @@ import static com.blankj.utilcode.util.Utils.runOnUiThread;
  */
 @SuppressLint("Registered")
 public abstract class BaseFragment extends Fragment {
+    protected Context context;
+    protected Activity activity;
     private View mConvertView;
     private Unbinder mBinder;
 
     private ProgressDialog dialog;
 
-    /**
-     * 加 final 不让子类 重写 onCreate，让其实现我们想要让他实现的方法
-     */
+
+    private Retrofit retrofit;
+
+    @Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mConvertView = convertView();
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mConvertView = inflater.inflate(offerLayout(), container, false);
+        activity = getActivity();
+        context = activity.getApplicationContext();
+        ButterKnife.bind(this, mConvertView);
         if (mConvertView == null) {
             // 传其他资源id 时的处理（只能传布局资源id ）
             throw new ClassCastException("view convert fail，check your resource id  be layout resource");
@@ -49,21 +62,25 @@ public abstract class BaseFragment extends Fragment {
             mBinder = ButterKnife.bind(getActivity());
             onBindView();
         }
-        //沉浸式状态栏
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.BASE_URL) // 设置 网络请求 Url
+                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+                .build();
 
         dialog = new ProgressDialog(getActivity());
         dialog.setCancelable(false);
         dialog.setMessage("正在请求...");
-
-
+        return mConvertView;
     }
+
 
     /**
      * 提供布局
      * 可以为 资源id
      * 可以为 view
      */
-    public abstract Object offerLayout();
+    protected abstract int offerLayout();
 
     /**
      * 处理view。 用户做自己的工作
@@ -71,24 +88,6 @@ public abstract class BaseFragment extends Fragment {
     public abstract void onBindView();
 
     public abstract void destory();
-
-    /**
-     * view的处理
-     * 实现类 传布局资源ID 或者传view
-     * 此处进行统一处理
-     */
-    private View convertView() {
-        View view = null;
-        if (offerLayout() instanceof Integer) {
-            view = LayoutInflater.from(getActivity()).inflate((Integer) offerLayout(), null, false);
-        } else if (offerLayout() instanceof View) {
-            view = (View) offerLayout();
-        } else {
-            throw new IllegalArgumentException("offerLayout only be View or be Resource Id");
-        }
-        return view;
-    }
-
 
 
     /**
@@ -125,7 +124,6 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * 隐藏加载框
-     *
      */
     public void hideDialog() {
         if (dialog.isShowing()) {
@@ -147,6 +145,11 @@ public abstract class BaseFragment extends Fragment {
         Toast.makeText(getActivity(), content, Toast.LENGTH_LONG).show();
     }
 
+
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
+
     /**
      * ButterKnife的解绑
      */
@@ -161,7 +164,4 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroy();
         destory();
     }
-
-
-
 }
