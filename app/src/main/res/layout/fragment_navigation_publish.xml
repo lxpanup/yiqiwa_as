@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_height"
+        android:background="@color/colorPrimary"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#ff00d98b">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="发布"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/img_head_share"
+            android:layout_width="68dp"
+            android:layout_height="41dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:text="我的发布"/>
+
+
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlt_fabu_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#fff"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_fabu_01"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@mipmap/ic_fabu_01"/>
+
+
+                <TextView
+                    android:id="@+id/txt_fabu_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/img_fabu_01"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_toEndOf="@+id/img_fabu_01"
+                    android:layout_toRightOf="@+id/img_fabu_01"
+                    android:text="承租发布"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_fabu_01"
+                    android:layout_alignLeft="@+id/txt_fabu_01"
+                    android:layout_marginLeft="-2dp"
+                    android:layout_marginTop="9dp"
+                    android:text="发布承租挖掘机，产品，机型，大小等信息。"
+                    android:textColor="#ff000000"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlt_fabu_02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_fabu_02"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@mipmap/ic_fabu_02"/>
+
+
+                <TextView
+                    android:id="@+id/txt_fabu_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_alignTop="@+id/img_fabu_02"
+                    android:layout_toEndOf="@+id/img_fabu_02"
+                    android:layout_toRightOf="@+id/img_fabu_02"
+                    android:text="承租发布"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_fabu_02"
+                    android:layout_alignLeft="@+id/txt_fabu_02"
+                    android:layout_marginLeft="-2dp"
+                    android:layout_marginTop="9dp"
+                    android:text="发布承租挖掘机，产品，机型，大小等信息。"
+                    android:textColor="#ff000000"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlt_fabu_03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_fabu_03"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@mipmap/ic_fabu_03"/>
+
+
+                <TextView
+                    android:id="@+id/txt_fabu_03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_alignTop="@+id/img_fabu_03"
+                    android:layout_toEndOf="@+id/img_fabu_03"
+                    android:layout_toRightOf="@+id/img_fabu_03"
+                    android:text="承租发布"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_fabu_03"
+                    android:layout_alignLeft="@+id/txt_fabu_03"
+                    android:layout_marginLeft="-2dp"
+                    android:layout_marginTop="9dp"
+                    android:text="发布承租挖掘机，产品，机型，大小等信息。"
+                    android:textColor="#ff000000"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlt_fabu_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_fabu_04"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@mipmap/ic_fabu_04"/>
+
+
+                <TextView
+                    android:id="@+id/txt_fabu_04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_alignTop="@+id/img_fabu_04"
+                    android:layout_toEndOf="@+id/img_fabu_04"
+                    android:layout_toRightOf="@+id/img_fabu_04"
+                    android:text="承租发布"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_fabu_04"
+                    android:layout_alignLeft="@+id/txt_fabu_04"
+                    android:layout_marginLeft="-2dp"
+                    android:layout_marginTop="9dp"
+                    android:text="发布承租挖掘机，产品，机型，大小等信息。"
+                    android:textColor="#ff000000"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlt_fabu_05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_fabu_05"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@mipmap/ic_fabu_05"/>
+
+
+                <TextView
+                    android:id="@+id/txt_fabu_05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_alignTop="@+id/img_fabu_05"
+                    android:layout_toEndOf="@+id/img_fabu_05"
+                    android:layout_toRightOf="@+id/img_fabu_05"
+                    android:text="承租发布"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_fabu_05"
+                    android:layout_alignLeft="@+id/txt_fabu_05"
+                    android:layout_marginLeft="-2dp"
+                    android:layout_marginTop="9dp"
+                    android:text="发布承租挖掘机，产品，机型，大小等信息。"
+                    android:textColor="#ff000000"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlt_fabu_06"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/img_fabu_06"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@mipmap/ic_fabu_06"/>
+
+
+                <TextView
+                    android:id="@+id/txt_fabu_06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_alignTop="@+id/img_fabu_06"
+                    android:layout_toEndOf="@+id/img_fabu_06"
+                    android:layout_toRightOf="@+id/img_fabu_06"
+                    android:text="承租发布"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_fabu_06"
+                    android:layout_alignLeft="@+id/txt_fabu_06"
+                    android:layout_marginLeft="-2dp"
+                    android:layout_marginTop="9dp"
+                    android:text="发布承租挖掘机，产品，机型，大小等信息。"
+                    android:textColor="#ff000000"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

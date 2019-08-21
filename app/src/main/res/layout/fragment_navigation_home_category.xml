@@ -1,0 +1,124 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_tmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@mipmap/ic_home_top_01"
+            android:gravity="center"
+            android:text="信息费"
+            android:textColor="@color/font_second_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_suan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@mipmap/ic_home_top_02"
+            android:gravity="center"
+            android:text="雇主承租"
+            android:textColor="@color/font_second_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_global"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@mipmap/ic_home_top_03"
+            android:gravity="center"
+            android:text="机主出租"
+            android:textColor="@color/font_second_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_wai"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@mipmap/ic_home_top_04"
+            android:gravity="center"
+            android:text="二手购买"
+            android:textColor="@color/font_second_color"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_charge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@mipmap/ic_home_top_05"
+            android:gravity="center"
+            android:text="二手出售"
+            android:textColor="@color/font_second_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_pig"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@mipmap/ic_home_top_06"
+            android:gravity="center"
+            android:text="操作手服务"
+            android:textColor="@color/font_second_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_gold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@mipmap/ic_home_top_07"
+            android:gravity="center"
+            android:text="维修配件"
+            android:textColor="@color/font_second_color"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_family"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableTop="@mipmap/ic_home_top_08"
+            android:gravity="center"
+            android:text="场地服务"
+            android:textColor="@color/font_second_color"
+            android:textSize="12sp" />
+
+
+
+    </LinearLayout>
+</LinearLayout>

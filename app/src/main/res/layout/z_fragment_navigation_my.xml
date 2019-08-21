@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_height"
+        android:background="@color/colorPrimary"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/bg_my_head" />
+
+
+                <ImageView
+                    android:id="@+id/img_my_head"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="50dp"
+                    android:padding="2dp"
+                    android:background="@mipmap/bg_head_img"
+                    android:src="@mipmap/ic_launcher_round"/>
+
+
+                <TextView
+                    android:id="@+id/txt_my_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/img_my_head"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@+id/img_my_head"
+                    android:layout_toRightOf="@+id/img_my_head"
+                    android:text="Adriana"
+                    android:textColor="#ffffffff"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/txt_my_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_my_name"
+                    android:layout_alignStart="@+id/txt_my_name"
+                    android:layout_alignLeft="@+id/txt_my_name"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="18dp"
+                    android:text="18719043333"
+                    android:textColor="#ffffffff"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img_my_setting"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="15dp"
+                    app:srcCompat="@mipmap/ic_setting" />
+
+
+
+                <LinearLayout
+                    android:layout_below="@+id/img_my_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="69dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg_write_boder_2">
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="465"
+                            android:textColor="#ff000000"
+                            android:textSize="18sp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="积分"
+                            android:textColor="#ff000000"
+                            android:textSize="14sp"
+                            />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="465"
+                            android:textColor="#ff000000"
+                            android:textSize="18sp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="积分"
+                            android:textColor="#ff000000"
+                            android:textSize="14sp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="465"
+                            android:textColor="#ff000000"
+                            android:textSize="18sp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="积分"
+                            android:textColor="#ff000000"
+                            android:textSize="14sp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_write_boder_2"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="基本信息"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp"
+                    />
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:columnCount="4"
+                    android:alignmentMode="alignBounds"
+                    android:orientation="horizontal"
+                    android:rowCount="5"
+                    android:useDefaultMargins="false">
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_04"
+                        android:gravity="center"
+                        android:text="二维码"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_05"
+                        android:gravity="center"
+                        android:text="简历"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_10"
+                        android:gravity="center"
+                        android:text="我的发帖"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_09"
+                        android:gravity="center"
+                        android:text="我的论坛"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                </GridLayout>
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_write_boder_2"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的发布"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp" />
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:columnCount="4"
+                    android:alignmentMode="alignBounds"
+                    android:orientation="horizontal"
+                    android:rowCount="5"
+                    android:useDefaultMargins="false">
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="7dp"
+                        android:drawableTop="@mipmap/ic_my_logo_15"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="出租信息"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp" />
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_03"
+                        android:gravity="center"
+                        android:text="二手购买"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_14"
+                        android:gravity="center"
+                        android:text="招聘信息"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_11"
+                        android:gravity="center"
+                        android:text="承租信息"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="7dp"
+                        android:drawableTop="@mipmap/ic_my_logo_01"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="二手出售"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp" />
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_13"
+                        android:gravity="center"
+                        android:text="应聘信息"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+                </GridLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_write_boder_2"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的交易记录"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp"
+                    />
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:columnCount="4"
+                    android:alignmentMode="alignBounds"
+                    android:orientation="horizontal"
+                    android:rowCount="5"
+                    android:useDefaultMargins="false">
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_06"
+                        android:gravity="center"
+                        android:text="租赁记录"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_07"
+                        android:gravity="center"
+                        android:text="购买记录"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                </GridLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_write_boder_2"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="区域管理"
+                    android:textColor="#ff000000"
+                    android:textSize="15sp"
+                    />
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:columnCount="4"
+                    android:alignmentMode="alignBounds"
+                    android:orientation="horizontal"
+                    android:rowCount="5"
+                    android:useDefaultMargins="false">
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_12"
+                        android:gravity="center"
+                        android:text="预约订单"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_02"
+                        android:gravity="center"
+                        android:text="跟进订单"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@mipmap/ic_my_logo_08"
+                        android:gravity="center"
+                        android:text="历史订单"
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/font_second_color"
+                        android:textSize="13sp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="7dp"/>
+
+
+                </GridLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
