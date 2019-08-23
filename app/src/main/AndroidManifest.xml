@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
@@ -17,7 +16,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.common.CountDownActivity">
+        <activity android:name=".ui.activities.chuzhu.CZPublishActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,9 +55,9 @@
         <activity android:name=".ui.activities.chuzhu.CZDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activities.chuzhu.CZPublishActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"/>
+        <!--<activity android:name=".ui.activities.chuzhu.CZPublishActivity"-->
+            <!--android:configChanges="orientation|screenSize|keyboardHidden"-->
+            <!--android:screenOrientation="portrait"/>-->
         <activity android:name=".ui.activities.gerenzhongxing.VersionActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"/>
@@ -68,7 +67,17 @@
         <activity android:name=".ui.activities.gerenzhongxing.UpdateUserActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"/>
-        <!--<activity android:name=".ui.activities.chuzhu.CZPublishActivity" />-->
+
+
+        <!--<provider-->
+            <!--android:name="androidx.core.content.FileProvider"-->
+            <!--android:authorities="com.zhihu.matisse.sample.fileprovider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/file_paths_public"></meta-data>-->
+        <!--</provider>-->
 
     </application>
 

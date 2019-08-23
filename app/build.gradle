@@ -54,7 +54,7 @@ dependencies {
     // 沉浸式状态
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
     // 相册
-    implementation 'com.zhihu.android:matisse:0.5.1-beta1'
+    implementation 'com.zhihu.android:matisse:0.5.2-beta2'
     //glide 图片缓存
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     // 图片缓存
@@ -81,5 +81,10 @@ dependencies {
     //检测内存泄漏
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+//    implementation "androidx.appcompat:appcompat:1.0.2"
+//    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+//    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+//    implementation 'com.squareup.picasso:picasso:2.5.2'
 
 }

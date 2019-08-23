@@ -1,11 +1,13 @@
 package com.ssd.yiqiwa.ui.activities;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.os.Handler;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,20 +16,25 @@ import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.custom.SpecialTab;
 import com.ssd.yiqiwa.custom.SpecialTabRound;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
-import com.ssd.yiqiwa.ui.activities.common.CityListActivity;
-import com.ssd.yiqiwa.ui.adapter.MyViewPagerAdapter;
 import com.ssd.yiqiwa.ui.adapter.ViewPagerAdapter;
 import com.ssd.yiqiwa.utils.Constants;
+import com.ssd.yiqiwa.widget.GlideLoadEngine;
 import com.zaaach.citypicker.CityPicker;
 import com.zaaach.citypicker.adapter.OnPickListener;
 import com.zaaach.citypicker.model.City;
-import com.zaaach.citypicker.model.HotCity;
-import com.zaaach.citypicker.model.LocateState;
-import com.zaaach.citypicker.model.LocatedCity;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.PicassoEngine;
+import com.zhihu.matisse.filter.Filter;
+import com.zhihu.matisse.internal.entity.IncapableCause;
+import com.zhihu.matisse.internal.entity.Item;
 //import com.ssd.yiqiwa.utils.StatusBarUtil;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.BindView;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
@@ -88,6 +95,8 @@ public class MainActivity extends BaseActivity {
         StatusBarUtil.setTransparentForImageViewInFragment(MainActivity.this,fakeStatusbar);
 
     }
+
+
 
     /**
      * 正常tab
