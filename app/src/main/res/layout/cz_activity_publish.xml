@@ -147,6 +147,7 @@
                             android:layout_marginLeft="10dp"/>
                     </RelativeLayout>
                     <RadioGroup
+                        android:id="@+id/rgp_laiyuan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="7dp"
@@ -155,6 +156,7 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="true"
                             android:text="个人"/>
 
                         <RadioButton
@@ -266,7 +268,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="23dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
@@ -301,9 +303,10 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edit_publish">
                         <Spinner
-                            android:id="@+id/edt_publish_06"
+                            android:id="@+id/spr_publish_06"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:entries="@array/date_dange"
                             android:paddingLeft="7dp"
                             />
                     </LinearLayout>
@@ -366,7 +369,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edit_publish">
                         <Spinner
-                            android:id="@+id/edt_publish_08"
+                            android:id="@+id/spr_publish_08"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingLeft="7dp"
@@ -397,6 +400,7 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="true"
                             android:text="吨位"/>
 
                         <RadioButton
@@ -790,7 +794,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_edit_publish">
                         <Spinner
-                            android:id="@+id/edt_publish_18"
+                            android:id="@+id/spr_publish_18"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingLeft="7dp"
@@ -946,6 +950,7 @@
 
 
                 <TextView
+                    android:id="@+id/txt_verify_publish"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="15dp"

@@ -122,7 +122,7 @@
                     android:layout_alignTop="@+id/img_fabu_02"
                     android:layout_toEndOf="@+id/img_fabu_02"
                     android:layout_toRightOf="@+id/img_fabu_02"
-                    android:text="承租发布"
+                    android:text="出租发布"
                     android:textColor="#ff000000"
                     android:textSize="15sp" />
 
@@ -170,7 +170,7 @@
                     android:layout_alignTop="@+id/img_fabu_03"
                     android:layout_toEndOf="@+id/img_fabu_03"
                     android:layout_toRightOf="@+id/img_fabu_03"
-                    android:text="承租发布"
+                    android:text="二手出售"
                     android:textColor="#ff000000"
                     android:textSize="15sp" />
 
@@ -217,7 +217,7 @@
                     android:layout_alignTop="@+id/img_fabu_04"
                     android:layout_toEndOf="@+id/img_fabu_04"
                     android:layout_toRightOf="@+id/img_fabu_04"
-                    android:text="承租发布"
+                    android:text="二手购买"
                     android:textColor="#ff000000"
                     android:textSize="15sp" />
 
@@ -265,7 +265,7 @@
                     android:layout_alignTop="@+id/img_fabu_05"
                     android:layout_toEndOf="@+id/img_fabu_05"
                     android:layout_toRightOf="@+id/img_fabu_05"
-                    android:text="承租发布"
+                    android:text="机主招聘发布"
                     android:textColor="#ff000000"
                     android:textSize="15sp" />
 
@@ -313,7 +313,7 @@
                     android:layout_alignTop="@+id/img_fabu_06"
                     android:layout_toEndOf="@+id/img_fabu_06"
                     android:layout_toRightOf="@+id/img_fabu_06"
-                    android:text="承租发布"
+                    android:text="操作手应聘发布"
                     android:textColor="#ff000000"
                     android:textSize="15sp" />
 

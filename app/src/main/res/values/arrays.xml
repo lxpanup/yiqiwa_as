@@ -14,4 +14,35 @@
         <item> 周 </item>
         <item> 月 </item>
     </array>
+
+
+    <array name="gongzuoshichang1">
+        <item> 时 </item>
+        <item> 天 </item>
+        <item> 周 </item>
+        <item> 月 </item>
+    </array>
+
+    <array name="gongzuoshichang">
+        <item> 元/小时 </item>
+        <item> 元/天  </item>
+        <item> 元/月  </item>
+    </array>
+
+
+
+    <array name="shebeidunwei">
+        <item> 10吨以下 </item>
+        <item> 10吨-20吨  </item>
+    </array>
+
+
+
+    <array name="shiyongxiaoshilei">
+        <item> 1000小时内 </item>
+        <item> 2000小时内 </item>
+    </array>
+
+
+
 </resources>

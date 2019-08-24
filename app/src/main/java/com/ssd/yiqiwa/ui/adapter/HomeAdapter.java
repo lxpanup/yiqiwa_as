@@ -3,43 +3,31 @@ package com.ssd.yiqiwa.ui.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.base.Type;
-import com.ssd.yiqiwa.model.entity.HomeBannerImages;
 import com.ssd.yiqiwa.model.entity.HomeBase;
-import com.ssd.yiqiwa.model.entity.HomeTop;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZListActivity;
-import com.ssd.yiqiwa.ui.activities.common.CityListActivity;
-import com.ssd.yiqiwa.widget.CirclePageIndicator;
+import com.ssd.yiqiwa.ui.activities.chuzhu.CZPublishActivity;
+import com.ssd.yiqiwa.ui.activities.other.SearchActivity;
+import com.ssd.yiqiwa.ui.activities.other.XingxifeiActivity;
+import com.ssd.yiqiwa.ui.activities.publish.ChengZuPublishActivity;
 import com.ssd.yiqiwa.widget.FooterLoading;
 import com.ssd.yiqiwa.widget.GlideImageLoader;
 import com.youth.banner.Banner;
-import com.zaaach.citypicker.CityPicker;
-import com.zaaach.citypicker.adapter.OnPickListener;
-import com.zaaach.citypicker.model.City;
-import com.zaaach.citypicker.model.LocateState;
-import com.zaaach.citypicker.model.LocatedCity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,9 +77,9 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case HomeBase.TYPE_RECOMMEND:
                 view = inflater.inflate(R.layout.item_home_type_recommend, parent, false);
                 return new RecommendHolder(view);
-//            case HomeBase.TYPE_PLACE:
-//                view = inflater.inflate(R.layout.item_place, parent, false);
-//                return new PlaceHolder(view);
+            case HomeBase.TYPE_LIVE:
+                view = inflater.inflate(R.layout.item_home_type_header, parent, false);
+                return new HeaderHolder(view);
             default:
                 view = inflater.inflate(R.layout.item_footer_loading, parent, false);
                 return new FooterHolder(view);
@@ -100,11 +88,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+        HomeBase bean = list.get(position);
         if (viewHolder instanceof CarouselHolder) {
             CarouselHolder holder = (CarouselHolder) viewHolder;
         }  else if (viewHolder instanceof FooterHolder) {
             FooterHolder holder = (FooterHolder) viewHolder;
             holder.footerLoading.onLoad(Type.TYPE_FOOTER_FULL == list.get(position).getType());
+        } else if (viewHolder instanceof HeaderHolder) {
+            HeaderHolder holder = (HeaderHolder) viewHolder;
+            holder.tvTitle.setText(bean.getName());
         } else if(viewHolder instanceof SpecialHolder){
             SpecialHolder holder = (SpecialHolder) viewHolder;
             List<String> listProduct = new ArrayList<>();
@@ -165,14 +157,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }
 
-        @OnClick({R.id.lil_city_list})
+        @OnClick({R.id.lil_city_list,R.id.lil_search})
         public void onViewClick(View v){
             switch (v.getId()){
                 case R.id.lil_city_list:
 //                    activity.startActivity(new Intent(context, CityListActivity.class));
                     ((MainActivity)activity).showCityList(txt_city);
 
-
+                case R.id.lil_search:
+                    activity.startActivity(new Intent(context, SearchActivity.class));
                     break;
             }
         }
@@ -220,8 +213,16 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ButterKnife.bind(this, itemView);
 
         }
+    }
 
+    class HeaderHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
 
+        HeaderHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
     }
 
     private class PlaceHolder extends RecyclerView.ViewHolder {
@@ -237,6 +238,38 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(view);
             ButterKnife.bind(this, view);
         }
+
+        @OnClick({R.id.tv_category_01,R.id.tv_category_02,R.id.tv_category_03,R.id.tv_category_04,
+                R.id.tv_category_05,R.id.tv_category_06,R.id.tv_category_07,R.id.tv_category_08})
+        public void onViewClick(View v) {
+            switch (v.getId()) {
+                case R.id.tv_category_01:
+                    activity.startActivity(new Intent(context, XingxifeiActivity.class));
+                    break;
+                case R.id.tv_category_02:  //雇主承租
+                    activity.startActivity(new Intent(context, ChengZuPublishActivity.class));
+                    break;
+                case R.id.tv_category_03:  //机主出售
+                    activity.startActivity(new Intent(context, CZListActivity.class));
+                    break;
+                case R.id.tv_category_04: //二手购买
+                    activity.startActivity(new Intent(context, CZListActivity.class));
+                    break;
+                case R.id.tv_category_05: //二手出售
+                    activity.startActivity(new Intent(context, CZPublishActivity.class));
+                    break;
+                case R.id.tv_category_06: //操作手服务
+                    activity.startActivity(new Intent(context, CZListActivity.class));
+                    break;
+                case R.id.tv_category_07: //维修配件
+                    activity.startActivity(new Intent(context, CZListActivity.class));
+                    break;
+                case R.id.tv_category_08: //场地服务
+                    activity.startActivity(new Intent(context, CZListActivity.class));
+                    break;
+            }
+        }
+
     }
 
     class FooterHolder extends RecyclerView.ViewHolder {

@@ -65,7 +65,7 @@ public class CZListActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.img_back,R.id.lil_city,R.id.img_list_fabu})
+    @OnClick({R.id.img_back,R.id.lil_city,R.id.img_list_fabu,R.id.txt_list_saixuan})
     public void onViewClick(View v){
         switch (v.getId()){
             case R.id.img_back:
@@ -77,6 +77,10 @@ public class CZListActivity extends BaseActivity {
             case R.id.img_list_fabu:
                 startActivity(new Intent(CZListActivity.this,CZPublishActivity.class));
                 break;
+            case R.id.txt_list_saixuan:
+                startActivity(new Intent(CZListActivity.this,CZShaixuanActivity.class));
+                break;
+
         }
     }
 

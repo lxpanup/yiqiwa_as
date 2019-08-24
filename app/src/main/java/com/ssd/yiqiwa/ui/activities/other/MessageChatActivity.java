@@ -11,7 +11,7 @@ import butterknife.OnClick;
 
 
 /**
- * 出租发布
+ * 聊天页面
  */
 public class MessageChatActivity extends BaseActivity {
 

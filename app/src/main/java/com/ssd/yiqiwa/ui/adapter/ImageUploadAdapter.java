@@ -22,12 +22,13 @@ public class ImageUploadAdapter extends BaseAdapter {
     private List<Uri> aData;
     private Context mContext;
 
+    private OnClickImageDelete onClickImageDelete;
 
 
-
-    public ImageUploadAdapter(List<Uri> aData, Context mContext) {
+    public ImageUploadAdapter(List<Uri> aData, Context mContext, OnClickImageDelete onClickImageDelete) {
         this.aData = aData;
         this.mContext = mContext;
+        this.onClickImageDelete = onClickImageDelete;
     }
 
     @Override
@@ -57,13 +58,21 @@ public class ImageUploadAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.imageView.setImageURI(getItem(position));
-        holder.txtDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.showLong("删除");
-            }
-        });
+
+        if (getItem(position) == null) {
+            holder.imageView.setImageResource(R.mipmap.ic_image_upload);
+            holder.txtDelete.setVisibility(View.GONE);
+        } else {
+            holder.txtDelete.setVisibility(View.VISIBLE);
+            holder.imageView.setImageURI(getItem(position));
+            holder.txtDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtils.showLong("删除");
+                    onClickImageDelete.onClickImageDelete(position);
+                }
+            });
+        }
 
         return convertView;
     }
@@ -72,4 +81,9 @@ public class ImageUploadAdapter extends BaseAdapter {
         ImageView imageView;
         TextView txtDelete;
     }
+
+    public interface OnClickImageDelete {
+        void onClickImageDelete(int postion);
+    }
+
 }

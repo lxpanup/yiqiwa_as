@@ -75,8 +75,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     // 城市选择器
     implementation 'com.zaaach:citypicker:2.0.3'
-
-
+    // 验证提交数据
+    implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
 
     //检测内存泄漏
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'

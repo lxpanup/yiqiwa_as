@@ -157,7 +157,7 @@ public class NavHomeFragment extends BaseFragment implements SwipeRefreshLayout.
     private void getTestList(){
         //模拟返回数据
         int spanCount = 300;
-
+        list.clear();
         //list添加轮播图片
         list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_CAROUSEL, spanCount));
         //list添加分类
@@ -166,6 +166,7 @@ public class NavHomeFragment extends BaseFragment implements SwipeRefreshLayout.
         list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HEADLINE, spanCount));
 
         list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_DIVIDER, spanCount));
+        list.add(new HomeBase(0, 0, "", "推荐商品", HomeBase.TYPE_LIVE, spanCount));
         list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
         list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
         list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));

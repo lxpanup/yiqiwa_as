@@ -184,44 +184,6 @@
                                 android:textSize="12sp"
                                 />
                         </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="¥200.00"
-                                android:textColor="#ffff0000"
-                                android:textSize="15sp"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="元/时"
-                                android:textColor="#ff222222"
-                                android:textSize="12sp"
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="¥200.00"
-                                android:textColor="#ffff0000"
-                                android:textSize="15sp"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="元/时"
-                                android:textColor="#ff222222"
-                                android:textSize="12sp"
-                                />
-                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -231,7 +193,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/divider_main_color" />
 
                 <LinearLayout
@@ -305,7 +267,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="挖斗机"
+                                android:text="10吨以下"
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />
@@ -332,7 +294,7 @@
                             <TextView
                                 android:layout_width="90dp"
                                 android:layout_height="30dp"
-                                android:text="设备类型"
+                                android:text="排放标准"
                                 android:textColor="#222222"
                                 android:gravity="center"
                                 android:background="#fff8f8f8"
@@ -342,7 +304,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="挖斗机"
+                                android:text="国一"
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />
@@ -358,7 +320,7 @@
                             <TextView
                                 android:layout_width="90dp"
                                 android:layout_height="30dp"
-                                android:text="设备吨位"
+                                android:text="设备数量"
                                 android:textColor="#222222"
                                 android:gravity="center"
                                 android:background="#fff8f8f8"
@@ -368,7 +330,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="挖斗机"
+                                android:text="5台"
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />
@@ -395,7 +357,7 @@
                             <TextView
                                 android:layout_width="90dp"
                                 android:layout_height="30dp"
-                                android:text="设备类型"
+                                android:text="进场时间"
                                 android:textColor="#222222"
                                 android:gravity="center"
                                 android:background="#fff8f8f8"
@@ -405,7 +367,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="挖斗机"
+                                android:text="2019-08-15"
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />
@@ -421,7 +383,7 @@
                             <TextView
                                 android:layout_width="90dp"
                                 android:layout_height="30dp"
-                                android:text="设备吨位"
+                                android:text="付款方式"
                                 android:textColor="#222222"
                                 android:gravity="center"
                                 android:background="#fff8f8f8"
@@ -431,7 +393,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="挖斗机"
+                                android:text="月付"
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />
@@ -469,6 +431,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="200dp"
                                 android:layout_margin="10dp"
+                                android:padding="5dp"
+                                android:text="2016年维修过，最近无事做出售挖掘机"
                                 android:background="@drawable/bg_gay_border"/>
 
                     </LinearLayout>

@@ -7,7 +7,9 @@
     android:layout_gravity="center_vertical"
     android:background="@drawable/bg_write_boder_2"
     android:padding="15dp"
-    android:layout_margin="20dp">
+    android:layout_margin="20dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
 
     <TextView
