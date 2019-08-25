@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/lil_item_message"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center_vertical"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="290dp"
+		android:layout_height="wrap_content"
+		android:background="@drawable/bg_write_boder_2"
+		android:padding="15dp"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/dialog_title_txt"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:text="确认发布此条承租信息吗？"
+			android:textColor="#ff222222"
+			android:textSize="18sp" />
+
+		<LinearLayout
+			android:layout_marginTop="5dp"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="#fff"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/dialog_content_txt"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone"
+				android:gravity="center"
+				android:text=""
+				android:textColor="#5C5B5B"
+				android:textSize="14sp"
+				/>
+
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="40dp"
+				android:layout_marginTop="10dp"
+				android:orientation="horizontal">
+				<TextView
+					android:id="@+id/jujue_txt"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:text=""
+					android:gravity="center"
+					android:layout_margin="5dp"
+					android:background="@drawable/btn_gay_login"
+					android:textColor="@color/white"
+					/>
+
+				<TextView
+					android:id="@+id/yunxu_txt"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:text=""
+					android:gravity="center"
+					android:layout_margin="5dp"
+					android:background="@drawable/btn_green_login"
+					android:textColor="@color/white"
+					/>
+			</LinearLayout>
+
+
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center">
+		<ImageView
+			android:id="@+id/dialog_close_imv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@mipmap/ic_dialog_close"/>
+	</LinearLayout>
+
+</LinearLayout>

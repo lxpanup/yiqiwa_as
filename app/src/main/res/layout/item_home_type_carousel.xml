@@ -17,7 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
                 android:text="成都市"
-                android:textColor="#000"
+                android:textColor="#525252"
                 android:textSize="16sp" />
 
             <ImageView
@@ -47,7 +47,6 @@
 
 
         <LinearLayout
-            android:id="@+id/lil_search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="7dp"
@@ -57,6 +56,7 @@
 
 
             <TextView
+                android:id="@+id/txt_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="请输入搜索的关键字"
@@ -82,22 +82,22 @@
             android:layout_width="60dp"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="30dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_message_home"
-                android:layout_centerInParent="true"/>
+            <!--<ImageView-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@mipmap/ic_message_home"-->
+                <!--android:layout_centerInParent="true"/>-->
 
-            <TextView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="35dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                android:text="2"
-                android:background="@mipmap/ic_message_red"/>
+            <!--<TextView-->
+                <!--android:layout_width="22dp"-->
+                <!--android:layout_height="22dp"-->
+                <!--android:layout_marginLeft="35dp"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="10sp"-->
+                <!--android:text="2"-->
+                <!--android:background="@mipmap/ic_message_red"/>-->
 
         </RelativeLayout>
     </LinearLayout>

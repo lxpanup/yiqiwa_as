@@ -15,7 +15,6 @@
         android:textSize="18sp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/start_experience"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"

@@ -69,5 +69,20 @@
         <!--全屏显示-->
     </style>
 
+    <!--自定义RatingBar Drawable-->
+    <style name="RatingBar_CustomDrawable" parent="@android:style/Widget.Holo.RatingBar.Indicator">
+        <item name="android:minHeight">15dp</item>
+        <item name="android:maxHeight">15dp</item>
+    </style>
+
+
+    <style name="ratingSmall" parent="@android:style/Widget.Holo.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <!--<item name="android:indeterminateDrawable">@android:drawable/ratingbar_small_holo_dark</item>-->
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
+    </style>
+
+
 
 </resources>

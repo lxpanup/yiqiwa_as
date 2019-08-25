@@ -84,7 +84,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int i) {
                 //
-
             }
 
             @Override
@@ -92,7 +91,7 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-        StatusBarUtil.setTransparentForImageViewInFragment(MainActivity.this,fakeStatusbar);
+//        StatusBarUtil.setTransparentForImageViewInFragment(MainActivity.this,fakeStatusbar);
 
     }
 
@@ -122,7 +121,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void setStatusBar() {
-        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
+//        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
     }
 
     @Override

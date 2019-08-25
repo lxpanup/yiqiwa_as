@@ -93,6 +93,7 @@
                     android:background="@drawable/bg_write_boder_2">
 
                     <LinearLayout
+                        android:id="@+id/lil_my_integral"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -119,6 +120,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/lil_my_collect"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -128,7 +130,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="465"
+                            android:text="22"
                             android:textColor="#ff000000"
                             android:textSize="18sp"
                             />
@@ -136,7 +138,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="积分"
+                            android:text="收藏"
                             android:textColor="#ff000000"
                             android:textSize="14sp"
                             />
@@ -144,6 +146,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/lil_my_bank"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -153,7 +156,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="465"
+                            android:text="3"
                             android:textColor="#ff000000"
                             android:textSize="18sp"
                             />
@@ -161,7 +164,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="积分"
+                            android:text="银行卡"
                             android:textColor="#ff000000"
                             android:textSize="14sp"
                             />
@@ -204,6 +207,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_qrcode"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -295,6 +299,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_fb_01"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
@@ -309,6 +314,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_fb_02"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -323,6 +329,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_fb_03"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -337,6 +344,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_fb_04"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -351,6 +359,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_fb_05"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
@@ -365,6 +374,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_fb_06"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -414,6 +424,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_pingzhu_jilu"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -427,6 +438,7 @@
                         android:layout_margin="7dp"/>
 
                     <TextView
+                        android:id="@+id/txt_goumai_jilu"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -503,6 +515,7 @@
 
 
                     <TextView
+                        android:id="@+id/txt_quyujl_yuyuedingdan"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -516,6 +529,7 @@
                         android:layout_margin="7dp"/>
 
                     <TextView
+                        android:id="@+id/txt_quyujl_gengjingdindan"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
@@ -528,8 +542,8 @@
                         android:layout_rowWeight="1"
                         android:layout_margin="7dp"/>
 
-
                     <TextView
+                        android:id="@+id/txt_quyujl_lishidingdan"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"

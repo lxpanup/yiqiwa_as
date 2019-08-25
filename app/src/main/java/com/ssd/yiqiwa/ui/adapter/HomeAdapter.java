@@ -18,6 +18,7 @@ import com.ssd.yiqiwa.model.entity.HomeBase;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZListActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZPublishActivity;
+import com.ssd.yiqiwa.ui.activities.jizhu.JizhuListActivity;
 import com.ssd.yiqiwa.ui.activities.other.SearchActivity;
 import com.ssd.yiqiwa.ui.activities.other.XingxifeiActivity;
 import com.ssd.yiqiwa.ui.activities.publish.ChengZuPublishActivity;
@@ -157,14 +158,14 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }
 
-        @OnClick({R.id.lil_city_list,R.id.lil_search})
+        @OnClick({R.id.lil_city_list,R.id.txt_search})
         public void onViewClick(View v){
             switch (v.getId()){
                 case R.id.lil_city_list:
 //                    activity.startActivity(new Intent(context, CityListActivity.class));
                     ((MainActivity)activity).showCityList(txt_city);
-
-                case R.id.lil_search:
+                    break;
+                case R.id.txt_search:
                     activity.startActivity(new Intent(context, SearchActivity.class));
                     break;
             }
@@ -259,7 +260,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     activity.startActivity(new Intent(context, CZPublishActivity.class));
                     break;
                 case R.id.tv_category_06: //操作手服务
-                    activity.startActivity(new Intent(context, CZListActivity.class));
+                    JizhuListActivity.start(context,0);
                     break;
                 case R.id.tv_category_07: //维修配件
                     activity.startActivity(new Intent(context, CZListActivity.class));

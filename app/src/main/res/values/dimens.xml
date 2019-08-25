@@ -18,7 +18,7 @@
 
 
     <dimen name="statusbar_view_height">0dp</dimen>
-    <dimen name="statusbar_height">20dp</dimen>
+    <dimen name="statusbar_height">0dp</dimen>
 
     <dimen name="dimen_border">16dp</dimen>
     <dimen name="dimen_height">46dp</dimen>

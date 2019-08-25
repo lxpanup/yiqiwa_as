@@ -43,6 +43,7 @@ public class GuideActivity extends BaseActivity {
         banner.setImageLoader(new GlideImageLoader());
         banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         banner.setDelayTime(3000);
+
         banner.start();
 //        banner.setImageLoader(new ModelImageLoader())
 //                .setImages(images)
@@ -57,6 +58,7 @@ public class GuideActivity extends BaseActivity {
             public void onPageSelected(int i) {
                 if (i == images.size() - 1) {
                     banner.stopAutoPlay();
+                    banner.setViewPagerIsScroll(false);
                     btnStart.setVisibility(View.VISIBLE);
                     btnStart.setOnClickListener(new View.OnClickListener() {
                         @Override

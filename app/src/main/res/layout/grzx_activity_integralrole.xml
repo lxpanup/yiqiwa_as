@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    tools:context=".ui.activities.chuzhu.CZDetailActivity">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="#ff00d98b">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="40dp"
+                android:layout_height="41dp"
+                android:layout_centerVertical="true"
+                android:scaleType="center"
+                android:src="@mipmap/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="积分规则"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_write_boder_2"
+        android:layout_margin="15dp"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="如何获得积分："/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:text="1、新用户注册默认赠送300积分；\n
+2、在商城购物即可获得积分，1元=1积分（注：订单金额为除去运费外的实际支付金额，金额不足1元则舍去）\n
+3、到佳雪论坛发使用报告帖子即送50积分；\n
+4、在佳雪商城购买的产品，您可以进行商品评价，您将得到20积分，若添加图片评论则可以得到100积分；\n
+5、佳雪商城不定期举行活动，例如订单积分翻倍、赠送X倍积分券、客服回访赠积分等；\n
+6、分享到微博、微信，推荐好友购买成功者，立即获得100积分，推荐越高获赠越多。"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

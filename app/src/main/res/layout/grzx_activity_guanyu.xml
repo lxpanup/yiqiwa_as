@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    tools:context=".ui.activities.chuzhu.CZDetailActivity">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="#ff00d98b">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="40dp"
+                android:layout_height="41dp"
+                android:layout_centerVertical="true"
+                android:scaleType="center"
+                android:src="@mipmap/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="关于"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_write_boder_2"
+        android:layout_margin="15dp"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="什么是易起挖？"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"
+            android:textColor="#646363"
+            android:text="易起挖是成都双易信息技术集团有限公司旗下的挖掘机平台的软件产品（ App 、小程序、 Web ) ，致力于打造 1 对 1 的服务模式，用 ( 020 ）互联网＋让客户省心、省钱、省时、省力（方便、快捷、实用、），是目前最方便最实用最全面的挖掘机一站式（租赁、二手、配件、维修、操作手招聘、配件快运、二手金融等）服务平台。"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="易起挖能为我做什么？"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"
+            android:textColor="#646363"
+            android:text=" 1 、易起挖可以为机主提供免费停放设备；\n
+    2 、为机主闲置的设备对接租赁业务并成功交易；\n
+    3 、机主需要买卖的二手设备，卖给用户买家，返开中间商信息费，更快、更准、更高的价格达成交易；\n
+    4 、在租赁与交易中提供后续服务，包括代班操作手、快修、常用配件、配件快运等一条龙服务。"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="什么是信息费"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"
+            android:textColor="#646363"
+            android:text="1 、工程管理人员、设备老板、操作手等为平台提供挖掘机真实可靠的承租信息，经平台派人看完施工现场、与甲方签订合同、设备入场施工，即可获得信息费佣金（租赁交易完成后提前支付佣金，设备工作时间内每月支付租赞价格 2 ％的信息费）。\n
+    2 、工程管理人员、设备老板、操作手等为平台提供挖掘机真实可靠的二手出售信息，经平台派人完成设备质检、与买方签订合同、设备交付，即可获得信息费佣金（买卖交易完成后支付佣金，按照成交价格 7 ％一 10 ％的信息费 》 。易起挖怎么收费？二手交易成功后易起挖 APP 收取卖方成交价格 \n
+    3 ％的服务费，低于 10 万元成交收取 2500 元服务费。"/>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

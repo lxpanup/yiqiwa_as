@@ -171,8 +171,8 @@ public class CZPublishActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.txt_verify_publish:
-//                validator.validate();
-                verifyPublishDialog();
+                validator.validate();
+//                verifyPublishDialog();
                 break;
 
         }

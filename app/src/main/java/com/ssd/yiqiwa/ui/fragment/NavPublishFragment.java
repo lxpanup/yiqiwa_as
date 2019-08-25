@@ -8,15 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.ui.activities.base.BaseFragment;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZPublishActivity;
 import com.ssd.yiqiwa.ui.activities.publish.ChengZuPublishActivity;
+import com.ssd.yiqiwa.ui.activities.publish.MyPublishActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class NavPublishFragment extends Fragment {
+public class NavPublishFragment extends BaseFragment {
 
 
 
@@ -27,23 +30,28 @@ public class NavPublishFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int offerLayout() {
+        return R.layout.fragment_navigation_publish;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_navigation_publish, container, false);
+    public void onBindView() {
+
+    }
+
+    @Override
+    public void destory() {
+
     }
 
 
-
-    @OnClick({R.id.rlt_fabu_01,R.id.rlt_fabu_02,R.id.rlt_fabu_03,R.id.rlt_fabu_04,R.id.rlt_fabu_05,R.id.rlt_fabu_06})
+    @OnClick({R.id.rlt_fabu_01,R.id.rlt_fabu_02,R.id.rlt_fabu_03,R.id.rlt_fabu_04,R.id.rlt_fabu_05,R.id.rlt_fabu_06,R.id.txt_my_publish})
     public void onViewClick(View v){
         switch (v.getId()){
             case R.id.rlt_fabu_01:  //承租发布
+                ToastUtils.showLong("承租发布");
                 startActivity(new Intent(getActivity(), ChengZuPublishActivity.class));
                 break;
             case R.id.rlt_fabu_02: //出租发布
@@ -60,6 +68,9 @@ public class NavPublishFragment extends Fragment {
                 break;
             case R.id.rlt_fabu_06: //操作手应聘发布
 
+                break;
+            case R.id.txt_my_publish:
+                MyPublishActivity.start(getActivity(),0);
                 break;
         }
     }
