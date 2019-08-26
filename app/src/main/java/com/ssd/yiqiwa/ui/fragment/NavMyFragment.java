@@ -14,11 +14,13 @@ import com.ssd.yiqiwa.ui.activities.base.BaseFragment;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.BankActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.CollectActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.IntegralActivity;
+import com.ssd.yiqiwa.ui.activities.gerenzhongxing.MyJianliActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.PingzujiluListActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.QrCodeActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.SettingActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.UpdateUserActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.YuyueListActivity;
+import com.ssd.yiqiwa.ui.activities.jizhu.JizhuListActivity;
 import com.ssd.yiqiwa.ui.activities.publish.MyPublishActivity;
 import com.ssd.yiqiwa.ui.adapter.MessageListAdapter;
 
@@ -70,7 +72,7 @@ public class NavMyFragment extends BaseFragment {
 
 
 
-    @OnClick({R.id.img_my_setting,R.id.img_my_head,R.id.txt_fb_01,R.id.txt_fb_02,R.id.txt_fb_03,R.id.txt_fb_04,
+    @OnClick({R.id.img_my_setting,R.id.img_my_head,R.id.txt_myjianli,R.id.txt_fb_01,R.id.txt_fb_02,R.id.txt_fb_03,R.id.txt_fb_04,
             R.id.txt_fb_05,R.id.txt_fb_06,R.id.lil_my_integral,R.id.lil_my_collect,R.id.lil_my_bank,R.id.txt_qrcode,
             R.id.txt_quyujl_yuyuedingdan,R.id.txt_quyujl_gengjingdindan,R.id.txt_quyujl_lishidingdan,
             R.id.txt_pingzhu_jilu,R.id.txt_goumai_jilu})
@@ -83,6 +85,9 @@ public class NavMyFragment extends BaseFragment {
             case R.id.img_my_head:
                 startActivity(new Intent(getActivity(), UpdateUserActivity.class));
 
+                break;
+            case R.id.txt_myjianli:
+                MyJianliActivity.start(getActivity());
                 break;
             case R.id.txt_fb_01:
                 MyPublishActivity.start(getActivity(),0);

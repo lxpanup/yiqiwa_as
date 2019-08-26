@@ -221,6 +221,7 @@
                         android:layout_margin="7dp"/>
 
                     <TextView
+                        android:id="@+id/txt_myjianli"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"

@@ -125,6 +125,9 @@
         <activity android:name=".ui.activities.gerenzhongxing.PingzujiluDetailedActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.gerenzhongxing.MyJianliActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activities.gerenzhongxing.GuanyuActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"/>
