@@ -11,14 +11,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.jaeger.library.StatusBarUtil;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.custom.SpecialTab;
 import com.ssd.yiqiwa.custom.SpecialTabRound;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
+import com.ssd.yiqiwa.ui.activities.common.LoginActivity;
 import com.ssd.yiqiwa.ui.adapter.ViewPagerAdapter;
 import com.ssd.yiqiwa.utils.Constants;
 import com.ssd.yiqiwa.widget.GlideLoadEngine;
+import com.ssd.yiqiwa.widget.common.CommomDialog;
 import com.zaaach.citypicker.CityPicker;
 import com.zaaach.citypicker.adapter.OnPickListener;
 import com.zaaach.citypicker.model.City;
@@ -84,6 +87,16 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int i) {
                 //
+
+//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//                    if (SPStaticUtils.getInt(Constants.SP_USER_ID) == -1) {
+//                        new CommomDialog(MainActivity.this, "提示", "用户还未登录", (dialog, confirm) -> {
+//                            if (confirm) {
+//                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//                            }
+//                        }).show();
+//                    }
+
             }
 
             @Override

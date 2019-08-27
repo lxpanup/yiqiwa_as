@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,13 +14,21 @@ import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Checked;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.api.Api;
 import com.ssd.yiqiwa.model.entity.BaseBean;
+import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.LoginUserBean;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.utils.Constants;
+import com.ssd.yiqiwa.utils.ToastUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,6 +54,27 @@ public class LoginActivity extends BaseActivity  {
     EditText edit_phone;
     @BindView(R.id.edit_pwd)
     EditText edit_pwd;
+
+    @NotEmpty(message = "不能为空")
+    @BindView(R.id.edt_register_phone)
+    EditText edt_register_phone;
+    @NotEmpty(message = "不能为空")
+    @BindView(R.id.edt_register_yanzhengma)
+    EditText edt_register_yanzhengma;
+    @Password(min = 3)
+    @BindView(R.id.edit_register_pwd)
+    EditText edit_register_pwd;
+    @ConfirmPassword
+    @BindView(R.id.edt_register_confirm_pwd)
+    EditText edt_register_confirm_pwd;
+    @BindView(R.id.edt_register_recommendcode)
+    EditText edt_register_recommendcode;
+    @Checked(message = "需要勾选许可")
+    @BindView(R.id.cbx_login_yhxy)
+    CheckBox cbx_login_yhxy;
+
+
+    Validator validator;
 
     @Override
     public Object offerLayout() {
@@ -81,6 +111,25 @@ public class LoginActivity extends BaseActivity  {
             }
         });
 
+        validator = new Validator(this);
+        validator.setValidationListener(new Validator.ValidationListener() {
+            @Override
+            public void onValidationSucceeded() {
+                getRegister();
+            }
+
+            @Override
+            public void onValidationFailed(List<ValidationError> errors) {
+                for (ValidationError error : errors) {
+                    View view = error.getView();
+                    String message = error.getCollatedErrorMessage(LoginActivity.this);
+                    if (view instanceof EditText) {
+                        ((EditText) view).setError(message);
+                    }
+                }
+            }
+        });
+
     }
 
 
@@ -89,7 +138,7 @@ public class LoginActivity extends BaseActivity  {
 
     }
 
-    @OnClick({R.id.img_back,R.id.txt_login,R.id.txt_login_forget})
+    @OnClick({R.id.img_back,R.id.txt_login,R.id.txt_register,R.id.txt_login_forget})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_back:
@@ -98,6 +147,10 @@ public class LoginActivity extends BaseActivity  {
             case R.id.txt_login:
                 getLogin();
                 break;
+            case R.id.txt_register:
+                validator.validate();
+//                getRegister();
+                break;
             case R.id.txt_login_forget:
                 startActivity(new Intent(LoginActivity.this,ForgetPwdActivity.class));
                 break;
@@ -105,9 +158,9 @@ public class LoginActivity extends BaseActivity  {
     }
 
 
-
-
-
+    /**
+     * 登录
+     */
     public void getLogin(){
         String userPhone = edit_phone.getText().toString();
         String userPwd = edit_pwd.getText().toString();
@@ -146,6 +199,7 @@ public class LoginActivity extends BaseActivity  {
                     SPStaticUtils.put(Constants.SP_USER_STATUS,loginUserBean.getStatus());
                     SPStaticUtils.put(Constants.SP_USER_CONTACTPHONE,loginUserBean.getContactPhone());
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 }else{
                     ToastUtils.showLong(beanBaseBean.getMsg());
                 }
@@ -159,5 +213,39 @@ public class LoginActivity extends BaseActivity  {
             }
         });
     }
+
+
+    /**
+     * 注册
+     */
+    public void getRegister(){
+
+        showDialog();
+        Api request = getRetrofit().create(Api.class);
+        Call<JsonEntity> call = request.register("18719041111","12345678","","");
+        call.enqueue(new Callback<JsonEntity>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<JsonEntity> call, Response<JsonEntity> response) {
+                hideDialog();
+                ToastUtils.showLong( response.body().getMsg());
+                if(response.body().getCode()==Constants.HTTP_RESPONSE_OK) {
+                    edit_phone.setText("18719041111");
+                    edit_pwd.setText("12345678");
+                    getLogin();
+                }
+
+            }
+
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<JsonEntity> call, Throwable throwable) {
+                System.out.println("请求失败");
+                System.out.println(throwable.getMessage());
+            }
+        });
+    }
+
+
 
 }

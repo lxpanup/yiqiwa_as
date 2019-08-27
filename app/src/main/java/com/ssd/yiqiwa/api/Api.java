@@ -2,12 +2,18 @@ package com.ssd.yiqiwa.api;
 
 
 import com.ssd.yiqiwa.model.entity.BaseBean;
+import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.LoginUserBean;
 
+import java.util.List;
+
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -24,6 +30,22 @@ public interface Api {
      */
     @POST("login")
     Call<BaseBean<LoginUserBean>> login(@Query("phone") String phone, @Query("password") String password);
+
+
+    /**
+     * 注册
+     * @return .
+     */
+    @POST("register")
+    Call<JsonEntity> register(@Query("phone") String phone, @Query("password") String password,
+                              @Query("validCode") String validCode, @Query("recommendCode") String recommendCode);
+
+    /**
+     * 注册
+     * @return .
+     */
+    @POST("userDetail")
+    Call<BaseBean<LoginUserBean>> userDetail(@Query("uId") int uId);
 
 
 
@@ -65,12 +87,25 @@ public interface Api {
     Call<ResponseBody> login();
 
     /**
-     * 下载文件
-     * 如果下载大文件的一定要加上   @Streaming  注解
+     * 上传
+     * Multipart 表示多表单上传,
      *
-     * @param fileUrl 文件的路径
-     * @return 请求call
+     * @param partList 表单信息
+     * @return .
      */
-    @GET("phone/15335514755/password/123456")
-    Call<ResponseBody> download();
+    @Multipart
+    @POST("uploadFile")
+    Call<JsonEntity> uploadFile(@Part MultipartBody.Part partList);
+
+
+    /**
+     * 上传多图上传
+     * Multipart 表示多表单上传,
+     *
+     * @param partList 表单信息
+     * @return .
+     */
+    @Multipart
+    @POST("你的地址")
+    Call<BaseBean> upLoadingAll(@Part List<MultipartBody.Part> partList);
 }

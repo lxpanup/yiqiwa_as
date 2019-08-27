@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Constants {
 
-    public static String BASE_URL = "http://192.168.0.178:7000/mobile/api/";
+    public static String BASE_URL = "http://47.108.76.233:8080/machine/mobile/api/";
 
 
     public static final String LOGIN_VERSION_INDEX = "login_version_index";

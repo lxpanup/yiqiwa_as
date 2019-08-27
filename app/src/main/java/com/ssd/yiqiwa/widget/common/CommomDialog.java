@@ -59,6 +59,8 @@ public class CommomDialog extends Dialog implements View.OnClickListener{
     }
 
 
+
+
     public CommomDialog(Context context, int themeResId, String content) {
         super(context, themeResId);
         this.mContext = context;
@@ -78,6 +80,17 @@ public class CommomDialog extends Dialog implements View.OnClickListener{
         super(context, cancelable, cancelListener);
         this.mContext = context;
     }
+
+
+    public CommomDialog(Context context,String title,String content, OnCloseListener listener) {
+        super(context, R.style.dialog);
+        this.mContext = context;
+        this.title = title;
+        this.content = content;
+        this.listener = listener;
+    }
+
+
 
 
     public CommomDialog setTitle(String title){
