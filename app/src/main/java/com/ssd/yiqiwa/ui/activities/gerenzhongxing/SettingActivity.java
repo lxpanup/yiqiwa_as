@@ -90,7 +90,7 @@ public class SettingActivity extends BaseActivity {
                 GuanyuActivity.start(SettingActivity.this);
                 break;
             case R.id.mnbv_setting_07:
-                startActivity(new Intent(SettingActivity.this, UpdateUserActivity.class));
+                startActivity(new Intent(SettingActivity.this, VersionActivity.class));
                 break;
         }
     }

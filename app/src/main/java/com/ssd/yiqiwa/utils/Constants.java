@@ -15,6 +15,11 @@ public class Constants {
 
     public static final String LOGIN_USER_PATH = BASE_URL + "/login";
 
+
+    public static final String ALIYUN_IMAGE_SSO = "https://syxxpic.oss-cn-chengdu.aliyuncs.com/";
+
+
+
     /**
      * 缓存文件保存路径
      */

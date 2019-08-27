@@ -61,9 +61,11 @@
 
 
                 <EditText
+                    android:id="@+id/edt_oldpwd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
+                    android:inputType="textPassword"
                     android:hint="请输入密码"/>
 
             </LinearLayout>
@@ -84,9 +86,11 @@
 
 
                 <EditText
+                    android:id="@+id/edt_newpwd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
+                    android:inputType="textPassword"
                     android:hint="请输入新密码"/>
 
             </LinearLayout>
@@ -107,16 +111,18 @@
 
 
                 <EditText
+                    android:id="@+id/edt_affirmpwd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
+                    android:inputType="textPassword"
                     android:hint="请输入确认密码"/>
 
             </LinearLayout>
 
 
             <TextView
-                android:id="@+id/txt_register"
+                android:id="@+id/txt_xiugaimima"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:background="@drawable/btn_green_login"

@@ -40,11 +40,37 @@ public interface Api {
     Call<JsonEntity> register(@Query("phone") String phone, @Query("password") String password,
                               @Query("validCode") String validCode, @Query("recommendCode") String recommendCode);
 
+
     /**
-     * 注册
+     * 修改用户信息
      * @return .
      */
-    @POST("userDetail")
+    @POST("user/changeInfo")
+    Call<JsonEntity> userChangeInfo(@Query("uId") int uId, @Query("portrait") String portrait,
+                              @Query("nickName") String nickName, @Query("contactPhone") String contactPhone,
+                              @Query("birthday") String birthday);
+
+    /**
+     * 修改用户信息
+     * @return .
+     */
+    @POST("user/resetPassword")
+    Call<JsonEntity> userResetPassword(@Query("uId") int uId, @Query("oriPassword") String oriPassword,
+                              @Query("newPassword") String newPassword);
+
+    /**
+     * 意见反馈
+     * @return .
+     */
+    @POST("user/feedBack")
+    Call<JsonEntity> userFeedBack(@Query("uId") int uId, @Query("content") String content,
+                              @Query("contactPhone") String contactPhone);
+
+    /**
+     * 用户信息信息
+     * @return .
+     */
+    @POST("user/userDetail")
     Call<BaseBean<LoginUserBean>> userDetail(@Query("uId") int uId);
 
 
@@ -95,7 +121,7 @@ public interface Api {
      */
     @Multipart
     @POST("uploadFile")
-    Call<JsonEntity> uploadFile(@Part MultipartBody.Part partList);
+    Call<JsonEntity> uploadFile(@Part MultipartBody.Part fileData);
 
 
     /**

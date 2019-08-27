@@ -1,16 +1,45 @@
 package com.ssd.yiqiwa.ui.activities.gerenzhongxing;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.SPStaticUtils;
+import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.api.Api;
 import com.ssd.yiqiwa.model.entity.BaseBean;
+import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
+import com.ssd.yiqiwa.utils.Constants;
+import com.ssd.yiqiwa.widget.GlideLoadEngine;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -26,6 +55,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UpdateUserActivity extends BaseActivity {
 
 
+    @BindView(R.id.img_user_head)
+    ImageView imgUserHead;
+
+    @BindView(R.id.txt_my_name)
+    EditText txt_my_name;
+    @BindView(R.id.txt_my_phone)
+    EditText txt_my_phone;
+    @BindView(R.id.txt_datetime)
+    TextView txt_datetime;
+
+    private Activity mActivity;
+
+    private String portrait;
+    private String nickName;
+    private String contactPhone;
+    private String birthday;
+
     @Override
     public Object offerLayout() {
         return R.layout.z_activity_updateuser;
@@ -33,87 +79,196 @@ public class UpdateUserActivity extends BaseActivity {
 
     @Override
     public void onBindView() {
+        mActivity = UpdateUserActivity.this;
+
+        portrait = SPStaticUtils.getString(Constants.SP_USER_PORTRAIT);
+        nickName = SPStaticUtils.getString(Constants.SP_USER_NICKNAME);
+        contactPhone = SPStaticUtils.getString(Constants.SP_USER_LOGINPHONE);
+        birthday = SPStaticUtils.getString(Constants.SP_USER_BIRTHDAY);
+
+        txt_my_name.setText(nickName);
+        txt_my_name.setSelection(txt_my_name.getText().length());
+        txt_my_phone.setText(contactPhone);
+        txt_datetime.setText(birthday);
+//            txt_shouchang.setText(SPStaticUtils.getString(Constants.SP_USER_NICKNAME));
+        portrait = SPStaticUtils.getString(Constants.SP_USER_PORTRAIT);
+
+        Glide.with(mActivity).load(Constants.ALIYUN_IMAGE_SSO+portrait)
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(imgUserHead);
 
     }
 
     @Override
     public void destory() {
 
+
     }
 
 
-    @OnClick({R.id.img_back})
+    @OnClick({R.id.img_back,R.id.img_user_head,R.id.txt_datetime,R.id.txt_update_user})
     public void onViewClick(View v){
         switch (v.getId()){
             case R.id.img_back:
                 finish();
                 break;
+            case R.id.img_user_head:
+                showMatisse();
+                break;
+            case R.id.txt_datetime:
+                Calendar calendar = Calendar.getInstance();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateUserActivity.this, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        txt_datetime.setText(year + "年" + (monthOfYear+1) + "月" + dayOfMonth+"日");
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+                break;
+            case R.id.txt_update_user:
+                getUerChangeInfo();
+
+                break;
         }
     }
 
 
-//    /**
-//     * 响应上传点击事件的方法
-//     */
-//    private void upLoadingMethod() {
-//
-//        //创建文件(你需要上传到服务器的文件)
-//        //file1Location文件的路径 ,我是在手机存储根目录下创建了一个文件夹,里面放着了一张图片;
-//        File file = new File(file1Location);
-//
-//        //创建表单map,里面存储服务器本接口所需要的数据;
-//        MultipartBody.Builder builder = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                //在这里添加服务器除了文件之外的其他参数
-//                .addFormDataPart("参数1", "值1")
-//
-//
-//        //设置文件的格式;两个文件上传在这里添加
-//        RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//        // RequestBody imageBody1 = RequestBody.create(MediaType.parse("multipart/form-data"), file1);
-//        //添加文件(uploadfile就是你服务器中需要的文件参数)
-//        builder.addFormDataPart("uploadfile", file.getName(), imageBody);
-//        //builder.addFormDataPart("uploadfile1", file1.getName(), imageBody1);
-//        //生成接口需要的list
-//        List<MultipartBody.Part> parts = builder.build().parts();
-//        //创建设置OkHttpClient
-//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .connectTimeout(20, TimeUnit.SECONDS)
-//                .readTimeout(20, TimeUnit.SECONDS)
-//                .writeTimeout(20, TimeUnit.SECONDS)
-//                //允许失败重试
-//                .retryOnConnectionFailure(true)
-//                .build();
-//        //创建retrofit实例对象
-//        Retrofit retrofit = new Retrofit.Builder()
-//                //设置基站地址(基站地址+描述网络请求的接口上面注释的Post地址,就是要上传文件到服务器的地址,
-//                // 这只是一种设置地址的方法,还有其他方式,不在赘述)
-//                .baseUrl("你的基站地址")
-//                //设置委托,使用OKHttp联网,也可以设置其他的;
-//                .client(okHttpClient)
-//                //设置数据解析器,如果没有这个类需要添加依赖:
-//                .addConverterFactory(GsonConverterFactory.create())
-//                //设置支持rxJava
-//                // .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .build();
-//        //实例化请求接口,把表单传递过去;
-//        Call<BaseBean> call = retrofit.create(Api.class).uploadFile(parts);
-//        //开始请求
-//        call.enqueue(new Callback<BaseBean>() {
-//            @Override
-//            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
-//                //联网有响应或有返回数据
-//                System.out.println(response.body().toString());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<BaseBean> call, Throwable t) {
-//                //连接失败,多数是网络不可用导致的
-//                System.out.println("网络不可用");
-//            }
-//        });
-//
-//    }
 
+
+
+//
+
+
+
+    public void showMatisse(){
+        Matisse.from(this).choose(MimeType.ofImage(), false)
+                .countable(true)
+                .maxSelectable(21)
+                .gridExpectedSize((int) getResources().getDimension(R.dimen.grid_expected_size))
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                .thumbnailScale(0.87f)
+                .imageEngine(new GlideLoadEngine())
+                .forResult(REQUEST_CODE_CHOOSE);
+    }
+
+
+    private final int REQUEST_CODE_CHOOSE = 10001;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
+            List<Uri> matisse = Matisse.obtainResult(data);
+            Uri uriFile = matisse.get(0);
+            imgUserHead.setImageURI(uriFile);
+            upLoadingMethod(uriFile);
+
+        }
+        Log.e("Matisse", "mSelected: " + data);
+    }
+
+
+
+    /**
+      *  响应上传点击事件的方法
+      */
+    private void upLoadingMethod(Uri uri)  {
+        //创建文件(你需要上传到服务器的文件)
+        //file1Location文件的路径 ,我是在手机存储根目录下创建了一个文件夹,里面放着了一张图片;
+        File file = new File(getRealFilePath(UpdateUserActivity.this,uri));
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("fileData", file.getName(), requestFile);
+
+        Call<JsonEntity> call = getRetrofit().create(Api.class).uploadFile(body);
+        call.enqueue(new Callback<JsonEntity>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<JsonEntity> call, Response<JsonEntity> response) {
+                hideDialog();
+                ToastUtils.showLong( response.body().getMsg());
+                if(response.body().getCode()== Constants.HTTP_RESPONSE_OK) {
+                    portrait = response.body().getData();
+                }
+
+            }
+
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<JsonEntity> call, Throwable throwable) {
+                Log.e("yqw","filePath:"+throwable.getMessage());
+            }
+        });
+
+    }
+
+
+    /**
+     * Try to return the absolute file path from the given Uri
+     *
+     * @param context
+     * @param uri
+     * @return the file path or null
+     */
+    public static String getRealFilePath(final Context context, final Uri uri ) {
+        if ( null == uri ) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if ( scheme == null )
+            data = uri.getPath();
+        else if ( ContentResolver.SCHEME_FILE.equals( scheme ) ) {
+            data = uri.getPath();
+        } else if ( ContentResolver.SCHEME_CONTENT.equals( scheme ) ) {
+            Cursor cursor = context.getContentResolver().query( uri, new String[] { MediaStore.Images.ImageColumns.DATA }, null, null, null );
+            if ( null != cursor ) {
+                if ( cursor.moveToFirst() ) {
+                    int index = cursor.getColumnIndex( MediaStore.Images.ImageColumns.DATA );
+                    if ( index > -1 ) {
+                        data = cursor.getString( index );
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }
+
+
+
+    /**
+     * 修改用户信息
+     */
+    public void getUerChangeInfo(){
+        nickName = txt_my_name.getText().toString();
+        contactPhone = txt_my_phone.getText().toString();
+        if(!RegexUtils.isMobileSimple(contactPhone)){
+            ToastUtils.showLong("手机号格式错误");
+            return;
+        }
+
+        showDialog();
+        Api request = getRetrofit().create(Api.class);
+        Call<JsonEntity> call = request.userChangeInfo(SPStaticUtils.getInt(Constants.SP_USER_ID),portrait,nickName,
+                contactPhone,birthday);
+        call.enqueue(new Callback<JsonEntity>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<JsonEntity> call, Response<JsonEntity> response) {
+                hideDialog();
+                ToastUtils.showLong( response.body().getMsg());
+                if(response.body().getCode()==Constants.HTTP_RESPONSE_OK) {
+                    finish();
+                }
+
+            }
+
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<JsonEntity> call, Throwable throwable) {
+                System.out.println("请求失败");
+                System.out.println(throwable.getMessage());
+            }
+        });
+    }
 
 }

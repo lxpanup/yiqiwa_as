@@ -174,7 +174,7 @@ public class LoginActivity extends BaseActivity  {
         }
         showDialog();
         Api request = getRetrofit().create(Api.class);
-        Call<BaseBean<LoginUserBean>> call = request.login("18382496398","12345678");
+        Call<BaseBean<LoginUserBean>> call = request.login("18719041111","12345678");
         call.enqueue(new Callback<BaseBean<LoginUserBean>>() {
             //请求成功时回调
             @Override

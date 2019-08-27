@@ -4,30 +4,19 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.api.Api;
 import com.ssd.yiqiwa.model.entity.BaseBean;
 import com.ssd.yiqiwa.model.entity.LoginUserBean;
-import com.ssd.yiqiwa.ui.activities.MainActivity;
 import com.ssd.yiqiwa.ui.activities.base.BaseFragment;
 import com.ssd.yiqiwa.ui.activities.common.LoginActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.BankActivity;
@@ -43,13 +32,7 @@ import com.ssd.yiqiwa.ui.activities.jizhu.JizhuListActivity;
 import com.ssd.yiqiwa.ui.activities.publish.MyPublishActivity;
 import com.ssd.yiqiwa.ui.adapter.MessageListAdapter;
 import com.ssd.yiqiwa.utils.Constants;
-import com.ssd.yiqiwa.widget.common.CommomDialog;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,7 +64,13 @@ public class NavMyFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getUserDetail();
+        if(SPStaticUtils.getInt(Constants.SP_USER_ID)==-1){
+            startActivity(new Intent(getActivity(),LoginActivity.class));
+        }else{
+            getUserDetail();
+
+        }
+
     }
 
     @Override
@@ -91,12 +80,7 @@ public class NavMyFragment extends BaseFragment {
 
     @Override
     public void onBindView() {
-        if(SPStaticUtils.getInt(Constants.SP_USER_ID)==-1){
-            startActivity(new Intent(getActivity(),LoginActivity.class));
-        }else{
-            getUserData();
 
-        }
     }
 
     @Override
@@ -110,13 +94,18 @@ public class NavMyFragment extends BaseFragment {
 
 
     private void getUserData(){
-        txt_my_name.setText(SPStaticUtils.getString(Constants.SP_USER_NICKNAME));
+        if(SPStaticUtils.getString(Constants.SP_USER_NICKNAME).equals("")) {
+            txt_my_name.setText("未设置昵称");
+        }else{
+            txt_my_name.setText(SPStaticUtils.getString(Constants.SP_USER_NICKNAME));
+        }
         txt_my_phone.setText(SPStaticUtils.getString(Constants.SP_USER_LOGINPHONE));
         txt_my_jifen.setText(SPStaticUtils.getInt(Constants.SP_USER_TOTALSCORE)+"");
 //            txt_shouchang.setText(SPStaticUtils.getString(Constants.SP_USER_NICKNAME));
-        Glide.with(context).load("http://i.ooniu.com/20190522.png")
+        Glide.with(getActivity()).load(Constants.ALIYUN_IMAGE_SSO+SPStaticUtils.getString(Constants.SP_USER_PORTRAIT))
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .into(img_my_head);
+
 
     }
 
@@ -132,7 +121,7 @@ public class NavMyFragment extends BaseFragment {
 
                 break;
             case R.id.img_my_head:
-                startActivity(new Intent(getActivity(), UpdateUserActivity.class));
+//                startActivity(new Intent(getActivity(), UpdateUserActivity.class));
 
                 break;
             case R.id.txt_myjianli:

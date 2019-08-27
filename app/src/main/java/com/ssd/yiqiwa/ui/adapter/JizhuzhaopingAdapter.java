@@ -51,14 +51,12 @@ public class JizhuzhaopingAdapter extends RecyclerView.Adapter<JizhuzhaopingAdap
     class MyHolder extends RecyclerView.ViewHolder {
 
 
-
         public MyHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
 
         }
-
 
     }
 }
