@@ -58,6 +58,8 @@ public class Constants {
 
 
 
+    /** 设置-是否阻止推送通知 */
+    public static final String SP_SETTING_MESSAGE = "sp_setting_message";
 
 
     /** 相应成功标识 */
