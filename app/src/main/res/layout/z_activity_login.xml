@@ -119,6 +119,7 @@
                         android:hint="请输入手机号码"
                         android:inputType="phone"
                         android:paddingLeft="38dp"
+                        android:text="18719041111"
                         android:textColor="@color/black" />
 
                 </RelativeLayout>
@@ -147,6 +148,7 @@
                         android:hint="请输入密码"
                         android:inputType="textPassword"
                         android:paddingLeft="38dp"
+                        android:text="12345678"
                         android:textColor="@color/black" />
 
                 </RelativeLayout>
@@ -158,7 +160,8 @@
 
                     <CheckBox
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:checked="true"/>
 
                     <TextView
                         android:layout_width="wrap_content"

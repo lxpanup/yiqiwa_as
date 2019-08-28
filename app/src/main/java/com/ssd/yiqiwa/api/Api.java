@@ -2,8 +2,11 @@ package com.ssd.yiqiwa.api;
 
 
 import com.ssd.yiqiwa.model.entity.BaseBean;
+import com.ssd.yiqiwa.model.entity.BaseBeanList;
+import com.ssd.yiqiwa.model.entity.HomeBannerImages;
 import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.LoginUserBean;
+import com.ssd.yiqiwa.model.entity.ProductBean;
 
 import java.util.List;
 
@@ -51,12 +54,29 @@ public interface Api {
                               @Query("birthday") String birthday);
 
     /**
-     * 修改用户信息
+     * 修改密码
      * @return .
      */
     @POST("user/resetPassword")
     Call<JsonEntity> userResetPassword(@Query("uId") int uId, @Query("oriPassword") String oriPassword,
                               @Query("newPassword") String newPassword);
+
+
+    /**
+     * 忘记密码
+     * @return .
+     */
+    @POST("user/resetPassword")
+    Call<JsonEntity> userResetPassword(@Query("phone") String phone, @Query("validCode") String validCode,
+                                       @Query("newPassword") String newPassword);
+
+    /**
+     * 修改银行卡
+     * @return .
+     */
+    @POST("user/addBankCard")
+    Call<JsonEntity> userAddBankCard(@Query("uId") int uId, @Query("cardNumber") String cardNumber,
+                                       @Query("cardBank") String cardBank);
 
     /**
      * 意见反馈
@@ -81,21 +101,21 @@ public interface Api {
      * @return .
      */
     @POST("home/banner")
-    Call<BaseBean<LoginUserBean>> homeBanner();
+    Call<BaseBeanList<HomeBannerImages>> homeBanner();
 
     /**
      * 推荐产品-新品推荐
      * @return .
      */
     @POST("home/newProduct")
-    Call<BaseBean<LoginUserBean>> homeNewProduct();
+    Call<BaseBeanList<ProductBean>> homeNewProduct();
 
     /**
      * 特价专区
      * @return .
      */
     @POST("home/discountZone")
-    Call<BaseBean<LoginUserBean>> homeDiscountZone();
+    Call<BaseBeanList<ProductBean>> homeDiscountZone();
 
 
 

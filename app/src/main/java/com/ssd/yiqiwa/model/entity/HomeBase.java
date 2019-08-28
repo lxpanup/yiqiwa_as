@@ -18,59 +18,156 @@ public class HomeBase implements Parcelable {
     public static final int TYPE_RECOMMEND = 12;
 
 
-    private long id;
-    private String name;
-    private String url;
-    private double price;
+
+
+    private String product_city;
+    private String product_coverImage;
+    private String product_createDate;
+    private String product_factoryDate;
+    private String product_id;
+    private String product_price;
+    private String product_priceUint;
+    private String product_province;
+    private String product_title;
+    private String product_type;
+    private String product_workHour;
+
+
+
     private int type = TYPE_RECOMMEND;
     private int spanCount = 300;
 
-    public HomeBase() {
-    }
 
-    public HomeBase(long id, double price, String url, String name, int type, int spanCount) {
-        this.id = id;
-        this.price = price;
-        this.url = url;
-        this.name = name;
+    public HomeBase(String product_city, String product_coverImage, String product_createDate, String product_factoryDate, String product_id, String product_price, String product_priceUint, String product_province, String product_title, String product_type, String product_workHour, int type, int spanCount) {
+        this.product_city = product_city;
+        this.product_coverImage = product_coverImage;
+        this.product_createDate = product_createDate;
+        this.product_factoryDate = product_factoryDate;
+        this.product_id = product_id;
+        this.product_price = product_price;
+        this.product_priceUint = product_priceUint;
+        this.product_province = product_province;
+        this.product_title = product_title;
+        this.product_type = product_type;
+        this.product_workHour = product_workHour;
         this.type = type;
         this.spanCount = spanCount;
     }
 
-    public long getId() {
-        return id;
+    protected HomeBase(Parcel in) {
+        product_city = in.readString();
+        product_coverImage = in.readString();
+        product_createDate = in.readString();
+        product_factoryDate = in.readString();
+        product_id = in.readString();
+        product_price = in.readString();
+        product_priceUint = in.readString();
+        product_province = in.readString();
+        product_title = in.readString();
+        product_type = in.readString();
+        product_workHour = in.readString();
+        type = in.readInt();
+        spanCount = in.readInt();
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public static final Creator<HomeBase> CREATOR = new Creator<HomeBase>() {
+        @Override
+        public HomeBase createFromParcel(Parcel in) {
+            return new HomeBase(in);
+        }
+
+        @Override
+        public HomeBase[] newArray(int size) {
+            return new HomeBase[size];
+        }
+    };
+
+    public String getProduct_city() {
+        return product_city;
     }
 
-    public double getPrice() {
-        return price;
+    public void setProduct_city(String product_city) {
+        this.product_city = product_city;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public String getProduct_coverImage() {
+        return product_coverImage;
     }
 
-    public String getUrl() {
-        return url == null ? "" : url;
+    public void setProduct_coverImage(String product_coverImage) {
+        this.product_coverImage = product_coverImage;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public String getProduct_createDate() {
+        return product_createDate;
     }
 
-    public String getName() {
-        return name == null ? "" : name;
+    public void setProduct_createDate(String product_createDate) {
+        this.product_createDate = product_createDate;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getProduct_factoryDate() {
+        return product_factoryDate;
     }
 
-    public String getCurrency() {
-        return "￥";
+    public void setProduct_factoryDate(String product_factoryDate) {
+        this.product_factoryDate = product_factoryDate;
+    }
+
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
+    }
+
+    public String getProduct_price() {
+        return product_price;
+    }
+
+    public void setProduct_price(String product_price) {
+        this.product_price = product_price;
+    }
+
+    public String getProduct_priceUint() {
+        return product_priceUint;
+    }
+
+    public void setProduct_priceUint(String product_priceUint) {
+        this.product_priceUint = product_priceUint;
+    }
+
+    public String getProduct_province() {
+        return product_province;
+    }
+
+    public void setProduct_province(String product_province) {
+        this.product_province = product_province;
+    }
+
+    public String getProduct_title() {
+        return product_title;
+    }
+
+    public void setProduct_title(String product_title) {
+        this.product_title = product_title;
+    }
+
+    public String getProduct_type() {
+        return product_type;
+    }
+
+    public void setProduct_type(String product_type) {
+        this.product_type = product_type;
+    }
+
+    public String getProduct_workHour() {
+        return product_workHour;
+    }
+
+    public void setProduct_workHour(String product_workHour) {
+        this.product_workHour = product_workHour;
     }
 
     public int getType() {
@@ -96,32 +193,18 @@ public class HomeBase implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.id);
-        dest.writeString(this.name);
-        dest.writeString(this.url);
-        dest.writeDouble(this.price);
-        dest.writeInt(this.type);
-        dest.writeInt(this.spanCount);
+        dest.writeString(product_city);
+        dest.writeString(product_coverImage);
+        dest.writeString(product_createDate);
+        dest.writeString(product_factoryDate);
+        dest.writeString(product_id);
+        dest.writeString(product_price);
+        dest.writeString(product_priceUint);
+        dest.writeString(product_province);
+        dest.writeString(product_title);
+        dest.writeString(product_type);
+        dest.writeString(product_workHour);
+        dest.writeInt(type);
+        dest.writeInt(spanCount);
     }
-
-    protected HomeBase(Parcel in) {
-        this.id = in.readLong();
-        this.name = in.readString();
-        this.url = in.readString();
-        this.price = in.readDouble();
-        this.type = in.readInt();
-        this.spanCount = in.readInt();
-    }
-
-    public static final Parcelable.Creator<HomeBase> CREATOR = new Parcelable.Creator<HomeBase>() {
-        @Override
-        public HomeBase createFromParcel(Parcel source) {
-            return new HomeBase(source);
-        }
-
-        @Override
-        public HomeBase[] newArray(int size) {
-            return new HomeBase[size];
-        }
-    };
 }

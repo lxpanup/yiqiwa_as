@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
@@ -23,12 +24,14 @@ import retrofit2.Response;
 public class ForgetPwdActivity extends BaseActivity {
 
 
-    @BindView(R.id.edt_oldpwd)
-    EditText edt_oldpwd;
-    @BindView(R.id.edt_newpwd)
-    EditText edt_newpwd;
-    @BindView(R.id.edt_affirmpwd)
-    EditText edt_affirmpwd;
+    @BindView(R.id.edt_register_phone)
+    EditText edt_register_phone;
+    @BindView(R.id.edt_register_yanzhengma)
+    EditText edt_register_yanzhengma;
+    @BindView(R.id.edit_register_pwd)
+    EditText edit_register_pwd;
+    @BindView(R.id.edt_register_confirm_pwd)
+    EditText edt_register_confirm_pwd;
 
 
 
@@ -56,7 +59,6 @@ public class ForgetPwdActivity extends BaseActivity {
                 break;
             case R.id.txt_xiugaimima:
                 getUserResetPassword();
-
                 break;
         }
     }
@@ -68,9 +70,10 @@ public class ForgetPwdActivity extends BaseActivity {
      *
      */
     public void getUserResetPassword(){
-        String oldpwd = edt_oldpwd.getText().toString();
-        String newpwd = edt_newpwd.getText().toString();
-        String affirmpwd = edt_affirmpwd.getText().toString();
+        String phone = edt_register_phone.getText().toString();
+        String newpwd = edit_register_pwd.getText().toString();
+        String affirmpwd = edt_register_confirm_pwd.getText().toString();
+        String validCode = edt_register_yanzhengma.getText().toString();
         if(!newpwd.equals(affirmpwd)){
             ToastUtils.showLong("确认密码不一致");
             return;
@@ -78,7 +81,7 @@ public class ForgetPwdActivity extends BaseActivity {
 
         showDialog();
         Api request = getRetrofit().create(Api.class);
-        Call<JsonEntity> call = request.userResetPassword(SPStaticUtils.getInt(Constants.SP_USER_ID),oldpwd,newpwd);
+        Call<JsonEntity> call = request.userResetPassword(phone,validCode,newpwd);
         call.enqueue(new Callback<JsonEntity>() {
             //请求成功时回调
             @Override
@@ -94,8 +97,8 @@ public class ForgetPwdActivity extends BaseActivity {
             //请求失败时回调
             @Override
             public void onFailure(Call<JsonEntity> call, Throwable throwable) {
-                System.out.println("请求失败");
-                System.out.println(throwable.getMessage());
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
             }
         });
     }

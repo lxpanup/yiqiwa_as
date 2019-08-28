@@ -12,12 +12,14 @@
 
 
         <ImageView
+            android:id="@+id/img_product_coverimage"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:scaleType="fitXY"
             android:src="@mipmap/test_wjj" />
 
         <ImageView
+            android:id="@+id/img_product_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -60,6 +62,7 @@
                 android:textColor="#ffff0000"
                 android:textSize="19sp" />
             <TextView
+                android:id="@+id/txt_product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="200.00"
@@ -68,6 +71,7 @@
                 />
 
             <TextView
+                android:id="@+id/txt_product_priceuint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="元/时"

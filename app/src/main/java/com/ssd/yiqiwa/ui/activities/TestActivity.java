@@ -44,17 +44,6 @@ public class TestActivity extends BaseActivity {
 
 
 
-        List<String> listProduct = new ArrayList<>();
-        listProduct.add("1");
-        listProduct.add("1");
-        listProduct.add("1");
-        listProduct.add("1");
-        listProduct.add("1");
-        LinearLayoutManager layoutManager =  new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        test_recy.setLayoutManager(layoutManager);//这里用线性宫格显示 类似于gridview
-        test_recy.setAdapter(new HomeProductAdapter(TestActivity.this,listProduct));
-
     }
 
     @Override

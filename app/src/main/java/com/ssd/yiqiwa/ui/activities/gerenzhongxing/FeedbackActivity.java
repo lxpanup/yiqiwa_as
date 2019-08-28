@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.EditText;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
@@ -105,8 +106,8 @@ public class FeedbackActivity extends BaseActivity {
             //请求失败时回调
             @Override
             public void onFailure(Call<JsonEntity> call, Throwable throwable) {
-                System.out.println("请求失败");
-                System.out.println(throwable.getMessage());
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
             }
         });
     }

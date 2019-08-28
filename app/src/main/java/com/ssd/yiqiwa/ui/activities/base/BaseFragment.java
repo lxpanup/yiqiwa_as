@@ -55,13 +55,6 @@ public abstract class BaseFragment extends Fragment {
         activity = getActivity();
         context = activity.getApplicationContext();
         ButterKnife.bind(this, mConvertView);
-        if (mConvertView == null) {
-            // 传其他资源id 时的处理（只能传布局资源id ）
-            throw new ClassCastException("view convert fail，check your resource id  be layout resource");
-        } else {
-            mBinder = ButterKnife.bind(getActivity());
-            onBindView();
-        }
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL) // 设置 网络请求 Url
@@ -71,6 +64,15 @@ public abstract class BaseFragment extends Fragment {
         dialog = new ProgressDialog(getActivity());
         dialog.setCancelable(false);
         dialog.setMessage("正在请求...");
+
+        if (mConvertView == null) {
+            // 传其他资源id 时的处理（只能传布局资源id ）
+            throw new ClassCastException("view convert fail，check your resource id  be layout resource");
+        } else {
+            mBinder = ButterKnife.bind(getActivity());
+            onBindView();
+        }
+
         return mConvertView;
     }
 

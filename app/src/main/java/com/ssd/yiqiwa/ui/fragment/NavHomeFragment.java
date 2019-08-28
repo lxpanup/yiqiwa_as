@@ -13,14 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.api.Api;
 import com.ssd.yiqiwa.model.entity.BaseBean;
+import com.ssd.yiqiwa.model.entity.BaseBeanList;
 import com.ssd.yiqiwa.model.entity.HomeBase;
-import com.ssd.yiqiwa.model.entity.LoginUserBean;
+import com.ssd.yiqiwa.model.entity.HomeBannerImages;
+import com.ssd.yiqiwa.model.entity.ProductBean;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
 import com.ssd.yiqiwa.ui.activities.base.BaseFragment;
 import com.ssd.yiqiwa.ui.activities.common.LoginActivity;
@@ -78,12 +81,15 @@ public class NavHomeFragment extends BaseFragment implements SwipeRefreshLayout.
         int spanCount = getResources().getInteger(R.integer.grid_span_count);
 
         GridLayoutManager layoutManager = new GridLayoutManager(activity, spanCount);
-        getTestList();
+//        getTestList();
         adapter = new HomeAdapter(context, activity,list);
         layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnLoadMoreListener(this);
+
+
+        getHomeBanner();
     }
 
     @Override
@@ -122,31 +128,33 @@ public class NavHomeFragment extends BaseFragment implements SwipeRefreshLayout.
 
 
 
-    public void getLogin(){
+    public void getHomeBanner(){
 
         Api request = getRetrofit().create(Api.class);
-        Call<BaseBean<LoginUserBean>> call = request.login("18382496398","12345678");
-        call.enqueue(new Callback<BaseBean<LoginUserBean>>() {
+        Call<BaseBeanList<HomeBannerImages>> call = request.homeBanner();
+        call.enqueue(new Callback<BaseBeanList<HomeBannerImages>>() {
             //请求成功时回调
             @Override
-            public void onResponse(Call<BaseBean<LoginUserBean>> call, Response<BaseBean<LoginUserBean>> response) {
-                System.out.println("翻译是："+ response.body().getData().getNickName());
+            public void onResponse(Call<BaseBeanList<HomeBannerImages>> call, Response<BaseBeanList<HomeBannerImages>> response) {
                 hideDialog();
-                BaseBean<LoginUserBean> beanBaseBean = response.body();
-                if(beanBaseBean.getCode()== Constants.HTTP_RESPONSE_OK){
-                    LoginUserBean loginUserBean = beanBaseBean.getData();
-                    SPStaticUtils.put(Constants.SP_USER_ID,loginUserBean.getuId());
-
+                BaseBeanList<HomeBannerImages> baseBeanList = response.body();
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    List<HomeBannerImages> bannerImages = baseBeanList.getData();
+                    List<String> imgList = new ArrayList<>();
+                    for(HomeBannerImages item:bannerImages){
+                        imgList.add(item.getImageUrl());
+                    }
+                    adapter.setHomeBannerImages(imgList);
                 }else{
-                    ToastUtils.showLong(beanBaseBean.getMsg());
+                    ToastUtils.showLong(baseBeanList.getMsg());
                 }
-
+                getHomeDiscountZone();
             }
             //请求失败时回调
             @Override
-            public void onFailure(Call<BaseBean<LoginUserBean>> call, Throwable throwable) {
-                System.out.println("请求失败");
-                System.out.println(throwable.getMessage());
+            public void onFailure(Call<BaseBeanList<HomeBannerImages>> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
             }
         });
     }
@@ -154,27 +162,93 @@ public class NavHomeFragment extends BaseFragment implements SwipeRefreshLayout.
 
 
 
+
+    public void getHomeDiscountZone(){
+
+        Api request = getRetrofit().create(Api.class);
+        Call<BaseBeanList<ProductBean>> call = request.homeDiscountZone();
+        call.enqueue(new Callback<BaseBeanList<ProductBean>>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<BaseBeanList<ProductBean>> call, Response<BaseBeanList<ProductBean>> response) {
+                hideDialog();
+                BaseBeanList<ProductBean> baseBeanList = response.body();
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    adapter.homeProduct(baseBeanList.getData());
+                }else{
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                }
+                getHomeNewProduct();
+
+            }
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<BaseBeanList<ProductBean>> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
+            }
+        });
+    }
+
+
+    public void getHomeNewProduct(){
+
+        Api request = getRetrofit().create(Api.class);
+        Call<BaseBeanList<ProductBean>> call = request.homeNewProduct();
+        call.enqueue(new Callback<BaseBeanList<ProductBean>>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<BaseBeanList<ProductBean>> call, Response<BaseBeanList<ProductBean>> response) {
+                hideDialog();
+                BaseBeanList<ProductBean> baseBeanList = response.body();
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    getTestList();
+                    for (ProductBean item:baseBeanList.getData()) {
+                        list.add(new HomeBase(item.getCity(), item.getCoverImage(), item.getCreateDate(), item.getFactoryDate(), item.getId()+"", item.getPrice()+"",
+                                item.getPriceUint(), item.getProvince(), item.getTitle(), item.getType()+"", item.getWorkHour()+"", HomeBase.TYPE_RECOMMEND, 150));
+                    }
+                    adapter.notifyDataSetChanged();
+                }else{
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                }
+
+            }
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<BaseBeanList<ProductBean>> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
+            }
+        });
+    }
+
+
     private void getTestList(){
         //模拟返回数据
         int spanCount = 300;
         list.clear();
         //list添加轮播图片
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_CAROUSEL, spanCount));
+        list.add(new HomeBase("", "","", "","", "",
+                "", "","", "","", HomeBase.TYPE_CAROUSEL, spanCount));
         //list添加分类
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_CATEGORY, spanCount));
+        list.add(new HomeBase("", "","", "","", "",
+                "", "","", "","", HomeBase.TYPE_CATEGORY, spanCount));
         //list
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_HEADLINE, spanCount));
+        list.add(new HomeBase("", "","", "","", "",
+                "", "","", "","",  HomeBase.TYPE_HEADLINE, spanCount));
 
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_DIVIDER, spanCount));
-        list.add(new HomeBase(0, 0, "", "推荐商品", HomeBase.TYPE_LIVE, spanCount));
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
-        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
+        list.add(new HomeBase("", "","", "","", "",
+                "", "","", "","", HomeBase.TYPE_DIVIDER, spanCount));
+        list.add(new HomeBase("", "","", "","", "",
+                "", "","推荐商品", "","", HomeBase.TYPE_LIVE, spanCount));
+//        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
+//        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
+//        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
+//        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
+//        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
+//        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
+//        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
+//        list.add(new HomeBase(0, 0, "", "", HomeBase.TYPE_RECOMMEND, 150));
         //list添加头部
 //        list.add(new HomeBase(0, 0, "", "热门直播", HomeBase.TYPE_HEADER, spanCount));
 

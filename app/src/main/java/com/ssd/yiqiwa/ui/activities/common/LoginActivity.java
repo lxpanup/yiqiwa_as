@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -179,7 +180,7 @@ public class LoginActivity extends BaseActivity  {
             //请求成功时回调
             @Override
             public void onResponse(Call<BaseBean<LoginUserBean>> call, Response<BaseBean<LoginUserBean>> response) {
-                System.out.println("翻译是："+ response.body().getData().getNickName());
+                LogUtils.e("翻译是："+ response.body().getData().getNickName());
                 hideDialog();
                 BaseBean<LoginUserBean> beanBaseBean = response.body();
                 if(beanBaseBean.getCode()==Constants.HTTP_RESPONSE_OK){
@@ -208,8 +209,8 @@ public class LoginActivity extends BaseActivity  {
             //请求失败时回调
             @Override
             public void onFailure(Call<BaseBean<LoginUserBean>> call, Throwable throwable) {
-                System.out.println("请求失败");
-                System.out.println(throwable.getMessage());
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
             }
         });
     }
@@ -240,8 +241,8 @@ public class LoginActivity extends BaseActivity  {
             //请求失败时回调
             @Override
             public void onFailure(Call<JsonEntity> call, Throwable throwable) {
-                System.out.println("请求失败");
-                System.out.println(throwable.getMessage());
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
             }
         });
     }

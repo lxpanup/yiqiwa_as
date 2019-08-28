@@ -70,4 +70,18 @@ public class DateFormatUtil {
 
         return sdf.format(calendar.getTime());
     }
+
+
+
+    public static String getDateFormat(String time){
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_yyyyMMdd_HHmm, Locale.getDefault());
+        SimpleDateFormat sdf2 = new SimpleDateFormat(FORMAT_yyyy, Locale.getDefault());
+        try {
+            return sdf2.format(sdf.parse(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "2015";
+
+    }
 }

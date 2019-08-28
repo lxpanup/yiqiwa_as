@@ -6,22 +6,30 @@ import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.base.Type;
+import com.ssd.yiqiwa.model.entity.HomeBannerImages;
 import com.ssd.yiqiwa.model.entity.HomeBase;
+import com.ssd.yiqiwa.model.entity.ProductBean;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
+import com.ssd.yiqiwa.ui.activities.chuzhu.CZDetailActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZListActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZPublishActivity;
 import com.ssd.yiqiwa.ui.activities.jizhu.JizhuListActivity;
 import com.ssd.yiqiwa.ui.activities.other.SearchActivity;
 import com.ssd.yiqiwa.ui.activities.other.XingxifeiActivity;
 import com.ssd.yiqiwa.ui.activities.publish.ChengZuPublishActivity;
+import com.ssd.yiqiwa.utils.Constants;
 import com.ssd.yiqiwa.widget.FooterLoading;
 import com.ssd.yiqiwa.widget.GlideImageLoader;
 import com.youth.banner.Banner;
@@ -34,6 +42,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
+
 /**
  * @author Smile Wei
  * @since 2017/03/01.
@@ -42,7 +52,8 @@ import butterknife.OnClick;
 public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private Activity activity;
-    private List<?> homeBannerImages = new ArrayList<>();
+    private List<String> homeBannerImages = new ArrayList<>();
+    private List<ProductBean> homeProducts = new ArrayList<>();
     private List<HomeBase> list;
     private final SpanSizeLookup spanSizeLookup = new SpanSizeLookup();
     private LayoutInflater inflater;
@@ -54,6 +65,25 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         inflater = LayoutInflater.from(context);
     }
 
+//    public void updateData(List<HomeBase> datalist){
+//        this.list.clear();
+//        this.list.addAll(datalist);
+//        notifyDataSetChanged();
+//    }
+
+    public void setHomeBannerImages(List<String> imgList){
+//        homeBannerImages.clear();
+        homeBannerImages.addAll(imgList);
+
+//        notifyDataSetChanged();
+    }
+
+    public void homeProduct(List<ProductBean> imgList){
+//        homeBannerImages.clear();
+        homeProducts.addAll(imgList);
+
+//        notifyDataSetChanged();
+    }
 
     public GridLayoutManager.SpanSizeLookup getSpanSizeLookup() {
         return spanSizeLookup;
@@ -97,21 +127,47 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.footerLoading.onLoad(Type.TYPE_FOOTER_FULL == list.get(position).getType());
         } else if (viewHolder instanceof HeaderHolder) {
             HeaderHolder holder = (HeaderHolder) viewHolder;
-            holder.tvTitle.setText(bean.getName());
+            holder.tvTitle.setText(bean.getProduct_title());
         } else if(viewHolder instanceof SpecialHolder){
             SpecialHolder holder = (SpecialHolder) viewHolder;
-            List<String> listProduct = new ArrayList<>();
-            listProduct.add("1");
-            listProduct.add("1");
-            listProduct.add("1");
-            listProduct.add("1");
-            listProduct.add("1");
+
             LinearLayoutManager layoutManager =  new LinearLayoutManager(context);
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             holder.rcy_home_special.setLayoutManager(layoutManager);//这里用线性宫格显示 类似于gridview
-            holder.rcy_home_special.setAdapter(new HomeProductAdapter(context,listProduct));
+            holder.rcy_home_special.setAdapter(new HomeProductAdapter(context,homeProducts));
             holder.rcy_home_special.setFocusable(false);
         } else if(viewHolder instanceof RecommendHolder){
+            RecommendHolder holder = (RecommendHolder) viewHolder;
+
+
+            holder.txt_product_name.setText(bean.getProduct_title());
+            StringBuilder sb = new StringBuilder();
+            sb.append(bean.getProduct_province()+bean.getProduct_city());
+            if(!bean.getProduct_factoryDate().isEmpty()){
+                sb.append("|");
+                sb.append(bean.getProduct_factoryDate().substring(0,4));
+            }
+
+            if(!bean.getProduct_workHour().isEmpty()){
+                sb.append("|");
+                sb.append(bean.getProduct_workHour()+"");
+            }
+
+            holder.txt_product_category.setText(sb.toString());
+            holder.txt_product_price.setText(bean.getProduct_price()+"");
+            holder.txt_product_priceuint.setText("元/"+bean.getProduct_priceUint());
+            if(bean.getProduct_type().equals("1")) {
+                holder.img_product_type.setImageResource(R.mipmap.ic_chuzhu);
+            }else{
+                holder.img_product_type.setImageResource(R.mipmap.ic_chushou);
+            }
+            Glide.with(context).load(Constants.ALIYUN_IMAGE_SSO+bean.getProduct_coverImage()).into(holder.img_product_coverimage);
+            holder.lil_item_product.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(context, CZDetailActivity.class));
+                }
+            });
 
         }
     }
@@ -148,9 +204,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            String[] urls = activity.getResources().getStringArray(R.array.url);
-            List list = Arrays.asList(urls);
-            homeBannerImages = new ArrayList(list);
+//            String[] urls = activity.getResources().getStringArray(R.array.url);
+//            List list = Arrays.asList(urls);
+//            homeBannerImages = new ArrayList(list);
+            Log.e("yqw","homeBannerImages:"+homeBannerImages.size());
             //简单使用
             banner.setImages(homeBannerImages)
                     .setImageLoader(new GlideImageLoader())
@@ -208,6 +265,22 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class RecommendHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.txt_product_name)
+        TextView txt_product_name;
+        @BindView(R.id.txt_product_category)
+        TextView txt_product_category;
+        @BindView(R.id.txt_product_price)
+        TextView txt_product_price;
+        @BindView(R.id.txt_product_priceuint)
+        TextView txt_product_priceuint;
+        @BindView(R.id.img_product_coverimage)
+        ImageView img_product_coverimage;
+        @BindView(R.id.img_product_type)
+        ImageView img_product_type;
+
+        @BindView(R.id.lil_item_product)
+        LinearLayout lil_item_product;
 
         RecommendHolder(View itemView) {
             super(itemView);
