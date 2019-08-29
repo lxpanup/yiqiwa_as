@@ -82,6 +82,16 @@ public class DateFormatUtil {
             e.printStackTrace();
         }
         return "2015";
+    }
+
+    /**
+     * 当前时间
+     * @param time
+     * @return
+     */
+    public static String getDateCurrentFormat(String format){
+        SimpleDateFormat sdf2 = new SimpleDateFormat(format, Locale.getDefault());
+        return sdf2.format(new Date());
 
     }
 }

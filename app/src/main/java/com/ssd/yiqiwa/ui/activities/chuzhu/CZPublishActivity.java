@@ -16,12 +16,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -39,10 +41,13 @@ import com.ssd.yiqiwa.model.entity.BaseBeanList;
 import com.ssd.yiqiwa.model.entity.HomeBase;
 import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.MachineBrandBean;
+import com.ssd.yiqiwa.model.entity.MachineModelBean;
+import com.ssd.yiqiwa.model.entity.MachineTypeBean;
 import com.ssd.yiqiwa.model.entity.ProductBean;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.ui.adapter.ImageUploadAdapter;
 import com.ssd.yiqiwa.utils.Constants;
+import com.ssd.yiqiwa.utils.DateFormatUtil;
 import com.ssd.yiqiwa.widget.GlideImageLoader;
 import com.ssd.yiqiwa.widget.GlideImageThisLoader;
 import com.ssd.yiqiwa.widget.GlideLoadEngine;
@@ -50,6 +55,8 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,26 +101,17 @@ public class CZPublishActivity extends BaseActivity {
     @BindView(R.id.edt_publish_07)
     EditText edt_publish_07;
     @NotEmpty(message = "不能为空")
-    @BindView(R.id.edt_publish_10)
-    EditText edt_publish_10;
-    @NotEmpty(message = "不能为空")
     @BindView(R.id.edt_publish_11)
     EditText edt_publish_11;
-//    @NotEmpty(message = "不能为空")
-//    @BindView(R.id.edt_publish_12)
-//    EditText edt_publish_12;
-//    @NotEmpty(message = "不能为空")
-//    @BindView(R.id.edt_publish_14)
-//    EditText edt_publish_14;
-//    @NotEmpty(message = "不能为空")
-//    @BindView(R.id.edt_publish_15)
-//    EditText edt_publish_15;
+    @BindView(R.id.edt_publish_12)
+    EditText edt_publish_12;
+    @BindView(R.id.edt_publish_14)
+    EditText edt_publish_14;
+    @BindView(R.id.edt_publish_15)
+    EditText edt_publish_15;
     @NotEmpty(message = "不能为空")
     @BindView(R.id.edt_publish_16)
     EditText edt_publish_16;
-    @NotEmpty(message = "不能为空")
-    @BindView(R.id.edt_publish_17)
-    EditText edt_publish_17;
     @NotEmpty(message = "不能为空")
     @BindView(R.id.edt_publish_19)
     EditText edt_publish_19;
@@ -124,14 +122,39 @@ public class CZPublishActivity extends BaseActivity {
     @BindView(R.id.edt_publish_22)
     EditText edt_publish_22;
 
+    @BindView(R.id.txt_publish_10)
+    TextView txt_publish_10;
+
+
     @BindView(R.id.spr_publish_06)
     Spinner spr_publish_06;
     @BindView(R.id.spr_publish_08)
     Spinner spr_publish_08;
+    @BindView(R.id.spr_publish_10)
+    Spinner spr_publish_10;
+    @BindView(R.id.spr_publish_17)
+    Spinner spr_publish_17;
     @BindView(R.id.spr_publish_18)
     Spinner spr_publish_18;
+
+    @BindView(R.id.rbn_geren)
+    RadioButton rbn_geren;
+    @BindView(R.id.rbn_gongshi)
+    RadioButton rbn_gongshi;
     // 品牌列表
-    List<MachineBrandBean> machineBrandBeans;
+    List<MachineBrandBean> machineBrandBeans = new ArrayList<>();
+    //设备类型
+    List<MachineTypeBean> machineTypeBeans = new ArrayList<>();
+    //设备型号
+    List<MachineModelBean> machineModelTypes = new ArrayList<>();
+    //出厂年份
+    List<String> yearList = new ArrayList<>();
+
+    private String machineBrand;
+    private String machineType;
+    private String machineModelType;
+    private String standard;
+    private String factoryDate;
 
     @Override
     public Object offerLayout() {
@@ -179,15 +202,103 @@ public class CZPublishActivity extends BaseActivity {
 
         gridView.setAdapter(imageUploadAdapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(selectList.get(position)!=null){
                     photoShowDialog(position);
                 }
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
+
+        spr_publish_06.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(machineTypeBeans.size()!=0) {
+                    machineType = machineTypeBeans.get(position).getMbId();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spr_publish_08.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(machineBrandBeans.size()!=0){
+                    machineBrand = machineBrandBeans.get(position).getMbId();
+                    getMachineModelType(Integer.parseInt(machineBrand), 0);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spr_publish_10.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(machineModelTypes.size()!=0) {
+                    machineModelType = machineModelTypes.get(position).getMbId();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spr_publish_17.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(yearList.size()!=0) {
+                    factoryDate = yearList.get(position).trim();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spr_publish_18.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                standard = getResources().getStringArray(R.array.paifangbiaozhun)[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
         getMachineBrandAll();
+        getMachineTypeAll();
+
+        int currentYear = Integer.parseInt(DateFormatUtil.getDateCurrentFormat(DateFormatUtil.FORMAT_yyyy));
+         yearList = new ArrayList<>();
+        for(int i = 0; i < 15; i++){
+            int cyear = currentYear-i;
+            yearList.add(cyear+"");
+        }
+        spr_publish_17.setAdapter(new ArrayAdapter<String>(CZPublishActivity.this, android.R.layout.simple_spinner_item, yearList) );
+
     }
 
     @Override
@@ -195,7 +306,7 @@ public class CZPublishActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.img_back,R.id.txt_verify_publish})
+    @OnClick({R.id.img_back,R.id.txt_verify_publish,R.id.rab_dunwei,R.id.rab_xinghao})
     public void onViewClick(View v){
         switch (v.getId()){
             case R.id.img_back:
@@ -204,6 +315,14 @@ public class CZPublishActivity extends BaseActivity {
             case R.id.txt_verify_publish:
                 validator.validate();
 //                verifyPublishDialog();
+                break;
+            case R.id.rab_dunwei:
+                txt_publish_10.setText("设备吨位");
+                getMachineModelType(Integer.parseInt(machineBrand),0);
+                break;
+            case R.id.rab_xinghao:
+                txt_publish_10.setText("设备型号");
+                getMachineModelType(Integer.parseInt(machineBrand),1);
                 break;
 
         }
@@ -270,7 +389,7 @@ public class CZPublishActivity extends BaseActivity {
         dia.findViewById(R.id.txt_putongfabu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getRentOutAdd();
+                getRentOutAdd(0);
                 ToastUtils.showLong("普通发布成功");
                 dia.dismiss();
             }
@@ -278,7 +397,7 @@ public class CZPublishActivity extends BaseActivity {
         dia.findViewById(R.id.txt_jingpingfabu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getRentOutAdd();
+                getRentOutAdd(1);
                 ToastUtils.showLong("精品发布成功");
                 dia.dismiss();
             }
@@ -383,40 +502,122 @@ public class CZPublishActivity extends BaseActivity {
     }
 
     /**
+     * 获取设备类型
+     */
+    public void getMachineTypeAll(){
+        Api request = getRetrofit().create(Api.class);
+        Call<BaseBeanList<MachineTypeBean>> call = request.machineTypeAll();
+        call.enqueue(new Callback<BaseBeanList<MachineTypeBean>>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<BaseBeanList<MachineTypeBean>> call, Response<BaseBeanList<MachineTypeBean>> response) {
+                hideDialog();
+                BaseBeanList<MachineTypeBean> baseBeanList = response.body();
+
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    machineTypeBeans =  baseBeanList.getData();
+                    List<String> machineList = new ArrayList<>();
+                    for (MachineTypeBean item:baseBeanList.getData()){
+                        machineList.add(item.getName());
+                    }
+                    spr_publish_06.setAdapter(new ArrayAdapter<>(CZPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
+                }else{
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                }
+            }
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<BaseBeanList<MachineTypeBean>> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 获取设备型号
+     */
+    public void getMachineModelType(int mbId,int type){
+        Api request = getRetrofit().create(Api.class);
+        Call<BaseBeanList<MachineModelBean>> call = request.machineModelType(mbId,type);
+        call.enqueue(new Callback<BaseBeanList<MachineModelBean>>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<BaseBeanList<MachineModelBean>> call, Response<BaseBeanList<MachineModelBean>> response) {
+                hideDialog();
+                BaseBeanList<MachineModelBean> baseBeanList = response.body();
+
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    machineModelTypes =  baseBeanList.getData();
+                    List<String> machineList = new ArrayList<>();
+                    for (MachineModelBean item:baseBeanList.getData()){
+                        if(type==0){
+                            machineList.add(item.getTonnage());
+                        }else {
+                            machineList.add(item.getName());
+                        }
+                    }
+                    spr_publish_10.setAdapter(new ArrayAdapter<>(CZPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
+                }else{
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                }
+            }
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<BaseBeanList<MachineModelBean>> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
+            }
+        });
+    }
+
+
+
+    /**
      * 获取产品信息
      */
-    public void getRentOutAdd(){
+    public void getRentOutAdd(int boutique){
 
         Map<String,Object> rentOutMap = new HashMap<>();
         rentOutMap.put("roId","");
         rentOutMap.put("title",edt_publish_01.getText().toString());
         rentOutMap.put("coverImage","封面的图片xxxxxxxxxxxxxxxxx");
+        if(rbn_geren.isChecked()) {
+            rentOutMap.put("rentFrom", "个人");
+            rentOutMap.put("contactPerson", "张三");
+            rentOutMap.put("companyName", "");
+        }else{
+            rentOutMap.put("rentFrom", "公司");
+            rentOutMap.put("companyName", "东拉西扯公司");
+            rentOutMap.put("contactPerson", "");
+        }
 
-        rentOutMap.put("rentFrom","公司");
-
-        rentOutMap.put("companyName","东拉西扯公司");
-
-        rentOutMap.put("contactPerson","");
 
         rentOutMap.put("contactPhone",edt_publish_04.getText().toString());
-        rentOutMap.put("mtId","");
-        rentOutMap.put("productDesc","");
-        rentOutMap.put("mbId","");
-        rentOutMap.put("mbmId","");
-        rentOutMap.put("capacity","");
-        rentOutMap.put("priceHour","");
-        rentOutMap.put("priceDay","");
-        rentOutMap.put("priceMonth","");
-        rentOutMap.put("workTime","");
-        rentOutMap.put("factoryDate","");
-        rentOutMap.put("standard","");
-        rentOutMap.put("province","");
-        rentOutMap.put("city","");
-        rentOutMap.put("county","");
-        rentOutMap.put("address","");
-        rentOutMap.put("describes","");
-        rentOutMap.put("uId","");
-        rentOutMap.put("boutique","");
+
+
+        rentOutMap.put("mtId",machineType);
+
+        rentOutMap.put("productDesc",edt_publish_07.getText().toString());
+
+        rentOutMap.put("mbId",machineBrand);
+
+        rentOutMap.put("mbmId",machineModelType);
+
+        rentOutMap.put("capacity",edt_publish_11.getText().toString());
+        rentOutMap.put("priceHour",edt_publish_12.getText().toString());
+        rentOutMap.put("priceDay",edt_publish_14.getText().toString());
+        rentOutMap.put("priceMonth",edt_publish_15.getText().toString());
+        rentOutMap.put("workTime",edt_publish_16.getText().toString());
+        rentOutMap.put("factoryDate",factoryDate);
+        rentOutMap.put("standard",standard);
+        rentOutMap.put("province","四川省");
+        rentOutMap.put("city","成都市");
+        rentOutMap.put("county","金牛区");
+        rentOutMap.put("address",edt_publish_20.getText().toString());
+        rentOutMap.put("describes",edt_publish_22.getText().toString());
+        rentOutMap.put("uId", SPStaticUtils.getInt(Constants.SP_USER_ID));
+        rentOutMap.put("boutique",boutique);
 //        rentOutMap.put("pictureList[0].url","");
         rentOutMap.put("pictureList","");
 

@@ -44,5 +44,14 @@
     </array>
 
 
+    <array name="paifangbiaozhun">
+        <item> 国标四 </item>
+        <item> 国标五 </item>
+        <item> 国标六 </item>
+        <item> 国标七 </item>
+        <item> 国标八 </item>
+    </array>
+
+
 
 </resources>

@@ -73,7 +73,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_marginRight="20dp"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -88,7 +88,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -97,9 +97,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_01"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <EditText
                         android:id="@+id/edt_publish_01"
@@ -115,10 +115,9 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -133,7 +132,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -142,34 +141,34 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_02"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <RadioGroup
-                        android:id="@+id/rgp_laiyuan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="7dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <RadioButton
+                            android:id="@+id/rbn_geren"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:text="个人"/>
 
                         <RadioButton
+                            android:id="@+id/rbn_gongshi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="公司"/>
                     </RadioGroup>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -187,10 +186,9 @@
                         android:background="@drawable/bg_edit_publish"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -205,7 +203,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -214,9 +212,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_04"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <EditText
                         android:id="@+id/edt_publish_04"
@@ -227,10 +225,9 @@
                         android:background="@drawable/bg_edit_publish"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -245,7 +242,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -254,9 +251,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_05"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <EditText
                         android:id="@+id/edt_publish_05"
@@ -271,7 +268,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
                     <RelativeLayout
@@ -285,7 +282,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -294,9 +291,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_06"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -312,7 +309,6 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="74dp"
@@ -328,15 +324,15 @@
                         android:id="@+id/edt_publish_07"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="top"
                         android:hint="产品出租描述"
                         android:paddingLeft="7dp"
                         android:background="@drawable/bg_edit_publish"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -351,7 +347,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -360,9 +356,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_08"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -378,10 +374,9 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -398,22 +393,23 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <RadioButton
+                            android:id="@+id/rab_dunwei"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:text="吨位"/>
 
                         <RadioButton
+                            android:id="@+id/rab_xinghao"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="型号"/>
                     </RadioGroup>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -428,7 +424,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -437,52 +433,33 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_10"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-
-                        <EditText
-                            android:id="@+id/edt_publish_10"
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/bg_edit_publish"
                             android:layout_weight="4"
-                            android:paddingLeft="7dp"
-                            android:background="@drawable/bg_edit_publish"/>
+                            android:paddingLeft="7dp">
+                        <Spinner
+                            android:id="@+id/spr_publish_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                        </LinearLayout>
 
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="设备型号"
-                            android:gravity="center"
-                            android:textColor="#ff000000"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="16sp"/>
-
-
-                        <EditText
-                            android:id="@+id/edt_publish_10_1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="4"
-                            android:paddingLeft="7dp"
-                            android:background="@drawable/bg_edit_publish"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -497,7 +474,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -506,9 +483,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_11"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
 
                     <EditText
@@ -525,7 +502,7 @@
                     android:layout_marginTop="13dp"
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -540,7 +517,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -549,9 +526,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_12"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
 
 
                     </RelativeLayout>
@@ -580,10 +557,10 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="3dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -601,6 +578,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="请填写每天出租价格"
+                            android:inputType="number"
                             android:layout_weight="1"
                             android:paddingLeft="7dp"
                             android:background="@drawable/bg_edit_publish"/>
@@ -618,10 +596,10 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="3dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -634,14 +612,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
                         <EditText
                             android:id="@+id/edt_publish_15"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:background="@drawable/bg_edit_publish"
+                            android:inputType="number"
                             android:hint="请填写每月出租价格"
-                            android:paddingLeft="7dp"
-                            android:background="@drawable/bg_edit_publish"/>
+                            android:paddingLeft="7dp" />
 
                         <TextView
                             android:layout_width="70dp"
@@ -658,10 +638,10 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="3dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -676,7 +656,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -685,9 +665,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_16"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -698,6 +678,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:inputType="number"
                             android:hint="请填写工作时长"
                             android:paddingLeft="7dp"
                             android:background="@drawable/bg_edit_publish"/>
@@ -716,10 +697,10 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="3dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -734,7 +715,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -743,25 +724,29 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_17"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
-                    <EditText
-                        android:id="@+id/edt_publish_17"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="请选择出厂时间"
                         android:paddingLeft="7dp"
-                        android:background="@drawable/bg_edit_publish"/>
+                        android:background="@drawable/bg_edit_publish">
+                        <Spinner
+                            android:id="@+id/spr_publish_17"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:layout_marginTop="3dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -776,7 +761,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -785,9 +770,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_18"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -797,6 +782,7 @@
                             android:id="@+id/spr_publish_18"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:entries="@array/paifangbiaozhun"
                             android:paddingLeft="7dp"
                             />
                     </LinearLayout>
@@ -804,10 +790,10 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="3dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -822,7 +808,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -831,9 +817,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_19"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <EditText
                         android:id="@+id/edt_publish_19"
@@ -846,10 +832,10 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="3dp"
+
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:background="#fff"
                     android:padding="4dp">
 
@@ -878,7 +864,7 @@
 
                     <RelativeLayout
                         android:layout_width="100dp"
-                        android:layout_height="44dp">
+                        android:layout_height="40dp">
                         <TextView
                             android:id="@+id/txt_publish_21"
                             android:layout_width="wrap_content"
@@ -887,7 +873,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -896,9 +882,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_21"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <com.ssd.yiqiwa.widget.NoRollGridView
                         android:id="@+id/grv_image_upload"
@@ -927,7 +913,7 @@
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:textSize="16sp"
                             />
 
@@ -936,9 +922,9 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_toLeftOf="@+id/txt_publish_22"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginRight="7dp"
                             android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
                     <EditText
                         android:id="@+id/edt_publish_22"

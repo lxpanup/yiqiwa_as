@@ -9,6 +9,7 @@ import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.widget.GlideImageLoader;
+import com.ssd.yiqiwa.widget.GlideImageThisLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -40,7 +41,7 @@ public class GuideActivity extends BaseActivity {
 
         //简单使用
         banner.setImages(images);
-        banner.setImageLoader(new GlideImageLoader());
+        banner.setImageLoader(new GlideImageThisLoader());
         banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         banner.setDelayTime(3000);
 

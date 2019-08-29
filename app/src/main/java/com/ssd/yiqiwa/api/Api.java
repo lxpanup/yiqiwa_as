@@ -7,6 +7,8 @@ import com.ssd.yiqiwa.model.entity.HomeBannerImages;
 import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.LoginUserBean;
 import com.ssd.yiqiwa.model.entity.MachineBrandBean;
+import com.ssd.yiqiwa.model.entity.MachineModelBean;
+import com.ssd.yiqiwa.model.entity.MachineTypeBean;
 import com.ssd.yiqiwa.model.entity.ProductBean;
 
 import java.util.List;
@@ -121,11 +123,25 @@ public interface Api {
     Call<BaseBeanList<ProductBean>> homeDiscountZone();
 
     /**
-     * 特价专区
+     * 品牌名称
      * @return .
      */
     @POST("machineBrand/all")
     Call<BaseBeanList<MachineBrandBean>> machineBrandAll();
+
+    /**
+     * 设备类型
+     * @return .
+     */
+    @POST("machineType/all")
+    Call<BaseBeanList<MachineTypeBean>> machineTypeAll();
+
+    /**
+     * 设备型号
+     * @return .
+     */
+    @POST("machineModel/type")
+    Call<BaseBeanList<MachineModelBean>> machineModelType(@Query("mbId") int mbId,@Query("type") int type);
 
     /**
      * 特价专区
@@ -133,7 +149,6 @@ public interface Api {
      */
     @POST("rentOut/add")
     Call<BaseBean<JsonEntity>> rentOutAdd(@QueryMap Map<String, Object> map);
-
 
 
 
