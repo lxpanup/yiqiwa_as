@@ -155,6 +155,7 @@ public class NavHomeFragment extends BaseFragment implements SwipeRefreshLayout.
             public void onFailure(Call<BaseBeanList<HomeBannerImages>> call, Throwable throwable) {
                 LogUtils.e("请求失败");
                 LogUtils.e(throwable.getMessage());
+                getHomeDiscountZone();
             }
         });
     }
@@ -186,6 +187,7 @@ public class NavHomeFragment extends BaseFragment implements SwipeRefreshLayout.
             public void onFailure(Call<BaseBeanList<ProductBean>> call, Throwable throwable) {
                 LogUtils.e("请求失败");
                 LogUtils.e(throwable.getMessage());
+                getHomeNewProduct();
             }
         });
     }
@@ -218,10 +220,11 @@ public class NavHomeFragment extends BaseFragment implements SwipeRefreshLayout.
             public void onFailure(Call<BaseBeanList<ProductBean>> call, Throwable throwable) {
                 LogUtils.e("请求失败");
                 LogUtils.e(throwable.getMessage());
+                getTestList();
+                adapter.notifyDataSetChanged();
             }
         });
     }
-
 
     private void getTestList(){
         //模拟返回数据

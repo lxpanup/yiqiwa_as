@@ -6,9 +6,11 @@ import com.ssd.yiqiwa.model.entity.BaseBeanList;
 import com.ssd.yiqiwa.model.entity.HomeBannerImages;
 import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.LoginUserBean;
+import com.ssd.yiqiwa.model.entity.MachineBrandBean;
 import com.ssd.yiqiwa.model.entity.ProductBean;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -18,6 +20,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * 创建用于描述网络请求的接口
@@ -116,6 +119,20 @@ public interface Api {
      */
     @POST("home/discountZone")
     Call<BaseBeanList<ProductBean>> homeDiscountZone();
+
+    /**
+     * 特价专区
+     * @return .
+     */
+    @POST("machineBrand/all")
+    Call<BaseBeanList<MachineBrandBean>> machineBrandAll();
+
+    /**
+     * 特价专区
+     * @return .
+     */
+    @POST("rentOut/add")
+    Call<BaseBean<JsonEntity>> rentOutAdd(@QueryMap Map<String, Object> map);
 
 
 

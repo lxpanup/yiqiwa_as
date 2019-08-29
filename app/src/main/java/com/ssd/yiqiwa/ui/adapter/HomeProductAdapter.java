@@ -61,7 +61,7 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
             sb.append(productBean.getFactoryDate().substring(0,4));
         }
 
-        if(productBean.getWorkHour()!=0){
+        if(!productBean.getWorkHour().isEmpty()&&!productBean.getWorkHour().equals("0")){
             sb.append("|");
             sb.append(productBean.getWorkHour()+"");
         }

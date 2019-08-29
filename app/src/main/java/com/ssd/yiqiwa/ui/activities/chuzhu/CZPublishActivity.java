@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -20,15 +21,30 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Checked;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.api.Api;
+import com.ssd.yiqiwa.model.LoadModel;
+import com.ssd.yiqiwa.model.entity.BaseBean;
+import com.ssd.yiqiwa.model.entity.BaseBeanList;
+import com.ssd.yiqiwa.model.entity.HomeBase;
+import com.ssd.yiqiwa.model.entity.JsonEntity;
+import com.ssd.yiqiwa.model.entity.MachineBrandBean;
+import com.ssd.yiqiwa.model.entity.ProductBean;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.ui.adapter.ImageUploadAdapter;
+import com.ssd.yiqiwa.utils.Constants;
 import com.ssd.yiqiwa.widget.GlideImageLoader;
+import com.ssd.yiqiwa.widget.GlideImageThisLoader;
 import com.ssd.yiqiwa.widget.GlideLoadEngine;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -37,10 +53,15 @@ import com.zhihu.matisse.MimeType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -109,6 +130,8 @@ public class CZPublishActivity extends BaseActivity {
     Spinner spr_publish_08;
     @BindView(R.id.spr_publish_18)
     Spinner spr_publish_18;
+    // 品牌列表
+    List<MachineBrandBean> machineBrandBeans;
 
     @Override
     public Object offerLayout() {
@@ -138,25 +161,33 @@ public class CZPublishActivity extends BaseActivity {
             }
         });
 
-        mSelected = new ArrayList<>();
-        mSelected.add(null);
-        imageUploadAdapter = new ImageUploadAdapter(mSelected, context, postion -> {
-            mSelected.remove(postion);
-            imageUploadAdapter.notifyDataSetChanged();
+
+
+        selectList = new ArrayList<>();
+        imageUploadAdapter = new ImageUploadAdapter(selectList, context, new ImageUploadAdapter.OnClickImageDelete() {
+            @Override
+            public void onClickImageDelete(int postion) {
+                selectList.remove(postion);
+                imageUploadAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onShowPhoto() {
+                showPicture();
+            }
         });
+
         gridView.setAdapter(imageUploadAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(mSelected.get(position)!=null){
+                if(selectList.get(position)!=null){
                     photoShowDialog(position);
-                }else {
-                    showMatisse();
                 }
             }
         });
-
+        getMachineBrandAll();
     }
 
     @Override
@@ -178,52 +209,48 @@ public class CZPublishActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 打开相册
+     */
+    public void showPicture(){
+        // 进入相册 以下是例子：不需要的api可以不写
+        PictureSelector.create(CZPublishActivity.this)
+                .openGallery(PictureMimeType.ofAll())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                .theme(R.style.picture_QQ_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
+                .maxSelectNum(10)// 最大图片选择数量
+                .minSelectNum(1)// 最小选择数量
+                .imageSpanCount(4)// 每行显示个数
+                .selectionMode(PictureConfig.MULTIPLE )// 多选 or 单选  PictureConfig.MULTIPLE : PictureConfig.SINGLE
+                .isCamera(true)// 是否显示拍照按钮
+                .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
+                .synOrAsy(true)//同步true或异步false 压缩 默认同步
+                .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
+                .selectionMedia(selectList)// 是否传入已选图片
+                .minimumCompressSize(100)// 小于100kb的图片不压缩
+                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
 
-    public void showMatisse(){
-        Matisse.from(this).choose(MimeType.ofImage(), false)
-            .countable(true)
-                .maxSelectable(21)
-                .gridExpectedSize((int) getResources().getDimension(R.dimen.grid_expected_size))
-            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-                .thumbnailScale(0.87f)
-                .imageEngine(new GlideLoadEngine())
-            .forResult(REQUEST_CODE_CHOOSE);
     }
 
+    private List<LocalMedia> selectList = new ArrayList<>();
 
-    List<Uri> mSelected;
-    private final int REQUEST_CODE_CHOOSE = 10001;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
-            mSelected.remove(mSelected.size()-1);
 
-            List<Uri> matisse = Matisse.obtainResult(data);
-            boolean isAdd = true;
-            for(int i =0; i < matisse.size();i++){
-                for(int j =0; j < mSelected.size();j++){
-                    Log.e("CZ","matisse:"+matisse.get(i).getPath()+"mSelected:"+ mSelected.get(j).getPath()+"|"+matisse.get(i).getPath().equals(mSelected.get(j).getPath()));
-                    if(matisse.get(i).getPath().equals(mSelected.get(j).getPath())){
-                        isAdd = false;
-                        break;
-                    }
-                }
-                if(isAdd) {
-                    mSelected.add(matisse.get(i));
-                    isAdd = true;
-                }
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    selectList.clear();
+                    // 图片选择结果回调
+                    selectList.addAll(PictureSelector.obtainMultipleResult(data));
+                    imageUploadAdapter.notifyDataSetChanged();
+                    break;
             }
-//            mSelected.addAll(Matisse.obtainResult(data));
-            mSelected.add(null);
-            Log.e("CZ", "mSelected: " + mSelected.size());
-            imageUploadAdapter.notifyDataSetChanged();
         }
+
         Log.e("Matisse", "mSelected: " + data);
     }
-
-
 
 
     /**
@@ -243,6 +270,7 @@ public class CZPublishActivity extends BaseActivity {
         dia.findViewById(R.id.txt_putongfabu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getRentOutAdd();
                 ToastUtils.showLong("普通发布成功");
                 dia.dismiss();
             }
@@ -250,6 +278,7 @@ public class CZPublishActivity extends BaseActivity {
         dia.findViewById(R.id.txt_jingpingfabu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getRentOutAdd();
                 ToastUtils.showLong("精品发布成功");
                 dia.dismiss();
             }
@@ -282,14 +311,20 @@ public class CZPublishActivity extends BaseActivity {
         Dialog dia = new Dialog(activity, R.style.imageDialog);
         dia.setContentView(R.layout.item_image_banner);
         Banner banner =  dia.findViewById(R.id.banner);
-        List<Uri> uriList = mSelected;
+
+//        List<Uri> uriList = mSelected;
 //        uriList.remove(uriList.size()-1);
-        banner.setImageLoader(new GlideImageLoader())
+        List<String> uriList = new ArrayList<>();
+        for(LocalMedia item:selectList){
+            uriList.add(item.getPath());
+        }
+
+            banner.setImageLoader(new GlideImageThisLoader())
                 .setImages(uriList)
                 .isAutoPlay(false)
                 .setBannerStyle(BannerConfig.NUM_INDICATOR)
                 .start();
-        banner.setIndicatorGravity(position);
+            banner.setIndicatorGravity(position);
 
         ImageView imageView = dia.findViewById(R.id.img_count_down);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -312,6 +347,104 @@ public class CZPublishActivity extends BaseActivity {
 
         dia.show();
     }
+
+
+    /**
+     * 获取产品信息
+     */
+    public void getMachineBrandAll(){
+        Api request = getRetrofit().create(Api.class);
+        Call<BaseBeanList<MachineBrandBean>> call = request.machineBrandAll();
+        call.enqueue(new Callback<BaseBeanList<MachineBrandBean>>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<BaseBeanList<MachineBrandBean>> call, Response<BaseBeanList<MachineBrandBean>> response) {
+                hideDialog();
+                BaseBeanList<MachineBrandBean> baseBeanList = response.body();
+
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    machineBrandBeans =  baseBeanList.getData();
+                    List<String> machineList = new ArrayList<>();
+                    for (MachineBrandBean item:baseBeanList.getData()){
+                        machineList.add(item.getName());
+                    }
+                    spr_publish_08.setAdapter(new ArrayAdapter<>(CZPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
+                }else{
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                }
+            }
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<BaseBeanList<MachineBrandBean>> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 获取产品信息
+     */
+    public void getRentOutAdd(){
+
+        Map<String,Object> rentOutMap = new HashMap<>();
+        rentOutMap.put("roId","");
+        rentOutMap.put("title",edt_publish_01.getText().toString());
+        rentOutMap.put("coverImage","封面的图片xxxxxxxxxxxxxxxxx");
+
+        rentOutMap.put("rentFrom","公司");
+
+        rentOutMap.put("companyName","东拉西扯公司");
+
+        rentOutMap.put("contactPerson","");
+
+        rentOutMap.put("contactPhone",edt_publish_04.getText().toString());
+        rentOutMap.put("mtId","");
+        rentOutMap.put("productDesc","");
+        rentOutMap.put("mbId","");
+        rentOutMap.put("mbmId","");
+        rentOutMap.put("capacity","");
+        rentOutMap.put("priceHour","");
+        rentOutMap.put("priceDay","");
+        rentOutMap.put("priceMonth","");
+        rentOutMap.put("workTime","");
+        rentOutMap.put("factoryDate","");
+        rentOutMap.put("standard","");
+        rentOutMap.put("province","");
+        rentOutMap.put("city","");
+        rentOutMap.put("county","");
+        rentOutMap.put("address","");
+        rentOutMap.put("describes","");
+        rentOutMap.put("uId","");
+        rentOutMap.put("boutique","");
+//        rentOutMap.put("pictureList[0].url","");
+        rentOutMap.put("pictureList","");
+
+        Api request = getRetrofit().create(Api.class);
+        Call<BaseBean<JsonEntity>> call = request.rentOutAdd(rentOutMap);
+        call.enqueue(new Callback<BaseBean<JsonEntity>>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<BaseBean<JsonEntity>> call, Response<BaseBean<JsonEntity>> response) {
+                hideDialog();
+                BaseBean<JsonEntity> baseBeanList = response.body();
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                    finish();
+                }else{
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                }
+            }
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<BaseBean<JsonEntity>> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
+            }
+        });
+    }
+
+
 
 
 }

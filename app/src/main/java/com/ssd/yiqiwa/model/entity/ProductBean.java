@@ -16,12 +16,12 @@ public class ProductBean implements Parcelable {
     private String province;
     private String title;
     private int type;
-    private int workHour;
+    private String workHour;
 
     public ProductBean() {
     }
 
-    public ProductBean(String city, String coverImage, String createDate, String factoryDate, int id, String price, String priceUint, String province, String title, int type, int workHour) {
+    public ProductBean(String city, String coverImage, String createDate, String factoryDate, int id, String price, String priceUint, String province, String title, int type, String workHour) {
         this.city = city;
         this.coverImage = coverImage;
         this.createDate = createDate;
@@ -35,6 +35,7 @@ public class ProductBean implements Parcelable {
         this.workHour = workHour;
     }
 
+
     protected ProductBean(Parcel in) {
         city = in.readString();
         coverImage = in.readString();
@@ -46,7 +47,7 @@ public class ProductBean implements Parcelable {
         province = in.readString();
         title = in.readString();
         type = in.readInt();
-        workHour = in.readInt();
+        workHour = in.readString();
     }
 
     public static final Creator<ProductBean> CREATOR = new Creator<ProductBean>() {
@@ -141,11 +142,11 @@ public class ProductBean implements Parcelable {
         this.type = type;
     }
 
-    public int getWorkHour() {
+    public String getWorkHour() {
         return workHour;
     }
 
-    public void setWorkHour(int workHour) {
+    public void setWorkHour(String workHour) {
         this.workHour = workHour;
     }
 
@@ -166,6 +167,6 @@ public class ProductBean implements Parcelable {
         dest.writeString(province);
         dest.writeString(title);
         dest.writeInt(type);
-        dest.writeInt(workHour);
+        dest.writeString(workHour);
     }
 }

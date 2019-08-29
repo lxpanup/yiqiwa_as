@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.ssd.yiqiwa.R;
 
 import java.util.HashMap;
@@ -19,13 +21,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ImageUploadAdapter extends BaseAdapter {
-    private List<Uri> aData;
+    private List<LocalMedia> aData;
     private Context mContext;
 
     private OnClickImageDelete onClickImageDelete;
 
 
-    public ImageUploadAdapter(List<Uri> aData, Context mContext, OnClickImageDelete onClickImageDelete) {
+    public ImageUploadAdapter(List<LocalMedia> aData, Context mContext, OnClickImageDelete onClickImageDelete) {
         this.aData = aData;
         this.mContext = mContext;
         this.onClickImageDelete = onClickImageDelete;
@@ -33,12 +35,16 @@ public class ImageUploadAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return aData.size();
+        return aData.size()+1;
     }
 
     @Override
-    public Uri getItem(int position) {
-        return aData.get(position);
+    public LocalMedia getItem(int position) {
+        if(position < aData.size()) {
+            return aData.get(position);
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -62,18 +68,19 @@ public class ImageUploadAdapter extends BaseAdapter {
         if (getItem(position) == null) {
             holder.imageView.setImageResource(R.mipmap.ic_image_upload);
             holder.txtDelete.setVisibility(View.GONE);
+            holder.imageView.setOnClickListener(v -> onClickImageDelete.onShowPhoto());
         } else {
             holder.txtDelete.setVisibility(View.VISIBLE);
-            holder.imageView.setImageURI(getItem(position));
+            Glide.with(mContext)
+                    .load(getItem(position).getPath())
+                    .into(holder.imageView);
             holder.txtDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtils.showLong("删除");
                     onClickImageDelete.onClickImageDelete(position);
                 }
             });
         }
-
         return convertView;
     }
 
@@ -84,6 +91,7 @@ public class ImageUploadAdapter extends BaseAdapter {
 
     public interface OnClickImageDelete {
         void onClickImageDelete(int postion);
+        void onShowPhoto();
     }
 
 }

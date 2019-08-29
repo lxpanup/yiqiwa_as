@@ -5,10 +5,6 @@ import android.os.Parcelable;
 
 import com.ssd.yiqiwa.base.Type;
 
-/**
- * @author Smile Wei
- * @since 2016/11/19.
- */
 
 public class CommentBase implements Parcelable {
 

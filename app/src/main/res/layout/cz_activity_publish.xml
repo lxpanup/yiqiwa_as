@@ -183,7 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingLeft="7dp"
-                        android:hint="请填写公司全称"
+                        android:hint="请填写姓名"
                         android:background="@drawable/bg_edit_publish"/>
                 </LinearLayout>
                 <LinearLayout
@@ -904,7 +904,7 @@
                         android:id="@+id/grv_image_upload"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:numColumns="auto_fit">
+                        android:numColumns="3">
 
                     </com.ssd.yiqiwa.widget.NoRollGridView>
                 </LinearLayout>
@@ -944,6 +944,7 @@
                         android:id="@+id/edt_publish_22"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="top"
                         android:paddingLeft="7dp"
                         android:background="@drawable/bg_edit_publish"/>
                 </LinearLayout>

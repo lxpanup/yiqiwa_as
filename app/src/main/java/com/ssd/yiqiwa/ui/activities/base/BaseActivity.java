@@ -47,6 +47,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mConvertView = convertView();
+
+        dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setMessage("正在请求...");
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.BASE_URL) // 设置 网络请求 Url
+                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+                .build();
+
         if (mConvertView == null) {
             // 传其他资源id 时的处理（只能传布局资源id ）
             throw new ClassCastException("view convert fail，check your resource id  be layout resource");
@@ -57,15 +67,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         //沉浸式状态栏
         setStatusBar();
-
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setMessage("正在请求...");
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL) // 设置 网络请求 Url
-                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
-                .build();
 
     }
 
