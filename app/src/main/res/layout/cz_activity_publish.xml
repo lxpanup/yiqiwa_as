@@ -324,7 +324,7 @@
                         android:id="@+id/edt_publish_07"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:hint="产品出租描述"
                         android:paddingLeft="7dp"
                         android:background="@drawable/bg_edit_publish"/>
@@ -733,10 +733,12 @@
                         android:layout_height="match_parent"
                         android:paddingLeft="7dp"
                         android:background="@drawable/bg_edit_publish">
-                        <Spinner
-                            android:id="@+id/spr_publish_17"
+                        <TextView
+                            android:id="@+id/txt_publish_17_1"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:hint="选择时间"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -821,11 +823,12 @@
                             android:src="@mipmap/ic_xinghao_hei"
                             android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
-                    <EditText
-                        android:id="@+id/edt_publish_19"
+                    <TextView
+                        android:id="@+id/txt_publish_19_1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="请选择所在地区"
+                        android:gravity="center_vertical"
                         android:paddingLeft="7dp"
                         android:background="@drawable/bg_edit_publish"/>
                 </LinearLayout>
