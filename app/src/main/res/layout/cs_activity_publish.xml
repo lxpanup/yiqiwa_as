@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="出租发布"
+                android:text="二手出售发布"
                 android:textColor="#fff"
                 android:textSize="18sp" />
 
@@ -160,12 +160,12 @@
                         android:layout_height="match_parent">
 
                     </RelativeLayout>
-                    <EditText
+                    <EditText android:text="1"
                         android:id="@+id/edt_publish_03"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingLeft="7dp"
-                        android:hint="请填写姓名"
+                        android:hint="请填写公司名称"
                         android:background="@drawable/bg_edit_publish"/>
                 </LinearLayout>
                 <LinearLayout
@@ -199,7 +199,7 @@
                             android:src="@mipmap/ic_xinghao_hei"
                             android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
-                    <EditText
+                    <EditText android:text="1"
                         android:id="@+id/edt_publish_04"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -238,7 +238,7 @@
                             android:src="@mipmap/ic_xinghao_hei"
                             android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
-                    <EditText
+                    <EditText android:text="1"
                         android:id="@+id/edt_publish_05"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -286,7 +286,6 @@
                             android:id="@+id/spr_publish_06"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:entries="@array/date_dange"
                             android:paddingLeft="7dp"
                             />
                     </LinearLayout>
@@ -303,7 +302,7 @@
                         android:layout_height="match_parent">
 
                     </RelativeLayout>
-                    <EditText
+                    <EditText android:text="1"
                         android:id="@+id/edt_publish_07"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -312,6 +311,7 @@
                         android:paddingLeft="7dp"
                         android:background="@drawable/bg_edit_publish"/>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_marginRight="20dp"
                     android:layout_width="match_parent"
@@ -439,47 +439,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_marginRight="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="#fff"
-                    android:padding="4dp">
-
-                    <RelativeLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/txt_publish_11"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="铲斗容量"
-                            android:gravity="center"
-                            android:textColor="#ff000000"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="7dp"
-                            android:textSize="16sp"
-                            />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_toLeftOf="@+id/txt_publish_11"
-                            android:layout_marginRight="7dp"
-                            android:src="@mipmap/ic_xinghao_hei"
-                            android:layout_marginLeft="7dp"/>
-                    </RelativeLayout>
-
-                    <EditText
-                        android:id="@+id/edt_publish_11"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentTop="true"
-                        android:background="@drawable/bg_edit_publish"
-                        android:paddingLeft="7dp" />
-                </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_marginTop="13dp"
@@ -519,11 +478,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <EditText
+                        <EditText android:text="1"
                             android:id="@+id/edt_publish_12"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="请填写小时出租价格"
+                            android:hint="请填写出售价格"
                             android:layout_weight="1"
                             android:paddingLeft="7dp"
                             android:background="@drawable/bg_edit_publish"/>
@@ -531,7 +490,7 @@
                         <TextView
                             android:layout_width="70dp"
                             android:layout_height="match_parent"
-                            android:text="元/小时"
+                            android:text="元/台"
                             android:gravity="center"
                             android:textColor="#ff000000"
                             android:layout_alignParentRight="true"
@@ -539,87 +498,6 @@
                             />
                     </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
-
-                    android:layout_marginRight="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="#fff"
-                    android:padding="4dp">
-
-                    <RelativeLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
-
-                    </RelativeLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-                        <EditText
-                            android:id="@+id/edt_publish_14"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint="请填写每天出租价格"
-                            android:inputType="number"
-                            android:layout_weight="1"
-                            android:paddingLeft="7dp"
-                            android:background="@drawable/bg_edit_publish"/>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="match_parent"
-                            android:text="元/天"
-                            android:gravity="center"
-                            android:textColor="#ff000000"
-                            android:layout_alignParentRight="true"
-                            android:textSize="16sp"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-
-                    android:layout_marginRight="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="#fff"
-                    android:padding="4dp">
-
-                    <RelativeLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
-
-                    </RelativeLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <EditText
-                            android:id="@+id/edt_publish_15"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_edit_publish"
-                            android:inputType="number"
-                            android:hint="请填写每月出租价格"
-                            android:paddingLeft="7dp" />
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="match_parent"
-                            android:text="元/月"
-                            android:gravity="center"
-                            android:textColor="#ff000000"
-                            android:layout_alignParentRight="true"
-                            android:textSize="16sp"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-
-
-
                 <LinearLayout
 
                     android:layout_marginRight="20dp"
@@ -656,7 +534,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <EditText
+                        <EditText android:text="1"
                             android:id="@+id/edt_publish_16"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -773,6 +651,72 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:padding="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/txt_publish_27"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="整机序列号"
+                            android:gravity="center"
+                            android:textColor="#ff000000"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="7dp"
+                            android:textSize="16sp"
+                            />
+
+
+                    </RelativeLayout>
+                    <EditText android:text="1"
+                        android:id="@+id/edt_publish_27"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="7dp"
+                        android:hint="请输入整机设备序列号"
+                        android:background="@drawable/bg_edit_publish"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:padding="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/txt_publish_28"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="环保标识码"
+                            android:gravity="center"
+                            android:textColor="#ff000000"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="7dp"
+                            android:textSize="16sp"
+                            />
+
+                    </RelativeLayout>
+                    <EditText android:text="1"
+                        android:id="@+id/edt_publish_28"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="7dp"
+                        android:hint="请输入环保标识码"
+                        android:background="@drawable/bg_edit_publish"/>
+                </LinearLayout>
+
 
                 <LinearLayout
 
@@ -830,7 +774,7 @@
                         android:layout_height="match_parent">
 
                     </RelativeLayout>
-                    <EditText
+                    <EditText android:text="1"
                         android:id="@+id/edt_publish_20"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -912,7 +856,7 @@
                             android:src="@mipmap/ic_xinghao_hei"
                             android:layout_marginLeft="7dp"/>
                     </RelativeLayout>
-                    <EditText
+                    <EditText android:text="1"
                         android:id="@+id/edt_publish_22"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

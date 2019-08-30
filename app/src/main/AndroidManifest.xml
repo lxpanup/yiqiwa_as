@@ -138,6 +138,13 @@
             android:theme="@style/DefaultCityPickerTheme"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.chushou.CSPublishActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.activities.chengzhu.ChengZhuPublishActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"/>
 
 
         <!--<provider-->

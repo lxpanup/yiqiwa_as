@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.ui.activities.base.BaseFragment;
+import com.ssd.yiqiwa.ui.activities.chengzhu.ChengZhuPublishActivity;
+import com.ssd.yiqiwa.ui.activities.chushou.CSPublishActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZPublishActivity;
 import com.ssd.yiqiwa.ui.activities.publish.ChengZuPublishActivity;
 import com.ssd.yiqiwa.ui.activities.publish.MyPublishActivity;
@@ -51,14 +53,13 @@ public class NavPublishFragment extends BaseFragment {
     public void onViewClick(View v){
         switch (v.getId()){
             case R.id.rlt_fabu_01:  //承租发布
-                ToastUtils.showLong("承租发布");
-                startActivity(new Intent(getActivity(), ChengZuPublishActivity.class));
+                startActivity(new Intent(getActivity(), ChengZhuPublishActivity.class));
                 break;
             case R.id.rlt_fabu_02: //出租发布
                 startActivity(new Intent(getActivity(), CZPublishActivity.class));
                 break;
             case R.id.rlt_fabu_03: //二手出售
-                startActivity(new Intent(getActivity(), CZPublishActivity.class));
+                startActivity(new Intent(getActivity(), CSPublishActivity.class));
                 break;
             case R.id.rlt_fabu_04: //二手购买
                 startActivity(new Intent(getActivity(), ChengZuPublishActivity.class));

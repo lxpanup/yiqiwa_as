@@ -1,13 +1,11 @@
-package com.ssd.yiqiwa.ui.activities.chuzhu;
+package com.ssd.yiqiwa.ui.activities.chushou;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -34,41 +32,26 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.Checked;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.api.Api;
-import com.ssd.yiqiwa.model.LoadModel;
-import com.ssd.yiqiwa.model.entity.BaseBean;
 import com.ssd.yiqiwa.model.entity.BaseBeanList;
-import com.ssd.yiqiwa.model.entity.HomeBase;
 import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.MachineBrandBean;
 import com.ssd.yiqiwa.model.entity.MachineModelBean;
 import com.ssd.yiqiwa.model.entity.MachineTypeBean;
-import com.ssd.yiqiwa.model.entity.ProductBean;
 import com.ssd.yiqiwa.model.entity.UploadImageBean;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
-import com.ssd.yiqiwa.ui.activities.gerenzhongxing.UpdateUserActivity;
 import com.ssd.yiqiwa.ui.adapter.ImageUploadAdapter;
 import com.ssd.yiqiwa.utils.AddressInitTask;
 import com.ssd.yiqiwa.utils.Constants;
-import com.ssd.yiqiwa.utils.DateFormatUtil;
-import com.ssd.yiqiwa.widget.GlideImageLoader;
 import com.ssd.yiqiwa.widget.GlideImageThisLoader;
-import com.ssd.yiqiwa.widget.GlideLoadEngine;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,9 +71,9 @@ import retrofit2.Response;
 
 
 /**
- * 出租发布
+ * 出售发布
  */
-public class CZPublishActivity extends BaseActivity {
+public class CSPublishActivity extends BaseActivity {
 
     @BindView(R.id.grv_image_upload)
     GridView gridView;
@@ -116,15 +99,8 @@ public class CZPublishActivity extends BaseActivity {
     @NotEmpty(message = "不能为空")
     @BindView(R.id.edt_publish_07)
     EditText edt_publish_07;
-    @NotEmpty(message = "不能为空")
-    @BindView(R.id.edt_publish_11)
-    EditText edt_publish_11;
     @BindView(R.id.edt_publish_12)
     EditText edt_publish_12;
-    @BindView(R.id.edt_publish_14)
-    EditText edt_publish_14;
-    @BindView(R.id.edt_publish_15)
-    EditText edt_publish_15;
     @NotEmpty(message = "不能为空")
     @BindView(R.id.edt_publish_16)
     EditText edt_publish_16;
@@ -134,6 +110,13 @@ public class CZPublishActivity extends BaseActivity {
     @NotEmpty(message = "不能为空")
     @BindView(R.id.edt_publish_22)
     EditText edt_publish_22;
+    @NotEmpty(message = "不能为空")
+    @BindView(R.id.edt_publish_27)
+    EditText edt_publish_27;
+    @NotEmpty(message = "不能为空")
+    @BindView(R.id.edt_publish_28)
+    EditText edt_publish_28;
+
     @BindView(R.id.txt_publish_10)
     TextView txt_publish_10;
     @BindView(R.id.txt_publish_19_1)
@@ -179,13 +162,11 @@ public class CZPublishActivity extends BaseActivity {
 
     private String coverImage;
 
-    private String dialogCoverImage;
-
     private int boutique = 0;
 
     @Override
     public Object offerLayout() {
-        return R.layout.cz_activity_publish;
+        return R.layout.cs_activity_publish;
     }
 
     @Override
@@ -335,7 +316,7 @@ public class CZPublishActivity extends BaseActivity {
     }
 
     @OnClick({R.id.img_back,R.id.txt_verify_publish,R.id.rab_dunwei,R.id.rab_xinghao,R.id.txt_publish_19_1,R.id.txt_publish_17_1,
-            R.id.rbn_gongshi,R.id.rbn_geren})
+        R.id.rbn_gongshi,R.id.rbn_geren})
     public void onViewClick(View v){
         switch (v.getId()){
             case R.id.img_back:
@@ -397,7 +378,7 @@ public class CZPublishActivity extends BaseActivity {
                 break;
             case R.id.txt_publish_17_1:
                 Calendar calendar = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(CZPublishActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CSPublishActivity.this, new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -412,13 +393,12 @@ public class CZPublishActivity extends BaseActivity {
         }
     }
 
-
     /**
      * 打开相册
      */
     public void showPicture(){
         // 进入相册 以下是例子：不需要的api可以不写
-        PictureSelector.create(CZPublishActivity.this)
+        PictureSelector.create(CSPublishActivity.this)
                 .openGallery(PictureMimeType.ofAll())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                 .theme(R.style.picture_QQ_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
                 .maxSelectNum(10)// 最大图片选择数量
@@ -488,7 +468,7 @@ public class CZPublishActivity extends BaseActivity {
 
 
         Dialog dia = new Dialog(activity, R.style.dialog);
-        dia.setContentView(R.layout.item_cz_verify_publish);
+        dia.setContentView(R.layout.item_cs_verify_publish);
 
 
         ImageView img_tipian = dia.findViewById(R.id.img_tipian);
@@ -499,17 +479,7 @@ public class CZPublishActivity extends BaseActivity {
         String productType = fb_province + fb_city +" | " + factoryDate + " | "+ edt_publish_16.getText().toString();
         txt_cart_product_type.setText(productType);
         TextView txt_product_price = dia.findViewById(R.id.txt_product_price);
-
-        String priceHour = edt_publish_12.getText().toString();
-        String priceDay = edt_publish_14.getText().toString();
-        String priceMonth = edt_publish_15.getText().toString();
-        if(!priceDay.isEmpty()) {
-            txt_product_price.setText(priceDay);
-        }else if(!priceHour.isEmpty()) {
-            txt_product_price.setText(Integer.parseInt(priceHour)*24+"");
-        }else if(!priceMonth.isEmpty()) {
-            txt_product_price.setText(Integer.parseInt(priceMonth)/30+"");
-        }
+        txt_product_price.setText( edt_publish_12.getText().toString());
 
         ImageView textView = dia.findViewById(R.id.img_close);
         textView.setOnClickListener(new View.OnClickListener() {
@@ -592,6 +562,7 @@ public class CZPublishActivity extends BaseActivity {
         window.setAttributes(layoutParams);
         window.getDecorView().setMinimumWidth(getResources().getDisplayMetrics().widthPixels);
         window.getDecorView().setBackgroundColor(Color.TRANSPARENT);
+
         dia.show();
     }
 
@@ -615,7 +586,7 @@ public class CZPublishActivity extends BaseActivity {
                     for (MachineBrandBean item:baseBeanList.getData()){
                         machineList.add(item.getName());
                     }
-                    spr_publish_08.setAdapter(new ArrayAdapter<>(CZPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
+                    spr_publish_08.setAdapter(new ArrayAdapter<>(CSPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
                 }else{
                     ToastUtils.showLong(baseBeanList.getMsg());
                 }
@@ -654,7 +625,7 @@ public class CZPublishActivity extends BaseActivity {
                         machineList.add(item.getName());
                     }
 
-                    spr_publish_06.setAdapter(new ArrayAdapter<>(CZPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
+                    spr_publish_06.setAdapter(new ArrayAdapter<>(CSPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
                 }else{
                     ToastUtils.showLong(baseBeanList.getMsg());
                 }
@@ -701,7 +672,7 @@ public class CZPublishActivity extends BaseActivity {
                             machineList.add(item.getName());
                         }
                     }
-                    spr_publish_10.setAdapter(new ArrayAdapter<>(CZPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
+                    spr_publish_10.setAdapter(new ArrayAdapter<>(CSPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
                 }else{
                     ToastUtils.showLong(baseBeanList.getMsg());
                 }
@@ -745,7 +716,6 @@ public class CZPublishActivity extends BaseActivity {
 
                     LogUtils.e(GsonUtils.toJson(uploadImageBeans));
                     if(index ==0) {
-
                         coverImage = response.body().getData();
                     }
                     for(UploadImageBean item:uploadImageBeans){
@@ -784,9 +754,28 @@ public class CZPublishActivity extends BaseActivity {
      */
     public void getRentOutAdd(){
 
+        if(txt_publish_19_1.getText().toString().isEmpty()){
+            ToastUtils.showLong("请选择设备停靠省市区");
+            return;
+        }
+        if(coverImage.isEmpty()){
+            ToastUtils.showLong("必须要上传一张图片作为主页展示。");
+            return;
+        }
+
+        if(factoryDate.isEmpty()){
+            ToastUtils.showLong("请选择出场时间");
+            return;
+        }
+
+//        if(machineType==null||machineType.isEmpty()){
+//            ToastUtils.showLong("请选择型号或吨位。");
+//            return;
+//        }xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        machineType = "1";
 
         Map<String,Object> rentOutMap = new HashMap<>();
-        rentOutMap.put("roId","");
+        rentOutMap.put("sId","");
         rentOutMap.put("title",edt_publish_01.getText().toString());
         rentOutMap.put("coverImage",coverImage);
         if(rbn_geren.isChecked()) {
@@ -799,7 +788,7 @@ public class CZPublishActivity extends BaseActivity {
             rentOutMap.put("contactPerson", edt_publish_04.getText().toString());
         }
 
-        rentOutMap.put("contactPhone",edt_publish_04.getText().toString());
+        rentOutMap.put("contactPhone",edt_publish_05.getText().toString());
         rentOutMap.put("mtId",machineType);
 //        rentOutMap.put("mtId",1);
         rentOutMap.put("productDesc",edt_publish_07.getText().toString());
@@ -807,13 +796,12 @@ public class CZPublishActivity extends BaseActivity {
 //        rentOutMap.put("mbId",1);
         rentOutMap.put("mbmId",machineModelType);
 //        rentOutMap.put("mbmId",1);
-        rentOutMap.put("capacity",edt_publish_11.getText().toString());
-        rentOutMap.put("priceHour",edt_publish_12.getText().toString());
-        rentOutMap.put("priceDay",edt_publish_14.getText().toString());
-        rentOutMap.put("priceMonth",edt_publish_15.getText().toString());
+        rentOutMap.put("price",edt_publish_12.getText().toString());
         rentOutMap.put("workTime",edt_publish_16.getText().toString());
         rentOutMap.put("factoryDate",factoryDate);
         rentOutMap.put("standard",standard);
+        rentOutMap.put("serialNumber",edt_publish_27.getText().toString());
+        rentOutMap.put("envCode",edt_publish_28.getText().toString());
         rentOutMap.put("province",fb_province);
         rentOutMap.put("city",fb_city);
         rentOutMap.put("county",fb_county);
@@ -827,7 +815,7 @@ public class CZPublishActivity extends BaseActivity {
 //        rentOutMap.put("pictureList","");
 
         Api request = getRetrofit().create(Api.class);
-        Call<JsonEntity> call = request.rentOutAdd(rentOutMap);
+        Call<JsonEntity> call = request.sellAdd(rentOutMap);
         call.enqueue(new Callback<JsonEntity>() {
             //请求成功时回调
             @Override

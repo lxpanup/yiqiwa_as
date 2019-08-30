@@ -144,11 +144,18 @@ public interface Api {
     Call<BaseBeanList<MachineModelBean>> machineModelType(@Query("mbId") int mbId,@Query("type") int type);
 
     /**
-     * 特价专区
+     * 出租发布
      * @return .
      */
     @POST("rentOut/add")
-    Call<BaseBean<JsonEntity>> rentOutAdd(@QueryMap Map<String, Object> map);
+    Call<JsonEntity> rentOutAdd(@QueryMap Map<String, Object> map);
+
+    /**
+     * 出售发布
+     * @return .
+     */
+    @POST("sell/add")
+    Call<JsonEntity> sellAdd(@QueryMap Map<String, Object> map);
 
 
 
