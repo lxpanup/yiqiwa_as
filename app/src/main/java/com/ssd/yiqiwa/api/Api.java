@@ -157,6 +157,13 @@ public interface Api {
     @POST("sell/add")
     Call<JsonEntity> sellAdd(@QueryMap Map<String, Object> map);
 
+    /**
+     * 发布承租信息
+     * @return .
+     */
+    @POST("rentIn/add")
+    Call<JsonEntity> rentInAdd(@QueryMap Map<String, Object> map);
+
 
 
 

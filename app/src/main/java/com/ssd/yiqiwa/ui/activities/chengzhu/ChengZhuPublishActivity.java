@@ -42,10 +42,13 @@ import com.ssd.yiqiwa.model.entity.MachineModelBean;
 import com.ssd.yiqiwa.model.entity.MachineTypeBean;
 import com.ssd.yiqiwa.model.entity.UploadImageBean;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
+import com.ssd.yiqiwa.ui.activities.chushou.CSPublishActivity;
+import com.ssd.yiqiwa.ui.adapter.CheckBoxAdapter;
 import com.ssd.yiqiwa.ui.adapter.ImageUploadAdapter;
 import com.ssd.yiqiwa.utils.AddressInitTask;
 import com.ssd.yiqiwa.utils.Constants;
 import com.ssd.yiqiwa.widget.GlideImageThisLoader;
+import com.ssd.yiqiwa.widget.common.CommomDialog;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -76,10 +79,13 @@ import retrofit2.Response;
 public class ChengZhuPublishActivity extends BaseActivity {
 
 
-    @BindView(R.id.grv_image_upload)
-    GridView gridView;
+    @BindView(R.id.grv_gclx_check)
+    GridView grv_gclx_check;
 
-    ImageUploadAdapter imageUploadAdapter;
+    @BindView(R.id.grv_sblx_check)
+    GridView grv_sblx_check;
+
+    CheckBoxAdapter checkBoxAdapter;
     private Activity activity;
     private Context context;
 
@@ -109,14 +115,12 @@ public class ChengZhuPublishActivity extends BaseActivity {
     @BindView(R.id.edt_publish_20)
     EditText edt_publish_20;
     @NotEmpty(message = "不能为空")
-    @BindView(R.id.edt_publish_22)
-    EditText edt_publish_22;
+    @BindView(R.id.edt_publish_34)
+    EditText edt_publish_34;
     @NotEmpty(message = "不能为空")
-    @BindView(R.id.edt_publish_27)
-    EditText edt_publish_27;
-    @NotEmpty(message = "不能为空")
-    @BindView(R.id.edt_publish_28)
-    EditText edt_publish_28;
+    @BindView(R.id.edt_publish_33)
+    EditText edt_publish_33;
+
 
     @BindView(R.id.txt_publish_10)
     TextView txt_publish_10;
@@ -124,17 +128,25 @@ public class ChengZhuPublishActivity extends BaseActivity {
     TextView txt_publish_19_1;
     @BindView(R.id.txt_publish_17_1)
     TextView txt_publish_17_1;
+    @BindView(R.id.txt_publish_35_1)
+    TextView txt_publish_35_1;
+
+
 
     @BindView(R.id.lil_publish_03)
     LinearLayout lil_publish_03;
 
 
-    @BindView(R.id.spr_publish_06)
-    Spinner spr_publish_06;
     @BindView(R.id.spr_publish_10)
     Spinner spr_publish_10;
     @BindView(R.id.spr_publish_18)
     Spinner spr_publish_18;
+    @BindView(R.id.spr_publish_12)
+    Spinner spr_publish_12;
+    @BindView(R.id.spr_publish_16)
+    Spinner spr_publish_16;
+    @BindView(R.id.spr_publish_36)
+    Spinner spr_publish_36;
 
     @BindView(R.id.rbn_geren)
     RadioButton rbn_geren;
@@ -142,24 +154,27 @@ public class ChengZhuPublishActivity extends BaseActivity {
     RadioButton rbn_gongshi;
     //设备类型
     List<MachineTypeBean> machineTypeBeans = new ArrayList<>();
-    //设备型号
-    List<MachineModelBean> machineModelTypes = new ArrayList<>();
-    //出厂年份
-    List<String> yearList = new ArrayList<>();
 
-    private String machineBrand;
     private String machineType;
-    private String machineModelType;
     private String standard;
     private String factoryDate;
+    private String arrivalTime;
+    private String paymentMethod;
 
+    private String fbPrivateType;
+    private String fbShebeidunwei;
+    private String workTimeUint;
     private String fb_province;
     private String fb_city;
     private String fb_county;
 
-    private String coverImage;
 
-    private int boutique = 0;
+
+
+
+    private List<String> checkBoxList = new ArrayList<>();
+    private List<String> isCheckBoxList = new ArrayList<>();
+    private List<String> sblxCheckBoxList = new ArrayList<>();
 
     @Override
     public Object offerLayout() {
@@ -192,60 +207,77 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
 
 
-        selectList = new ArrayList<>();
-        imageUploadAdapter = new ImageUploadAdapter(selectList, context, new ImageUploadAdapter.OnClickImageDelete() {
-            @Override
-            public void onClickImageDelete(int postion) {
-                selectList.remove(postion);
-                imageUploadAdapter.notifyDataSetChanged();
-            }
+        checkBoxList = new ArrayList<>();
+        checkBoxList.add("市政府工程");
+        checkBoxList.add("场地平整");
+        checkBoxList.add("装车");
+        checkBoxList.add("拆迁");
+        checkBoxList.add("道路");
+        checkBoxList.add("其他");
 
+        checkBoxAdapter = new CheckBoxAdapter(checkBoxList, context, new CheckBoxAdapter.OnClickCheckChanged() {
             @Override
-            public void onShowPhoto() {
-                showPicture();
-            }
-        });
-
-        gridView.setAdapter(imageUploadAdapter);
-
-        gridView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(machineTypeBeans.size()!=0) {
-                    if (selectList.get(position) != null) {
-                        photoShowDialog(position);
+            public void onCheckedChanged(int postion, boolean isCheck) {
+                for(int i = 0; i < isCheckBoxList.size();i++){
+                    if(checkBoxList.get(postion).equals(isCheckBoxList.get(i))) {
+                        if (!isCheck) {
+                            isCheckBoxList.remove(i);
+                        }
+                        return;
                     }
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                isCheckBoxList.add(checkBoxList.get(postion));
             }
         });
+        grv_gclx_check.setAdapter(checkBoxAdapter);
 
-        spr_publish_06.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(machineTypeBeans.size()!=0) {
-                    machineType = machineTypeBeans.get(position).getMbId();
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
 
         spr_publish_10.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(machineModelTypes.size()!=0) {
-                    machineModelType = machineModelTypes.get(position).getMbId();
-                }
+                fbShebeidunwei = getResources().getStringArray(R.array.shebeidunwei)[position].trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spr_publish_16.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                paymentMethod = getResources().getStringArray(R.array.fukuanfangshi)[position].trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spr_publish_36.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                workTimeUint = getResources().getStringArray(R.array.gongzuoshichang1)[position].trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        spr_publish_12.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                fbPrivateType = getResources().getStringArray(R.array.gongzuoshichang)[position].trim();
             }
 
             @Override
@@ -282,15 +314,6 @@ public class ChengZhuPublishActivity extends BaseActivity {
         });
 
         getMachineTypeAll();
-
-//        int currentYear = Integer.parseInt(DateFormatUtil.getDateCurrentFormat(DateFormatUtil.FORMAT_yyyy));
-//         yearList = new ArrayList<>();
-//        for(int i = 0; i < 15; i++){
-//            int cyear = currentYear-i;
-//            yearList.add(cyear+"");
-//        }
-//        spr_publish_17.setAdapter(new ArrayAdapter<String>(CZPublishActivity.this, android.R.layout.simple_spinner_item, yearList) );
-
     }
 
     @Override
@@ -298,7 +321,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.img_back,R.id.txt_verify_publish,R.id.rab_dunwei,R.id.rab_xinghao,R.id.txt_publish_19_1,R.id.txt_publish_17_1,
+    @OnClick({R.id.img_back,R.id.txt_verify_publish,R.id.txt_publish_19_1,R.id.txt_publish_17_1,R.id.txt_publish_35_1,
             R.id.rbn_gongshi,R.id.rbn_geren})
     public void onViewClick(View v){
         switch (v.getId()){
@@ -310,14 +333,6 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
 //                isUploadImage();
 //                verifyPublishDialog();
-                break;
-            case R.id.rab_dunwei:
-                txt_publish_10.setText("设备吨位");
-                getMachineModelType(Integer.parseInt(machineBrand),0);
-                break;
-            case R.id.rab_xinghao:
-                txt_publish_10.setText("设备型号");
-                getMachineModelType(Integer.parseInt(machineBrand),1);
                 break;
             case R.id.rbn_gongshi:
                 lil_publish_03.setVisibility(View.VISIBLE);
@@ -361,7 +376,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
                 break;
             case R.id.txt_publish_17_1:
                 Calendar calendar = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(ChengZhuPublishActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ChengZhuPublishActivity.this,DatePickerDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -372,181 +387,20 @@ public class ChengZhuPublishActivity extends BaseActivity {
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
                 break;
+            case R.id.txt_publish_35_1:
+                Calendar calendar2 = Calendar.getInstance();
+                DatePickerDialog datePickerDialog2 = new DatePickerDialog(ChengZhuPublishActivity.this,DatePickerDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
 
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        arrivalTime = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
+                        txt_publish_35_1.setText(arrivalTime);
+
+                    }
+                }, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog2.show();
+                break;
         }
-    }
-
-    /**
-     * 打开相册
-     */
-    public void showPicture(){
-        // 进入相册 以下是例子：不需要的api可以不写
-        PictureSelector.create(ChengZhuPublishActivity.this)
-                .openGallery(PictureMimeType.ofAll())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
-                .theme(R.style.picture_QQ_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style
-                .maxSelectNum(10)// 最大图片选择数量
-                .minSelectNum(1)// 最小选择数量
-                .imageSpanCount(4)// 每行显示个数
-                .selectionMode(PictureConfig.MULTIPLE )// 多选 or 单选  PictureConfig.MULTIPLE : PictureConfig.SINGLE
-                .isCamera(true)// 是否显示拍照按钮
-                .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
-                .synOrAsy(true)//同步true或异步false 压缩 默认同步
-                .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
-                .selectionMedia(selectList)// 是否传入已选图片
-                .minimumCompressSize(100)// 小于100kb的图片不压缩
-                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
-
-    }
-
-    private List<LocalMedia> selectList = new ArrayList<>();
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case PictureConfig.CHOOSE_REQUEST:
-                    selectList.clear();
-                    // 图片选择结果回调
-                    selectList.addAll(PictureSelector.obtainMultipleResult(data));
-                    imageUploadAdapter.notifyDataSetChanged();
-                    break;
-            }
-        }
-
-        Log.e("Matisse", "mSelected: " + data);
-    }
-
-
-    /**
-     * 验证信息
-     */
-    private void verifyPublishDialog(){
-
-        if(selectList.size()<1){
-            ToastUtils.showLong("必须要上传一张图片作为主页展示。");
-            return;
-        }
-
-        if(txt_publish_19_1.getText().toString().isEmpty()){
-            ToastUtils.showLong("请选择设备停靠省市区");
-            return;
-        }
-
-        if(factoryDate.isEmpty()){
-            ToastUtils.showLong("请选择出场时间");
-            return;
-        }
-
-
-//        if(machineType==null||machineType.isEmpty()){
-//            ToastUtils.showLong("请选择型号或吨位。");
-//            return;
-//        }xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        machineType = "1";
-
-
-
-
-        Dialog dia = new Dialog(activity, R.style.dialog);
-        dia.setContentView(R.layout.item_cs_verify_publish);
-
-
-        ImageView img_tipian = dia.findViewById(R.id.img_tipian);
-        Glide.with(activity).load(selectList.get(0).getPath()).into(img_tipian);
-        TextView txt_cart_product_title = dia.findViewById(R.id.txt_cart_product_title);
-        txt_cart_product_title.setText(edt_publish_01.getText().toString());
-        TextView txt_cart_product_type = dia.findViewById(R.id.txt_cart_product_type);
-        String productType = fb_province + fb_city +" | " + factoryDate + " | "+ edt_publish_16.getText().toString();
-        txt_cart_product_type.setText(productType);
-        TextView txt_product_price = dia.findViewById(R.id.txt_product_price);
-        txt_product_price.setText( edt_publish_12.getText().toString());
-
-        ImageView textView = dia.findViewById(R.id.img_close);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dia.dismiss();
-            }
-        });
-        dia.findViewById(R.id.txt_putongfabu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boutique = 0;
-                isUploadImage();
-                dia.dismiss();
-            }
-        });
-        dia.findViewById(R.id.txt_jingpingfabu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boutique = 1;
-                isUploadImage();
-                dia.dismiss();
-            }
-        });
-
-        //选择true的话点击其他地方可以使dialog消失，为false的话不会消失
-        dia.setCanceledOnTouchOutside(false); // Sets whether this dialog is
-
-//        Window window = dia.getWindow();
-//        window.getDecorView().setPadding(0, 0, 0, 0);
-//        WindowManager.LayoutParams layoutParams = window.getAttributes();
-//        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        layoutParams.horizontalMargin = 0;
-//        window.setAttributes(layoutParams);
-//        window.getDecorView().setMinimumWidth(getResources().getDisplayMetrics().widthPixels);
-//        window.getDecorView().setBackgroundColor(Color.TRANSPARENT);
-
-        dia.show();
-    }
-
-
-
-    /**
-     * 查看图片
-     */
-    private void photoShowDialog(int position){
-        Dialog dia = new Dialog(activity, R.style.imageDialog);
-        dia.setContentView(R.layout.item_image_banner);
-        Banner banner =  dia.findViewById(R.id.banner);
-
-//        List<Uri> uriList = mSelected;
-//        uriList.remove(uriList.size()-1);
-        List<String> uriList = new ArrayList<>();
-        for(LocalMedia item:selectList){
-            uriList.add(item.getPath());
-        }
-
-        banner.setImageLoader(new GlideImageThisLoader())
-                .setImages(uriList)
-                .isAutoPlay(false)
-                .setBannerStyle(BannerConfig.NUM_INDICATOR)
-                .start();
-        banner.setIndicatorGravity(position);
-
-        ImageView imageView = dia.findViewById(R.id.img_count_down);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dia.dismiss();
-            }
-        });
-        //选择true的话点击其他地方可以使dialog消失，为false的话不会消失
-        dia.setCanceledOnTouchOutside(false); // Sets whether this dialog is
-
-        Window window = dia.getWindow();
-        window.getDecorView().setPadding(0, 0, 0, 0);
-        WindowManager.LayoutParams layoutParams = window.getAttributes();
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.horizontalMargin = 0;
-        window.setAttributes(layoutParams);
-        window.getDecorView().setMinimumWidth(getResources().getDisplayMetrics().widthPixels);
-        window.getDecorView().setBackgroundColor(Color.TRANSPARENT);
-
-        dia.show();
     }
 
 
@@ -575,8 +429,23 @@ public class ChengZhuPublishActivity extends BaseActivity {
                         }
                         machineList.add(item.getName());
                     }
-
-                    spr_publish_06.setAdapter(new ArrayAdapter<>(ChengZhuPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
+                    CheckBoxAdapter sblxCheckBoxAdapter = new CheckBoxAdapter(machineList, context, new CheckBoxAdapter.OnClickCheckChanged() {
+                        @Override
+                        public void onCheckedChanged(int postion, boolean isCheck) {
+//                            if(sblxCheckBoxList.size()>0) {
+//                                for (int i = 0; i < machineTypeBeans.size(); i++) {
+//                                    if (machineTypeBeans.get(postion).getMbId().equals(sblxCheckBoxList.get(postion-1))) {
+//                                        if (!isCheck) {
+//                                            sblxCheckBoxList.remove(i);
+//                                            return;
+//                                        }
+//                                    }
+//                                }
+//                            }
+                            sblxCheckBoxList.add("1");
+                        }
+                    });
+                    grv_sblx_check.setAdapter(sblxCheckBoxAdapter);
                 }else{
                     ToastUtils.showLong(baseBeanList.getMsg());
                 }
@@ -590,114 +459,31 @@ public class ChengZhuPublishActivity extends BaseActivity {
         });
     }
 
-    /**
-     * 获取设备型号
-     */
-    public void getMachineModelType(int mbId,int type){
-        Api request = getRetrofit().create(Api.class);
-        Call<BaseBeanList<MachineModelBean>> call = request.machineModelType(mbId,type);
-        call.enqueue(new Callback<BaseBeanList<MachineModelBean>>() {
-            //请求成功时回调
-            @Override
-            public void onResponse(Call<BaseBeanList<MachineModelBean>> call, Response<BaseBeanList<MachineModelBean>> response) {
-                hideDialog();
-                BaseBeanList<MachineModelBean> baseBeanList = response.body();
-
-                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
-                    machineModelTypes =  baseBeanList.getData();
-                    List<String> machineList = new ArrayList<>();
-
-                    boolean isSprAddType = true;
-                    for (MachineModelBean item:baseBeanList.getData()){
-                        if(type==0){
-                            if(isSprAddType) {
-                                machineModelType = item.getName();
-                                isSprAddType = false;
-                            }
-                            machineList.add(item.getTonnage());
-                        }else {
-                            if(isSprAddType) {
-                                machineModelType = item.getName();
-                                isSprAddType = false;
-                            }
-                            machineList.add(item.getName());
-                        }
-                    }
-                    spr_publish_10.setAdapter(new ArrayAdapter<>(ChengZhuPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
-                }else{
-                    ToastUtils.showLong(baseBeanList.getMsg());
-                }
-            }
-            //请求失败时回调
-            @Override
-            public void onFailure(Call<BaseBeanList<MachineModelBean>> call, Throwable throwable) {
-                LogUtils.e("请求失败");
-                LogUtils.e(throwable.getMessage());
-            }
-        });
-    }
-
-
-
-    List<UploadImageBean> uploadImageBeans = new ArrayList<>();
 
     /**
-     *  上传图
+     * 验证信息
      */
-    private void uploadImageFile(String filePath,int index)  {
-        //创建文件(你需要上传到服务器的文件)
-        //file1Location文件的路径 ,我是在手机存储根目录下创建了一个文件夹,里面放着了一张图片;
-        File file = new File(filePath);
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("fileData", file.getName(), requestFile);
+    private void verifyPublishDialog(){
 
-        Call<JsonEntity> call = getRetrofit().create(Api.class).uploadFile(body);
-        call.enqueue(new Callback<JsonEntity>() {
-            //请求成功时回调
-            @Override
-            public void onResponse(Call<JsonEntity> call, Response<JsonEntity> response) {
-                hideDialog();
-                if(response.body().getCode()== Constants.HTTP_RESPONSE_OK) {
 
-                    UploadImageBean uploadImageBean = uploadImageBeans.get(index);
-                    uploadImageBean.setUrlFile(response.body().getData());
-                    uploadImageBeans.remove(index);
-                    uploadImageBeans.add(index,uploadImageBean);
-//                    Collections.replaceAll(uploadImageBeans,uploadImageBeans.get(index),uploadImageBean);
-
-                    LogUtils.e(GsonUtils.toJson(uploadImageBeans));
-                    if(index ==0) {
-                        coverImage = response.body().getData();
-                    }
-                    for(UploadImageBean item:uploadImageBeans){
-                        if(item.getUrlFile().isEmpty()){
-                            return;
-                        }
-                    }
-                    getRentOutAdd();
-                }
-            }
-
-            //请求失败时回调
-            @Override
-            public void onFailure(Call<JsonEntity> call, Throwable throwable) {
-                Log.e("yqw","filePath:"+throwable.getMessage());
-            }
-        });
-
-    }
-
-    /**
-     * 是否上传图片
-     */
-    public void isUploadImage(){
-        uploadImageBeans.clear();
-        for(int i = 0; i < selectList.size();i++){
-            String filePath = selectList.get(i).getPath();
-            uploadImageBeans.add(new UploadImageBean(i,filePath,""));
-            uploadImageFile(filePath,i);
+        if(txt_publish_19_1.getText().toString().isEmpty()){
+            ToastUtils.showLong("请选择设备停靠省市区");
+            return;
         }
+
+        CommomDialog commomDialog = new CommomDialog(ChengZhuPublishActivity.this, "确认发布此条承租信息吗", "", (dialog, confirm) -> {
+            if (confirm) {
+                getRentOutAdd();
+            }
+        });
+        commomDialog.show();
     }
+
+
+
+
+
+
 
 
     /**
@@ -709,64 +495,67 @@ public class ChengZhuPublishActivity extends BaseActivity {
             ToastUtils.showLong("请选择设备停靠省市区");
             return;
         }
-        if(coverImage.isEmpty()){
-            ToastUtils.showLong("必须要上传一张图片作为主页展示。");
-            return;
-        }
 
-        if(factoryDate.isEmpty()){
-            ToastUtils.showLong("请选择出场时间");
-            return;
-        }
-
-//        if(machineType==null||machineType.isEmpty()){
-//            ToastUtils.showLong("请选择型号或吨位。");
-//            return;
-//        }xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        machineType = "1";
 
         Map<String,Object> rentOutMap = new HashMap<>();
-        rentOutMap.put("sId","");
+        rentOutMap.put("riId","");
         rentOutMap.put("title",edt_publish_01.getText().toString());
-        rentOutMap.put("coverImage",coverImage);
+        rentOutMap.put("coverImage","xxxxxx");
         if(rbn_geren.isChecked()) {
             rentOutMap.put("rentFrom", "个人");
             rentOutMap.put("contactPerson", edt_publish_04.getText().toString());
-            rentOutMap.put("companyName", "");
+//            rentOutMap.put("companyName", "");
         }else{
             rentOutMap.put("rentFrom", "公司");
-            rentOutMap.put("companyName", edt_publish_03.getText().toString());
+//            rentOutMap.put("companyName", edt_publish_03.getText().toString());
             rentOutMap.put("contactPerson", edt_publish_04.getText().toString());
         }
 
         rentOutMap.put("contactPhone",edt_publish_05.getText().toString());
-        rentOutMap.put("mtId",machineType);
-//        rentOutMap.put("mtId",1);
-        rentOutMap.put("productDesc",edt_publish_07.getText().toString());
-        rentOutMap.put("mbId",machineBrand);
-//        rentOutMap.put("mbId",1);
-        rentOutMap.put("mbmId",machineModelType);
-//        rentOutMap.put("mbmId",1);
-        rentOutMap.put("price",edt_publish_12.getText().toString());
+        rentOutMap.put("priceHour", "");
+        rentOutMap.put("priceDay", "");
+        rentOutMap.put("priceMonth", "");
+        if(fbPrivateType.trim().equals("元/小时")) {
+            rentOutMap.put("priceHour", edt_publish_12.getText().toString());
+            rentOutMap.put("priceUint", "时");
+        }else if(fbPrivateType.trim().equals("元/天")) {
+            rentOutMap.put("priceDay", edt_publish_12.getText().toString());
+            rentOutMap.put("priceUint", "天");
+        }else if(fbPrivateType.trim().equals("元/月")) {
+            rentOutMap.put("priceMonth", edt_publish_12.getText().toString());
+            rentOutMap.put("priceUint", "月");
+        }
+        rentOutMap.put("tonnage",fbShebeidunwei);
+        rentOutMap.put("count",edt_publish_33.getText().toString());
         rentOutMap.put("workTime",edt_publish_16.getText().toString());
-        rentOutMap.put("factoryDate",factoryDate);
+        rentOutMap.put("workTimeUint",workTimeUint);
         rentOutMap.put("standard",standard);
-        rentOutMap.put("serialNumber",edt_publish_27.getText().toString());
-        rentOutMap.put("envCode",edt_publish_28.getText().toString());
+        rentOutMap.put("factoryDate",factoryDate);
+        rentOutMap.put("arrivalTime",arrivalTime);
+        rentOutMap.put("paymentMethod",paymentMethod);
+        String projectType = "";
+        for(int i = 0; i < isCheckBoxList.size();i++){
+            projectType += isCheckBoxList.get(i);
+            if(i != isCheckBoxList.size()-1){
+                projectType += ",";
+            }
+        }
+
+       rentOutMap.put("projectType",projectType);
+
         rentOutMap.put("province",fb_province);
         rentOutMap.put("city",fb_city);
         rentOutMap.put("county",fb_county);
         rentOutMap.put("address",edt_publish_20.getText().toString());
-        rentOutMap.put("describes",edt_publish_22.getText().toString());
+        rentOutMap.put("describes",edt_publish_34.getText().toString());
         rentOutMap.put("uId", SPStaticUtils.getInt(Constants.SP_USER_ID));
-        rentOutMap.put("boutique",boutique);
-        for(int i = 0; i < uploadImageBeans.size();i++){
-            rentOutMap.put("pictureList["+i+"].url",uploadImageBeans.get(i).getUrlFile());
+        for(int i = 0; i < sblxCheckBoxList.size();i++){
+            rentOutMap.put("typeList["+i+"].url",sblxCheckBoxList.get(i));
         }
 //        rentOutMap.put("pictureList","");
 
         Api request = getRetrofit().create(Api.class);
-        Call<JsonEntity> call = request.sellAdd(rentOutMap);
+        Call<JsonEntity> call = request.rentInAdd(rentOutMap);
         call.enqueue(new Callback<JsonEntity>() {
             //请求成功时回调
             @Override

@@ -156,8 +156,6 @@ public class CommomDialog extends Dialog implements View.OnClickListener{
             titleTxt.setText(title);
         }
 
-
-
     }
 
 
@@ -180,6 +178,7 @@ public class CommomDialog extends Dialog implements View.OnClickListener{
                 if(listener != null){
                     listener.onClick(this, true);
                 }
+                this.dismiss();
                 break;
         }
     }

@@ -19,7 +19,6 @@
     <array name="gongzuoshichang1">
         <item> 时 </item>
         <item> 天 </item>
-        <item> 周 </item>
         <item> 月 </item>
     </array>
 
@@ -34,6 +33,9 @@
     <array name="shebeidunwei">
         <item> 10吨以下 </item>
         <item> 10吨-20吨  </item>
+        <item> 20吨-30吨  </item>
+        <item> 40吨-50吨  </item>
+        <item> 60吨以上  </item>
     </array>
 
 
@@ -50,6 +52,12 @@
         <item> 国标六 </item>
         <item> 国标七 </item>
         <item> 国标八 </item>
+    </array>
+
+    <array name="fukuanfangshi">
+        <item> 月份 </item>
+        <item> 季付 </item>
+        <item> 其他 </item>
     </array>
 
 
