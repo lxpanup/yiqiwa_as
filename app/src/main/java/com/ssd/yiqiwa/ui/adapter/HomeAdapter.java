@@ -22,9 +22,12 @@ import com.ssd.yiqiwa.model.entity.HomeBannerImages;
 import com.ssd.yiqiwa.model.entity.HomeBase;
 import com.ssd.yiqiwa.model.entity.ProductBean;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
+import com.ssd.yiqiwa.ui.activities.chengzhu.ChengzhuListActivity;
+import com.ssd.yiqiwa.ui.activities.chushou.CSListActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZDetailActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZListActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZPublishActivity;
+import com.ssd.yiqiwa.ui.activities.goumai.GoumaiListActivity;
 import com.ssd.yiqiwa.ui.activities.jizhu.JizhuListActivity;
 import com.ssd.yiqiwa.ui.activities.other.SearchActivity;
 import com.ssd.yiqiwa.ui.activities.other.XingxifeiActivity;
@@ -150,7 +153,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             if(!bean.getProduct_workHour().isEmpty()){
                 sb.append("|");
-                sb.append(bean.getProduct_workHour()+"");
+                sb.append(bean.getProduct_workHour()+bean.getProduct_workHour());
             }
 
             holder.txt_product_category.setText(sb.toString());
@@ -321,16 +324,16 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     activity.startActivity(new Intent(context, XingxifeiActivity.class));
                     break;
                 case R.id.tv_category_02:  //雇主承租
-                    activity.startActivity(new Intent(context, ChengZuPublishActivity.class));
+                    activity.startActivity(new Intent(context, CZListActivity.class));
                     break;
                 case R.id.tv_category_03:  //机主出售
-                    activity.startActivity(new Intent(context, CZListActivity.class));
+                    activity.startActivity(new Intent(context, ChengzhuListActivity.class));
                     break;
                 case R.id.tv_category_04: //二手购买
-                    activity.startActivity(new Intent(context, CZListActivity.class));
+                    activity.startActivity(new Intent(context, GoumaiListActivity.class));
                     break;
                 case R.id.tv_category_05: //二手出售
-                    activity.startActivity(new Intent(context, CZPublishActivity.class));
+                    activity.startActivity(new Intent(context, CSListActivity.class));
                     break;
                 case R.id.tv_category_06: //操作手服务
                     JizhuListActivity.start(context,0);

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.squareup.leakcanary.LeakCanary;
+import com.ssd.yiqiwa.utils.SharedPreferencesUtils;
 
 
 public class App extends Application {
@@ -23,6 +24,8 @@ public class App extends Application {
 //            return;
 //        }
 //        LeakCanary.install(this);
+
+        SharedPreferencesUtils.getInstance(this,"scdyiqiwa");
     }
 
 }

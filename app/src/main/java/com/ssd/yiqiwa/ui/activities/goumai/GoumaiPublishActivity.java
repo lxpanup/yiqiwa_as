@@ -1,35 +1,22 @@
-package com.ssd.yiqiwa.ui.activities.chengzhu;
+package com.ssd.yiqiwa.ui.activities.goumai;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.bumptech.glide.Glide;
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.picture.lib.entity.LocalMedia;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
@@ -38,21 +25,14 @@ import com.ssd.yiqiwa.api.Api;
 import com.ssd.yiqiwa.model.entity.BaseBeanList;
 import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.MachineBrandBean;
-import com.ssd.yiqiwa.model.entity.MachineModelBean;
 import com.ssd.yiqiwa.model.entity.MachineTypeBean;
-import com.ssd.yiqiwa.model.entity.UploadImageBean;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.ui.activities.chushou.CSPublishActivity;
 import com.ssd.yiqiwa.ui.adapter.CheckBoxAdapter;
-import com.ssd.yiqiwa.ui.adapter.ImageUploadAdapter;
 import com.ssd.yiqiwa.utils.AddressInitTask;
 import com.ssd.yiqiwa.utils.Constants;
-import com.ssd.yiqiwa.widget.GlideImageThisLoader;
 import com.ssd.yiqiwa.widget.common.CommomDialog;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -65,27 +45,21 @@ import cn.qqtheme.framework.entity.City;
 import cn.qqtheme.framework.entity.County;
 import cn.qqtheme.framework.entity.Province;
 import cn.qqtheme.framework.picker.AddressPicker;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
 /**
- * 承租发布
+ * 出售购买-二手出售
  */
-public class ChengZhuPublishActivity extends BaseActivity {
+public class GoumaiPublishActivity extends BaseActivity {
 
 
-    @BindView(R.id.grv_gclx_check)
-    GridView grv_gclx_check;
 
     @BindView(R.id.grv_sblx_check)
     GridView grv_sblx_check;
 
-    CheckBoxAdapter checkBoxAdapter;
     private Activity activity;
     private Context context;
 
@@ -139,10 +113,10 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
     @BindView(R.id.spr_publish_10)
     Spinner spr_publish_10;
+    @BindView(R.id.spr_publish_08)
+    Spinner spr_publish_08;
     @BindView(R.id.spr_publish_18)
     Spinner spr_publish_18;
-    @BindView(R.id.spr_publish_12)
-    Spinner spr_publish_12;
     @BindView(R.id.spr_publish_16)
     Spinner spr_publish_16;
     @BindView(R.id.spr_publish_36)
@@ -152,18 +126,20 @@ public class ChengZhuPublishActivity extends BaseActivity {
     RadioButton rbn_geren;
     @BindView(R.id.rbn_gongshi)
     RadioButton rbn_gongshi;
+
+    // 品牌列表
+    List<MachineBrandBean> machineBrandBeans = new ArrayList<>();
     //设备类型
     List<MachineTypeBean> machineTypeBeans = new ArrayList<>();
 
-    private String machineType;
+    private String machineBrand;
     private String standard;
     private String factoryDate;
     private String arrivalTime;
     private String paymentMethod;
-
-    private String fbPrivateType;
-    private String fbShebeidunwei;
     private String workTimeUint;
+    private String machineType;
+    private String fbShebeidunwei;
     private String fb_province;
     private String fb_city;
     private String fb_county;
@@ -172,13 +148,11 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
 
 
-    private List<String> checkBoxList = new ArrayList<>();
-    private List<String> isCheckBoxList = new ArrayList<>();
     private List<String> sblxCheckBoxList = new ArrayList<>();
 
     @Override
     public Object offerLayout() {
-        return R.layout.chengzu_activity_publish;
+        return R.layout.goumai_activity_publish;
     }
 
     @Override
@@ -207,31 +181,20 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
 
 
-        checkBoxList = new ArrayList<>();
-        checkBoxList.add("市政府工程");
-        checkBoxList.add("场地平整");
-        checkBoxList.add("装车");
-        checkBoxList.add("拆迁");
-        checkBoxList.add("道路");
-        checkBoxList.add("其他");
-
-        checkBoxAdapter = new CheckBoxAdapter(checkBoxList, context, new CheckBoxAdapter.OnClickCheckChanged() {
+        spr_publish_08.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onCheckedChanged(int postion, boolean isCheck) {
-                for(int i = 0; i < isCheckBoxList.size();i++){
-                    if(checkBoxList.get(postion).equals(isCheckBoxList.get(i))) {
-                        if (!isCheck) {
-                            isCheckBoxList.remove(i);
-                        }
-                        return;
-                    }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(machineBrandBeans.size()!=0){
+                    machineBrand = machineBrandBeans.get(position).getMbId();
+
                 }
-                isCheckBoxList.add(checkBoxList.get(postion));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
-        grv_gclx_check.setAdapter(checkBoxAdapter);
-
-
 
 
 
@@ -248,18 +211,6 @@ public class ChengZhuPublishActivity extends BaseActivity {
         });
 
 
-        spr_publish_16.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                paymentMethod = getResources().getStringArray(R.array.fukuanfangshi)[position].trim();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         spr_publish_36.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -272,12 +223,10 @@ public class ChengZhuPublishActivity extends BaseActivity {
             }
         });
 
-
-
-        spr_publish_12.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spr_publish_16.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                fbPrivateType = getResources().getStringArray(R.array.gongzuoshichang)[position].trim();
+                paymentMethod = getResources().getStringArray(R.array.fukuanfangshi)[position].trim();
             }
 
             @Override
@@ -285,6 +234,8 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
             }
         });
+
+
 
 //        spr_publish_17.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
@@ -314,6 +265,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
         });
 
         getMachineTypeAll();
+        getMachineBrandAll();
     }
 
     @Override
@@ -376,7 +328,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
                 break;
             case R.id.txt_publish_17_1:
                 Calendar calendar = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(ChengZhuPublishActivity.this,DatePickerDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(GoumaiPublishActivity.this,DatePickerDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -389,7 +341,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
                 break;
             case R.id.txt_publish_35_1:
                 Calendar calendar2 = Calendar.getInstance();
-                DatePickerDialog datePickerDialog2 = new DatePickerDialog(ChengZhuPublishActivity.this,DatePickerDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog2 = new DatePickerDialog(GoumaiPublishActivity.this,DatePickerDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -402,6 +354,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
                 break;
         }
     }
+
 
 
 
@@ -461,6 +414,40 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
 
     /**
+     * 获取产品信息
+     */
+    public void getMachineBrandAll(){
+        Api request = getRetrofit().create(Api.class);
+        Call<BaseBeanList<MachineBrandBean>> call = request.machineBrandAll();
+        call.enqueue(new Callback<BaseBeanList<MachineBrandBean>>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<BaseBeanList<MachineBrandBean>> call, Response<BaseBeanList<MachineBrandBean>> response) {
+                hideDialog();
+                BaseBeanList<MachineBrandBean> baseBeanList = response.body();
+
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    machineBrandBeans =  baseBeanList.getData();
+                    List<String> machineList = new ArrayList<>();
+                    for (MachineBrandBean item:baseBeanList.getData()){
+                        machineList.add(item.getName());
+                    }
+                    spr_publish_08.setAdapter(new ArrayAdapter<>(GoumaiPublishActivity.this, android.R.layout.simple_spinner_item, machineList) );
+                }else{
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                }
+            }
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<BaseBeanList<MachineBrandBean>> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
+            }
+        });
+    }
+
+
+    /**
      * 验证信息
      */
     private void verifyPublishDialog(){
@@ -471,7 +458,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
             return;
         }
 
-        CommomDialog commomDialog = new CommomDialog(ChengZhuPublishActivity.this, "确认发布此条承租信息吗", "", (dialog, confirm) -> {
+        CommomDialog commomDialog = new CommomDialog(GoumaiPublishActivity.this, "确认发布此条承租信息吗", "", (dialog, confirm) -> {
             if (confirm) {
                 getRentOutAdd();
             }
@@ -498,7 +485,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
 
 
         Map<String,Object> rentOutMap = new HashMap<>();
-        rentOutMap.put("riId","");
+        rentOutMap.put("bId","");
         rentOutMap.put("title",edt_publish_01.getText().toString());
         rentOutMap.put("coverImage","xxxxxx");
         if(rbn_geren.isChecked()) {
@@ -512,36 +499,18 @@ public class ChengZhuPublishActivity extends BaseActivity {
         }
 
         rentOutMap.put("contactPhone",edt_publish_05.getText().toString());
-        rentOutMap.put("priceHour", "");
-        rentOutMap.put("priceDay", "");
-        rentOutMap.put("priceMonth", "");
-        if(fbPrivateType.trim().equals("元/小时")) {
-            rentOutMap.put("priceHour", edt_publish_12.getText().toString());
-            rentOutMap.put("priceUint", "时");
-        }else if(fbPrivateType.trim().equals("元/天")) {
-            rentOutMap.put("priceDay", edt_publish_12.getText().toString());
-            rentOutMap.put("priceUint", "天");
-        }else if(fbPrivateType.trim().equals("元/月")) {
-            rentOutMap.put("priceMonth", edt_publish_12.getText().toString());
-            rentOutMap.put("priceUint", "月");
-        }
+
+        rentOutMap.put("price", edt_publish_12.getText().toString());
+
         rentOutMap.put("tonnage",fbShebeidunwei);
         rentOutMap.put("count",edt_publish_33.getText().toString());
         rentOutMap.put("workTime",edt_publish_16.getText().toString());
         rentOutMap.put("workTimeUint",workTimeUint);
         rentOutMap.put("standard",standard);
-        rentOutMap.put("factoryDate",factoryDate);
+//        rentOutMap.put("factoryDate",factoryDate);
         rentOutMap.put("arrivalTime",arrivalTime);
         rentOutMap.put("paymentMethod",paymentMethod);
-        String projectType = "";
-        for(int i = 0; i < isCheckBoxList.size();i++){
-            projectType += isCheckBoxList.get(i);
-            if(i != isCheckBoxList.size()-1){
-                projectType += ",";
-            }
-        }
-
-       rentOutMap.put("projectType",projectType);
+        rentOutMap.put("mbId",machineBrand);
 
         rentOutMap.put("province",fb_province);
         rentOutMap.put("city",fb_city);
@@ -555,7 +524,7 @@ public class ChengZhuPublishActivity extends BaseActivity {
 //        rentOutMap.put("pictureList","");
 
         Api request = getRetrofit().create(Api.class);
-        Call<JsonEntity> call = request.rentInAdd(rentOutMap);
+        Call<JsonEntity> call = request.buyAdd(rentOutMap);
         call.enqueue(new Callback<JsonEntity>() {
             //请求成功时回调
             @Override

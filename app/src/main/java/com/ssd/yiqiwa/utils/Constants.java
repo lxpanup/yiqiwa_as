@@ -1,5 +1,6 @@
 package com.ssd.yiqiwa.utils;
 
+import com.ssd.yiqiwa.model.entity.CartProductBean;
 import com.zaaach.citypicker.model.HotCity;
 
 import java.util.ArrayList;
@@ -61,6 +62,9 @@ public class Constants {
     /** 设置-是否阻止推送通知 */
     public static final String SP_SETTING_MESSAGE = "sp_setting_message";
 
+    /** 购物车列表 */
+    public static final String SP_CART_LIST_MESSAGE = "sp_cart_list_message";
+
 
     /** 相应成功标识 */
     public static int HTTP_RESPONSE_OK = 200;
@@ -77,6 +81,43 @@ public class Constants {
         hotCities.add(new HotCity("成都", "四川", "101270101"));
         hotCities.add(new HotCity("深圳", "广东", "101280601"));
         return hotCities;
+    }
+
+
+    public static String getOrderType(int index) {
+        switch (index){
+            case 1:
+                return "购买";
+            case 2:
+                return "出售";
+            case 3:
+                return "承租";
+            case 4:
+                return "出租";
+        }
+        return "出售";
+    }
+
+
+    /**
+     * 添加购物车信息
+     * @param cartProductBean
+     * @return
+     */
+    public static String addCartListMessage(CartProductBean cartProductBean){
+        List<CartProductBean> cartProductBeanList = SharedPreferencesUtils.getListData(Constants.SP_CART_LIST_MESSAGE,CartProductBean.class);
+        for(int i = 0; i < cartProductBeanList.size();i++){
+            if(cartProductBeanList.get(i).getProductType().equals(cartProductBean.getProductType())&&
+                    cartProductBeanList.get(i).getProductId().equals(cartProductBean.getProductId())){
+                return "加入成功";
+            }
+        }
+        cartProductBeanList.add(cartProductBean);
+        if(cartProductBeanList.size()>100){
+            return "购物车列表已满";
+        }
+        SharedPreferencesUtils.putListData(Constants.SP_CART_LIST_MESSAGE,cartProductBeanList);
+        return "加入成功";
     }
 
 

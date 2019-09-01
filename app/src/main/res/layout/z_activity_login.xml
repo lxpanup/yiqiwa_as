@@ -119,7 +119,7 @@
                         android:hint="请输入手机号码"
                         android:inputType="phone"
                         android:paddingLeft="38dp"
-                        android:text="18719041111"
+                        android:text="18382496201"
                         android:textColor="@color/black" />
 
                 </RelativeLayout>
@@ -148,7 +148,7 @@
                         android:hint="请输入密码"
                         android:inputType="textPassword"
                         android:paddingLeft="38dp"
-                        android:text="12345678"
+                        android:text="123456"
                         android:textColor="@color/black" />
 
                 </RelativeLayout>

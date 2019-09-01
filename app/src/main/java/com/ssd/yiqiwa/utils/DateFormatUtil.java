@@ -73,15 +73,26 @@ public class DateFormatUtil {
 
 
 
-    public static String getDateFormat(String time){
+    public static String getDateFormat(String time,String format){
         SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_yyyyMMdd_HHmm, Locale.getDefault());
-        SimpleDateFormat sdf2 = new SimpleDateFormat(FORMAT_yyyy, Locale.getDefault());
+        SimpleDateFormat sdf2 = new SimpleDateFormat(format, Locale.getDefault());
         try {
             return sdf2.format(sdf.parse(time));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return "2015";
+        return "2011-01-01";
+    }
+
+    public static String getDateFormatYMD(String time){
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_yyyyMMdd_HHmm, Locale.getDefault());
+        SimpleDateFormat sdf2 = new SimpleDateFormat(FORMAT_yyyyMMdd, Locale.getDefault());
+        try {
+            return sdf2.format(sdf.parse(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "2011-01-01";
     }
 
     /**

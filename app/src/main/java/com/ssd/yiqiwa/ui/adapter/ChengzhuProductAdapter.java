@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.model.entity.MacRentIntPoBean;
 import com.ssd.yiqiwa.model.entity.MacRentOutPoBean;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
+import com.ssd.yiqiwa.ui.activities.chengzhu.ChengzhuDetailActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZDetailActivity;
 import com.ssd.yiqiwa.utils.Constants;
 import com.ssd.yiqiwa.utils.DateFormatUtil;
@@ -31,13 +33,13 @@ import static com.blankj.utilcode.util.ActivityUtils.startActivity;
  * <p>
  * 商品列表adapter
  */
-public class CZProductAdapter extends RecyclerView.Adapter<CZProductAdapter.MyHolder> {
+public class ChengzhuProductAdapter extends RecyclerView.Adapter<ChengzhuProductAdapter.MyHolder> {
     private Context context;
     private MainActivity activity;
-    public List<MacRentOutPoBean> mList;
+    public List<MacRentIntPoBean> mList;
 
 
-    public CZProductAdapter(Context context, List<MacRentOutPoBean> mList) {
+    public ChengzhuProductAdapter(Context context, List<MacRentIntPoBean> mList) {
         this.context = context;
         this.mList = mList;
     }
@@ -45,17 +47,15 @@ public class CZProductAdapter extends RecyclerView.Adapter<CZProductAdapter.MyHo
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_cz_product, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_chengzhu_product, parent, false);
         return new MyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        MacRentOutPoBean macRentOutPoBean = mList.get(position);
+        MacRentIntPoBean macRentOutPoBean = mList.get(position);
         Glide.with(context).load(Constants.ALIYUN_IMAGE_SSO+macRentOutPoBean.getCoverImage()).into(holder.imageview);
-        if(macRentOutPoBean.getBoutique().equals("1")) {
-            holder.img_type.setImageResource(R.mipmap.ic_jingxuan);
-        }
+
         holder.txt_cart_product_title.setText(macRentOutPoBean.getTitle());
         StringBuilder sb = new StringBuilder();
         sb.append(macRentOutPoBean.getProvince()+macRentOutPoBean.getCity());
@@ -75,8 +75,8 @@ public class CZProductAdapter extends RecyclerView.Adapter<CZProductAdapter.MyHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context,CZDetailActivity.class);
-                intent.putExtra("productRoId",macRentOutPoBean.getRoId());
+                intent.setClass(context,ChengzhuDetailActivity.class);
+                intent.putExtra("productRoId",macRentOutPoBean.getRiId());
                 startActivity(intent);
             }
         });
@@ -93,8 +93,7 @@ public class CZProductAdapter extends RecyclerView.Adapter<CZProductAdapter.MyHo
         LinearLayout lil_item_product;
         @BindView(R.id.imageview)
         ImageView imageview;
-        @BindView(R.id.img_type)
-        ImageView img_type;
+
 
         @BindView(R.id.txt_cart_product_title)
         TextView txt_cart_product_title;

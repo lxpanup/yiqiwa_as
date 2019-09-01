@@ -14,6 +14,7 @@ import com.ssd.yiqiwa.ui.activities.base.BaseFragment;
 import com.ssd.yiqiwa.ui.activities.chengzhu.ChengZhuPublishActivity;
 import com.ssd.yiqiwa.ui.activities.chushou.CSPublishActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZPublishActivity;
+import com.ssd.yiqiwa.ui.activities.goumai.GoumaiPublishActivity;
 import com.ssd.yiqiwa.ui.activities.publish.ChengZuPublishActivity;
 import com.ssd.yiqiwa.ui.activities.publish.MyPublishActivity;
 
@@ -62,7 +63,7 @@ public class NavPublishFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), CSPublishActivity.class));
                 break;
             case R.id.rlt_fabu_04: //二手购买
-                startActivity(new Intent(getActivity(), ChengZuPublishActivity.class));
+                startActivity(new Intent(getActivity(), GoumaiPublishActivity.class));
                 break;
             case R.id.rlt_fabu_05: //机主招聘发布
 

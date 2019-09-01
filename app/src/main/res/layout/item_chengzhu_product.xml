@@ -24,13 +24,6 @@
                 android:layout_marginLeft="5dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/test_wjj" />
-            <ImageView
-                android:id="@+id/img_type"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_width="30dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/ic_jingxuan"/>
 
         </RelativeLayout>
 

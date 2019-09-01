@@ -6,9 +6,15 @@ import com.ssd.yiqiwa.model.entity.BaseBeanList;
 import com.ssd.yiqiwa.model.entity.HomeBannerImages;
 import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.model.entity.LoginUserBean;
+import com.ssd.yiqiwa.model.entity.MacBuyPoBean;
+import com.ssd.yiqiwa.model.entity.MacOrderSubPo;
+import com.ssd.yiqiwa.model.entity.MacRentIntPoBean;
+import com.ssd.yiqiwa.model.entity.MacRentOutPoBean;
+import com.ssd.yiqiwa.model.entity.MacSellPoBean;
 import com.ssd.yiqiwa.model.entity.MachineBrandBean;
 import com.ssd.yiqiwa.model.entity.MachineModelBean;
 import com.ssd.yiqiwa.model.entity.MachineTypeBean;
+import com.ssd.yiqiwa.model.entity.PagesBean;
 import com.ssd.yiqiwa.model.entity.ProductBean;
 
 import java.util.List;
@@ -164,8 +170,88 @@ public interface Api {
     @POST("rentIn/add")
     Call<JsonEntity> rentInAdd(@QueryMap Map<String, Object> map);
 
+    /**
+     * 二手购买
+     * @return .
+     */
+    @POST("buy/add")
+    Call<JsonEntity> buyAdd(@QueryMap Map<String, Object> map);
 
 
+
+    /**
+     * 出租列表
+     * @return .
+     */
+    @POST("rentOut/list")
+    Call<BaseBean<PagesBean<MacRentOutPoBean>>> rentOutList(@Query("pageNo") int pageNo);
+
+    /**
+     * 出租详情
+     * @return .
+     */
+    @POST("rentOut/detail")
+    Call<BaseBean<MacRentOutPoBean>> rentOutDetail(@Query("roId") int roId);
+
+
+    /**
+     * 承租列表
+     * @return .
+     */
+    @POST("rentIn/list")
+    Call<BaseBean<PagesBean<MacRentIntPoBean>>> rentInList(@Query("pageNo") int pageNo);
+
+    /**
+     * 承租详情
+     * @return .
+     */
+    @POST("rentIn/detail")
+    Call<BaseBean<MacRentIntPoBean>> rentInDetail(@Query("riId") int roId);
+
+    /**
+     * 二手出售列表
+     * @return .
+     */
+    @POST("sell/list")
+    Call<BaseBean<PagesBean<MacSellPoBean>>> sellList(@Query("pageNo") int pageNo);
+
+    /**
+     * 二手出售详情
+     * @return .
+     */
+    @POST("sell/detail")
+    Call<BaseBean<MacSellPoBean>> sellDetail(@Query("sId") int sId);
+
+    /**
+     * 二手购买列表
+     * @return .
+     */
+    @POST("buy/list")
+    Call<BaseBean<PagesBean<MacBuyPoBean>>> buyList(@Query("pageNo") int pageNo);
+
+    /**
+     * 二手购买详情
+     * @return .
+     */
+    @POST("buy/detail")
+    Call<BaseBean<MacBuyPoBean>> buyDetail(@Query("bId") int bId);
+
+
+    /** ******************** 区域经理 **************************** */
+    /**
+     * 区域经理的订单 预约订单
+     * @return .
+     */
+    @POST("order/mangerReserveOrder")
+    Call<BaseBean<PagesBean<MacOrderSubPo>>> orderMangerReserveOrder(@Query("uId") int uId, @Query("pageNo") int pageNo);
+
+
+    /**
+     * 跟进订单
+     * @return .
+     */
+    @POST("order/followOrder")
+    Call<JsonEntity> orderFollowOrder(@Query("uId") int uId,@Query("osId") int osId);
 
 
 

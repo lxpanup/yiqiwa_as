@@ -10,10 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.model.entity.CartProductBean;
 import com.ssd.yiqiwa.ui.activities.other.CartConfirmActivity;
 import com.ssd.yiqiwa.ui.adapter.CartListAdapter;
 import com.ssd.yiqiwa.ui.adapter.MessageListAdapter;
+import com.ssd.yiqiwa.utils.Constants;
+import com.ssd.yiqiwa.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,9 @@ public class NavCartFragment extends Fragment {
     @BindView(R.id.recy_cart)
     RecyclerView recy_cart;
 
+    private CartListAdapter cartListAdapter;
+    private List<CartProductBean> cartProductBeanList;
+
     public static NavCartFragment newInstance() {
         NavCartFragment fragment = new NavCartFragment();
         Bundle args = new Bundle();
@@ -49,22 +56,18 @@ public class NavCartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         View view = inflater.inflate(R.layout.fragment_navigation_cart, container, false);
         ButterKnife.bind(this, view);
         initView();
-
         return view;
     }
 
     public void initView() {
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
+
+        cartProductBeanList = SharedPreferencesUtils.getListData(Constants.SP_CART_LIST_MESSAGE, CartProductBean.class);
+        cartListAdapter = new CartListAdapter(getActivity(),cartProductBeanList);
         recy_cart.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recy_cart.setAdapter(new CartListAdapter(getActivity(),list));
-
-
+        recy_cart.setAdapter(cartListAdapter);
 
     }
 
