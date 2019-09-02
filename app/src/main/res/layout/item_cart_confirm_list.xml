@@ -13,6 +13,7 @@
 
 
     <TextView
+        android:id="@+id/txt_gerenqiye"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="个人"
@@ -28,6 +29,7 @@
 
 
         <ImageView
+            android:id="@+id/imageview"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginLeft="5dp"
@@ -79,6 +81,7 @@
                     android:textSize="15sp"
                     />
                 <TextView
+                    android:id="@+id/txt_product_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="200.00"
@@ -118,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="right">
                     <EditText
+                        android:id="@+id/edt_count"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:paddingLeft="4dp"
@@ -238,8 +242,9 @@
 
 
             <EditText
+                android:id="@+id/edt_remarks"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_edit_publish"/>
         </LinearLayout>
 

@@ -109,7 +109,11 @@ public class CZDetailActivity extends BaseActivity {
     private String productTile;
     private String projectType;
     private String productPrice;
+    private String priceDay;
+    private String priceHour;
+    private String priceMonth;
     private String productPriceUint;
+    private boolean isCartCheckbox;
 
     @Override
     public Object offerLayout() {
@@ -151,7 +155,10 @@ public class CZDetailActivity extends BaseActivity {
             case R.id.tv_cart:
 
 
-                ToastUtils.showLong(Constants.addCartListMessage(new CartProductBean(productId,productType,rentFrom,coverImage,productTile,projectType,productPrice,productPriceUint)));
+                ToastUtils.showLong(Constants.addCartListMessage(new CartProductBean(productId,productType,
+                        rentFrom,coverImage,productTile,projectType,"",priceDay,priceHour,priceMonth,productPriceUint,false)));
+
+
                 break;
             case R.id.tv_buyer:
                 startActivity(new Intent(activity,CartConfirmActivity.class));
@@ -288,7 +295,12 @@ public class CZDetailActivity extends BaseActivity {
             sb.append(macRentOutPoBean.getWorkTime()+macRentOutPoBean.getWorkTimeUint());
         }
         projectType = sb.toString();
-        productPrice = macRentOutPoBean.getPriceDay();
+
+        priceDay = macRentOutPoBean.getPriceDay();
+        priceHour = macRentOutPoBean.getPriceHour();
+        priceMonth = macRentOutPoBean.getPriceMonth();
+
+
         productPriceUint = "";
     }
 

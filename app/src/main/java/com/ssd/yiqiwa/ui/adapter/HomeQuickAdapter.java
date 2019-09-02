@@ -49,7 +49,8 @@ public class HomeQuickAdapter extends BaseQuickAdapter<ProductBean, BaseViewHold
             helper.setImageResource(R.id.img_product_type,R.mipmap.ic_chushou);
         }
 
-        Glide.with(mContext).load(Constants.ALIYUN_IMAGE_SSO+item.getCoverImage()).into((ImageView) helper.getView(R.id.img_product_coverimage));
+        String coverImage = item.getCoverImage()==null?"":item.getCoverImage();
+        Glide.with(mContext).load(Constants.ALIYUN_IMAGE_SSO+coverImage).into((ImageView) helper.getView(R.id.img_product_coverimage));
         helper.getView(R.id.lil_item_product).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

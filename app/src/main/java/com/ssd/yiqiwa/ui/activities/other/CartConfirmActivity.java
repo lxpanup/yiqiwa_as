@@ -8,9 +8,13 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.model.entity.CartProductBean;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.ui.adapter.CartConfirmAdapter;
+import com.ssd.yiqiwa.ui.adapter.CartListAdapter;
 import com.ssd.yiqiwa.ui.adapter.MessageListAdapter;
+import com.ssd.yiqiwa.utils.Constants;
+import com.ssd.yiqiwa.utils.SharedPreferencesUtils;
 import com.ssd.yiqiwa.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -32,6 +36,11 @@ public class CartConfirmActivity extends BaseActivity {
     private Activity activity;
     private Context context;
 
+
+    private CartConfirmAdapter cartListAdapter;
+    private List<CartProductBean> cartProductBeanList;
+
+
     @Override
     public Object offerLayout() {
         return R.layout.activity_cart_confirm;
@@ -42,11 +51,18 @@ public class CartConfirmActivity extends BaseActivity {
         activity = this;
         context = getApplicationContext();
 
-
-        List<String> list = new ArrayList<>();
-        list.add("1");
         recy_cart_confirm.setLayoutManager(new LinearLayoutManager(activity));
-        recy_cart_confirm.setAdapter(new CartConfirmAdapter(activity,list));
+
+        cartProductBeanList = new ArrayList<>();
+        List<CartProductBean> listData = SharedPreferencesUtils.getListData(Constants.SP_CART_LIST_MESSAGE, CartProductBean.class);
+        for(CartProductBean item:listData){
+            if(item.isCartCheckbox()){
+                cartProductBeanList.add(item);
+            }
+        }
+
+        cartListAdapter = new CartConfirmAdapter(activity,cartProductBeanList,this::addOrderMessage);
+        recy_cart_confirm.setAdapter(cartListAdapter);
     }
 
 
@@ -65,6 +81,26 @@ public class CartConfirmActivity extends BaseActivity {
                 ToastUtils.showLong("预约成功");
                 finish();
                 break;
+        }
+    }
+
+    /**
+     * 添加订单信息
+     * @param postion
+     * @param count
+     * @param remarks
+     * @param productPriceUint
+     */
+    public void addOrderMessage(int postion,String count,String remarks,String productPriceUint){
+        CartProductBean cartProductBean = cartProductBeanList.get(postion);
+        if(count!=null) {
+            cartProductBean.setProductCount(count);
+        }
+        if(remarks!=remarks) {
+            cartProductBean.setProductRemarks(remarks);
+        }
+        if(productPriceUint!=productPriceUint) {
+            cartProductBean.setProductPriceUint(productPriceUint);
         }
     }
 }

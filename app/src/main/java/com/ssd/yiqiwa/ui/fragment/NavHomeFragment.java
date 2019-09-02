@@ -111,8 +111,6 @@ public class NavHomeFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onBindView() {
-
-
         GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
 
         homeQuickAdapter = new HomeQuickAdapter();
@@ -128,7 +126,7 @@ public class NavHomeFragment extends BaseFragment implements View.OnClickListene
                         refreshLayout.getLayout().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                               ToastUtils.showLong("下拉刷新");
+                                ToastUtils.showLong("下拉刷新");
                                 refreshLayout.finishRefresh();
                             }
                         },2000);
@@ -136,6 +134,8 @@ public class NavHomeFragment extends BaseFragment implements View.OnClickListene
                 },2000);
             }
         });
+
+        refreshLayout.setFooterHeight(100);
 
 
         //添加Header

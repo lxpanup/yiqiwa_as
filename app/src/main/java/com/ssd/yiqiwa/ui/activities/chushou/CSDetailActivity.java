@@ -194,8 +194,8 @@ public class CSDetailActivity extends BaseActivity {
 
 
     private void initViewData(MacBuyPoBean macRentOutPoBean){
-
-        Glide.with(context).load(Constants.ALIYUN_IMAGE_SSO+macRentOutPoBean.getCoverImage()).into(img_detail);
+        String coverImage = macRentOutPoBean.getCoverImage()==null?"":macRentOutPoBean.getCoverImage();
+        Glide.with(context).load(Constants.ALIYUN_IMAGE_SSO+coverImage).into(img_detail);
         txt_product_name.setText(macRentOutPoBean.getTitle());
         txt_product_time.setText("发布时间："+DateFormatUtil.getDateFormatYMD(macRentOutPoBean.getCreateDate()));
 

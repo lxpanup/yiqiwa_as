@@ -190,8 +190,9 @@ public class ChengzhuDetailActivity extends BaseActivity {
 
 
     private void initViewData(MacRentIntPoBean macRentOutPoBean){
+        String coverImage = macRentOutPoBean.getCoverImage()==null?"":macRentOutPoBean.getCoverImage();
+        Glide.with(context).load(Constants.ALIYUN_IMAGE_SSO+coverImage).into(img_detail);
 
-        Glide.with(context).load(Constants.ALIYUN_IMAGE_SSO+macRentOutPoBean.getCoverImage()).into(img_detail);
         txt_product_name.setText(macRentOutPoBean.getTitle());
         txt_product_time.setText(DateFormatUtil.getDateFormatYMD(macRentOutPoBean.getCreateDate()));
 

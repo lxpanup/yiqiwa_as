@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:id="@+id/lil_item_message"
     android:layout_gravity="center_vertical"
-    android:padding="3dp">
+    android:background="#fff"
+    android:padding="5dp">
 
 
     <TextView
@@ -20,10 +21,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff">
+        android:layout_height="match_parent">
 
         <CheckBox
+            android:id="@+id/chx_cart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"/>

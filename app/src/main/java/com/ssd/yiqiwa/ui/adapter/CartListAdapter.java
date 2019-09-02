@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,11 +39,12 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyHold
     private Context context;
     private MainActivity activity;
     public List<CartProductBean> mList;
+    private OnCartCheckbox onCartCheckbox;
 
-
-    public CartListAdapter(Context context, List<CartProductBean> mList) {
+    public CartListAdapter(Context context, List<CartProductBean> mList,OnCartCheckbox onCartCheckbox) {
         this.context = context;
         this.mList = mList;
+        this.onCartCheckbox = onCartCheckbox;
     }
 
     @NonNull
@@ -70,6 +73,11 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyHold
 //                startActivity(intent);
 //            }
 //        });
+        holder.chx_cart.setChecked(macRentOutPoBean.isCartCheckbox());
+        holder.chx_cart.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            onCartCheckbox.onCartChebox(position,isChecked);
+        });
+
     }
 
     @Override
@@ -82,7 +90,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyHold
         @BindView(R.id.imageview)
         ImageView imageview;
 
-
+        @BindView(R.id.chx_cart)
+        CheckBox chx_cart;
         @BindView(R.id.txt_cart_product_title)
         TextView txt_cart_product_title;
         @BindView(R.id.txt_cart_product_type)
@@ -99,4 +108,9 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyHold
 
         }
     }
+
+    public interface OnCartCheckbox{
+        void onCartChebox(int postion,boolean isChecked);
+    }
+
 }

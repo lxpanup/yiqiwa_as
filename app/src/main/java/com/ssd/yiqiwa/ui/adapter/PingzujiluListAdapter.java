@@ -46,7 +46,7 @@ public class PingzujiluListAdapter extends RecyclerView.Adapter<PingzujiluListAd
 
     @Override
     public int getItemCount() {
-        return mList.size() == 0 ? 1 : mList.size();
+        return mList.size();
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
