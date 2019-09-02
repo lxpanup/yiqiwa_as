@@ -237,6 +237,19 @@ public interface Api {
     Call<BaseBean<MacBuyPoBean>> buyDetail(@Query("bId") int bId);
 
 
+
+
+
+    /** ******************** 购物车 **************************** */
+    /**
+     * 订单-生成四种订单-- 1购买 2出售 3承租 4出租 用户而言 JSON 的数据 ,建议用这个
+     * @return .
+     */
+    @POST("order/produceOrderJson")
+    Call<JsonEntity> orderProduceOrderJson(@Query("data") String data);
+
+
+
     /** ******************** 区域经理 **************************** */
     /**
      * 区域经理的订单 预约订单

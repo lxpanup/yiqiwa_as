@@ -6,9 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
+import com.ssd.yiqiwa.api.Api;
+import com.ssd.yiqiwa.model.entity.BaseBeanList;
 import com.ssd.yiqiwa.model.entity.CartProductBean;
+import com.ssd.yiqiwa.model.entity.HomeBannerImages;
+import com.ssd.yiqiwa.model.entity.JsonEntity;
 import com.ssd.yiqiwa.ui.activities.base.BaseActivity;
 import com.ssd.yiqiwa.ui.adapter.CartConfirmAdapter;
 import com.ssd.yiqiwa.ui.adapter.CartListAdapter;
@@ -22,6 +27,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -78,8 +86,7 @@ public class CartConfirmActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.txt_cart_commint:
-                ToastUtils.showLong("预约成功");
-                finish();
+                getOrderProduceOrderJson();
                 break;
         }
     }
@@ -103,4 +110,36 @@ public class CartConfirmActivity extends BaseActivity {
             cartProductBean.setProductPriceUint(productPriceUint);
         }
     }
+
+
+    /**
+     * 提交预约
+     */
+    public void getOrderProduceOrderJson(){
+        Api request = getRetrofit().create(Api.class);
+        String jsonStr = "[   {     \"userId\" : \"18\",     \"count\" : \"11\",     \"type\" : 2,     \"produceId\" : 1,     \"describes\" : \" \"   }]";
+        Call<JsonEntity> call = request.orderProduceOrderJson(jsonStr);
+        call.enqueue(new Callback<JsonEntity>() {
+            //请求成功时回调
+            @Override
+            public void onResponse(Call<JsonEntity> call, Response<JsonEntity> response) {
+                hideDialog();
+                JsonEntity baseBeanList = response.body();
+                if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                    finish();
+                }else{
+                    ToastUtils.showLong(baseBeanList.getMsg());
+                }
+
+            }
+            //请求失败时回调
+            @Override
+            public void onFailure(Call<JsonEntity> call, Throwable throwable) {
+                LogUtils.e("请求失败");
+                LogUtils.e(throwable.getMessage());
+            }
+        });
+    }
+
 }

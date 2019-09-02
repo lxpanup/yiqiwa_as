@@ -140,7 +140,7 @@ public class GoumaiDetailActivity extends BaseActivity {
                 break;
             case R.id.tv_cart:
                 ToastUtils.showLong(Constants.addCartListMessage(new CartProductBean(productId,productType,
-                        rentFrom,coverImage,productTile,projectType,productPrice,"","","",productPriceUint,false)));
+                        rentFrom,coverImage,productTile,projectType,productPrice,"","","","","",productPriceUint,false)));
                 break;
             case R.id.tv_buyer:
                 startActivity(new Intent(activity,CartConfirmActivity.class));

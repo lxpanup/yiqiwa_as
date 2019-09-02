@@ -156,7 +156,7 @@ public class CZDetailActivity extends BaseActivity {
 
 
                 ToastUtils.showLong(Constants.addCartListMessage(new CartProductBean(productId,productType,
-                        rentFrom,coverImage,productTile,projectType,"",priceDay,priceHour,priceMonth,productPriceUint,false)));
+                        rentFrom,coverImage,productTile,projectType,"",priceDay,priceHour,priceMonth,productPriceUint,"","",false)));
 
 
                 break;
