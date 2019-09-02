@@ -70,41 +70,12 @@ public class MainActivity extends BaseActivity {
                 .build();
 
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
-
-
+        viewPager.setOffscreenPageLimit(4);
         //设置消息数
         navigationController.setMessageNumber(1, 8);
 
         //自动适配ViewPager页面切换
         navigationController.setupWithViewPager(viewPager);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-                //
-
-//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                    if (SPStaticUtils.getInt(Constants.SP_USER_ID) == -1) {
-//                        new CommomDialog(MainActivity.this, "提示", "用户还未登录", (dialog, confirm) -> {
-//                            if (confirm) {
-//                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                            }
-//                        }).show();
-//                    }
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
-//        StatusBarUtil.setTransparentForImageViewInFragment(MainActivity.this,fakeStatusbar);
 
     }
 

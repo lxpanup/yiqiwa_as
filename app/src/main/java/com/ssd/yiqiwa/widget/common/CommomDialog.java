@@ -146,16 +146,13 @@ public class CommomDialog extends Dialog implements View.OnClickListener{
             submitTxt.setText(positiveName);
         }
 
-
         if(!TextUtils.isEmpty(negativeName)){
             cancelTxt.setText(negativeName);
         }
 
-
         if(!TextUtils.isEmpty(title)){
             titleTxt.setText(title);
         }
-
     }
 
 

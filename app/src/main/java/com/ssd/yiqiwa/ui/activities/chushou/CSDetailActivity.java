@@ -114,7 +114,7 @@ public class CSDetailActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.img_back,R.id.tv_cart,R.id.tv_buyer})
+    @OnClick({R.id.img_back,R.id.tv_buyer})
     public void onViewClick(View v){
         switch (v.getId()){
             case R.id.img_back:

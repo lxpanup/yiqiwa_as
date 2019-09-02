@@ -1,15 +1,31 @@
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color">
+    android:background="@color/bg_color"
+    app:srlPrimaryColor="@color/colorPrimary"
+    app:srlAccentColor="@android:color/white"
+    app:srlEnableHeaderTranslationContent="false"
+    app:srlEnablePreviewInEditMode="false"
+    app:srlEnableNestedScrolling="true">
 
-    <com.ssd.yiqiwa.widget.LoadMoreRecyclerView
-        android:id="@+id/recycler_view"
+    <com.scwang.smartrefresh.header.MaterialHeader
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:descendantFocusability="beforeDescendants"
-        android:fastScrollEnabled="false"/>
+        android:layout_marginTop="?attr/actionBarSize"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:background="@android:color/white"
+        android:overScrollMode="never"/>
+    <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srlPrimaryColor="@android:color/white"/>
 
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

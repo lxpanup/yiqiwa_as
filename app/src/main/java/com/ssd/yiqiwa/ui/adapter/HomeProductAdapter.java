@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.model.entity.ProductBean;
 import com.ssd.yiqiwa.ui.activities.MainActivity;
+import com.ssd.yiqiwa.ui.activities.chushou.CSDetailActivity;
 import com.ssd.yiqiwa.ui.activities.chuzhu.CZDetailActivity;
 import com.ssd.yiqiwa.utils.Constants;
 import com.ssd.yiqiwa.utils.DateFormatUtil;
@@ -78,7 +79,15 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
         holder.lil_item_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, CZDetailActivity.class));
+                Intent intent = new Intent();
+                if(productBean.getType()==1) {
+                    intent.setClass(context,CZDetailActivity.class);
+                }else{
+                    intent.setClass(context, CSDetailActivity.class);
+                }
+                intent.putExtra("productRoId",productBean.getId()+"");
+                startActivity(intent);
+
             }
         });
     }
