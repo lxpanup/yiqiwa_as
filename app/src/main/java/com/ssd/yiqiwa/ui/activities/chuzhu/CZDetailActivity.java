@@ -156,7 +156,7 @@ public class CZDetailActivity extends BaseActivity {
 
 
                 ToastUtils.showLong(Constants.addCartListMessage(new CartProductBean(productId,productType,
-                        rentFrom,coverImage,productTile,projectType,"",priceDay,priceHour,priceMonth,productPriceUint,"","",false)));
+                        rentFrom,coverImage,productTile,projectType,"",priceDay,priceHour,priceMonth,productPriceUint,"1","",false)));
 
 
                 break;
@@ -211,6 +211,7 @@ public class CZDetailActivity extends BaseActivity {
      * 获取产品信息
      */
     public void getRentOutDetail(int roId){
+        showDialog();
         Api request = getRetrofit().create(Api.class);
         Call<BaseBean<MacRentOutPoBean>> call = request.rentOutDetail(roId);
         call.enqueue(new Callback<BaseBean<MacRentOutPoBean>>() {
@@ -230,6 +231,7 @@ public class CZDetailActivity extends BaseActivity {
             public void onFailure(Call<BaseBean<MacRentOutPoBean>> call, Throwable throwable) {
                 LogUtils.e("请求失败");
                 LogUtils.e(throwable.getMessage());
+                hideDialog();
             }
         });
     }
@@ -246,7 +248,7 @@ public class CZDetailActivity extends BaseActivity {
                 .setImageLoader(new GlideImageLoader())
                 .start();
         txt_product_name.setText(macRentOutPoBean.getTitle());
-        txt_product_time.setText(DateFormatUtil.getDateFormatYMD(macRentOutPoBean.getCreateDate()));
+        txt_product_time.setText("发布时间:"+DateFormatUtil.getDateFormatYMD(macRentOutPoBean.getCreateDate()));
 
 
         txt_product_num.setText(macRentOutPoBean.getViewAmount());

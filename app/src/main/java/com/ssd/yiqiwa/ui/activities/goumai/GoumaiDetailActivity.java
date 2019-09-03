@@ -140,7 +140,7 @@ public class GoumaiDetailActivity extends BaseActivity {
                 break;
             case R.id.tv_cart:
                 ToastUtils.showLong(Constants.addCartListMessage(new CartProductBean(productId,productType,
-                        rentFrom,coverImage,productTile,projectType,productPrice,"","","","","",productPriceUint,false)));
+                        rentFrom,coverImage,productTile,projectType,productPrice,"","","",productPriceUint,"1","",false)));
                 break;
             case R.id.tv_buyer:
                 startActivity(new Intent(activity,CartConfirmActivity.class));
@@ -192,6 +192,7 @@ public class GoumaiDetailActivity extends BaseActivity {
      * 获取产品信息
      */
     public void getRentOutDetail(int sId){
+        showDialog();
         Api request = getRetrofit().create(Api.class);
         Call<BaseBean<MacSellPoBean>> call = request.sellDetail(sId);
         call.enqueue(new Callback<BaseBean<MacSellPoBean>>() {
@@ -211,6 +212,7 @@ public class GoumaiDetailActivity extends BaseActivity {
             public void onFailure(Call<BaseBean<MacSellPoBean>> call, Throwable throwable) {
                 LogUtils.e("请求失败");
                 LogUtils.e(throwable.getMessage());
+                hideDialog();
             }
         });
     }
@@ -227,7 +229,7 @@ public class GoumaiDetailActivity extends BaseActivity {
                 .setImageLoader(new GlideImageLoader())
                 .start();
         txt_product_name.setText(macRentOutPoBean.getTitle());
-        txt_product_time.setText(DateFormatUtil.getDateFormatYMD(macRentOutPoBean.getCreateDate()));
+        txt_product_time.setText("发布时间:"+DateFormatUtil.getDateFormatYMD(macRentOutPoBean.getCreateDate()));
 
 
         txt_product_num.setText(macRentOutPoBean.getViewAmount());

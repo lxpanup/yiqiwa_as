@@ -165,6 +165,7 @@ public class ChengzhuDetailActivity extends BaseActivity {
      * 获取产品信息
      */
     public void getRentOutDetail(int roId){
+        showDialog();
         Api request = getRetrofit().create(Api.class);
         Call<BaseBean<MacRentIntPoBean>> call = request.rentInDetail(roId);
         call.enqueue(new Callback<BaseBean<MacRentIntPoBean>>() {
@@ -184,6 +185,7 @@ public class ChengzhuDetailActivity extends BaseActivity {
             public void onFailure(Call<BaseBean<MacRentIntPoBean>> call, Throwable throwable) {
                 LogUtils.e("请求失败");
                 LogUtils.e(throwable.getMessage());
+                hideDialog();
             }
         });
     }
@@ -194,7 +196,7 @@ public class ChengzhuDetailActivity extends BaseActivity {
         Glide.with(context).load(Constants.ALIYUN_IMAGE_SSO+coverImage).into(img_detail);
 
         txt_product_name.setText(macRentOutPoBean.getTitle());
-        txt_product_time.setText(DateFormatUtil.getDateFormatYMD(macRentOutPoBean.getCreateDate()));
+        txt_product_time.setText("发布时间:"+DateFormatUtil.getDateFormatYMD(macRentOutPoBean.getCreateDate()));
 
 
         txt_product_num.setText(macRentOutPoBean.getViewAmount());

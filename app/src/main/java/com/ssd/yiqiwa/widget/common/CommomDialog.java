@@ -166,9 +166,6 @@ public class CommomDialog extends Dialog implements View.OnClickListener{
                 this.dismiss();
                 break;
             case R.id.dialog_close_imv:
-                if(listener != null){
-                    listener.onClick(this, false);
-                }
                 this.dismiss();
                 break;
             case R.id.yunxu_txt:

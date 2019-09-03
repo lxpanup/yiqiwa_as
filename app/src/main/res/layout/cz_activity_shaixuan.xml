@@ -183,7 +183,7 @@
                 android:layout_marginLeft="25dp"
                 android:background="@drawable/bg_tab_detail"
                 android:textSize="16sp"
-                android:text="国一" />
+                android:text="" />
 
             <TextView
                 android:layout_width="wrap_content"

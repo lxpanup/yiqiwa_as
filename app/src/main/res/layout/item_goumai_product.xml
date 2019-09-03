@@ -44,7 +44,7 @@
                 android:id="@+id/txt_cart_product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="龙工2019机型大型挖掘机"
+                android:text=""
                 android:lines="1"
                 android:ellipsize="end"
                 android:textColor="#ff000000"
@@ -93,7 +93,7 @@
                     android:id="@+id/txt_product_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="200.00"
+                    android:text="00.00"
                     android:textColor="#ffff0000"
                     android:textSize="19sp"
                     />

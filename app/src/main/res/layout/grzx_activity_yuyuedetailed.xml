@@ -53,15 +53,17 @@
 
 
         <TextView
+            android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="出租商品：龙工2019机型大型挖掘机"
+            android:text="出租商品："
             android:textColor="#ff000000"
             android:textSize="16sp"/>
 
 
 
         <TextView
+            android:id="@+id/txt_address"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,6 +72,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/txt_count"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,6 +91,7 @@
             android:textColor="#ff000000"
             android:textSize="16sp"/>
         <TextView
+            android:id="@+id/txt_price"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,6 +100,7 @@
             android:textSize="18sp"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/txt_product_ckxq"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -153,13 +158,13 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/txt_cz_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="东拉西扯销售公司"
                 android:textColor="#4E4D4D"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
@@ -177,6 +182,7 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/txt_cz_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -221,6 +227,7 @@
                 />
 
             <TextView
+                android:id="@+id/txt_cz_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -281,6 +288,7 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/txt_cc_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -305,6 +313,7 @@
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/txt_cc_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -320,6 +329,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -329,35 +339,33 @@
 
 
             <ImageView
-                android:id="@+id/img_cz_message"
+                android:id="@+id/txt_cc_message"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="5dp"
                 android:layout_alignParentRight="true"
-                android:src="@mipmap/ic_message_green"
-                />
+                android:src="@mipmap/ic_message_green" />
 
 
             <ImageView
-                android:id="@+id/img_cz_phone"
+                android:id="@+id/img_cc_phonet"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:padding="5dp"
-                android:layout_toStartOf="@+id/img_cz_message"
-                android:layout_toLeftOf="@+id/img_cz_message"
-                android:src="@mipmap/ic_phone_1"
-                />
+                android:layout_toStartOf="@+id/txt_cc_message"
+                android:layout_toLeftOf="@+id/txt_cc_message"
+                android:src="@mipmap/ic_phone_1" />
 
             <TextView
+                android:id="@+id/txt_cc_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:layout_toStartOf="@+id/img_cz_phone"
-                android:layout_toLeftOf="@+id/img_cz_phone"
+                android:layout_toStartOf="@+id/img_cc_phonet"
+                android:layout_toLeftOf="@+id/img_cc_phonet"
                 android:text="18719041111"
                 android:textColor="#4E4D4D"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
@@ -386,7 +394,8 @@
             android:textColor="#ff000000"
             android:textSize="18sp"/>
 
-        <EditText
+        <TextView
+            android:id="@+id/txt_bzxx"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
@@ -394,19 +403,31 @@
             android:background="@drawable/bg_gay_border"/>
 
 
-
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/txt_register"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:background="@drawable/btn_green_login"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:text="提交" />
+
+        <TextView
+            android:id="@+id/txt_detailed_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="20dp"
+            android:background="@drawable/bg_write_boder_2"
+            android:text="订单备注"
+            android:textColor="#ff00d98b"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/txt_gjdd"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@drawable/btn_green_login"
+            android:layout_margin="20dp"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="跟进订单" />
 
 
 </LinearLayout>

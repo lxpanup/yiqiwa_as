@@ -105,7 +105,7 @@
                             android:id="@+id/txt_product_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="龙工2019机型大型挖掘机"
+                            android:text=""
                             android:textColor="#ff222222"
                             android:textSize="15sp" />
 
@@ -114,7 +114,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/txt_product_name"
-                            android:text="发布时间：2019-07-31"
+                            android:text=""
                             android:textColor="#ff222222"
                             android:textSize="12sp" />
 
@@ -149,7 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
                             android:background="@drawable/bg_tab_detail"
-                            android:text="成都市" />
+                            android:text="" />
 
 
                         <TextView
@@ -159,7 +159,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="3dp"
                             android:background="@drawable/bg_tab_detail"
-                            android:text="2019" />
+                            android:text="" />
 
 
 
@@ -170,7 +170,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="3dp"
                             android:background="@drawable/bg_tab_detail"
-                            android:text="2019" />
+                            android:text="" />
 
 
 
@@ -181,7 +181,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="3dp"
                             android:background="@drawable/bg_tab_detail"
-                            android:text="2019" />
+                            android:text="" />
 
 
 
@@ -214,7 +214,7 @@
                                 android:id="@+id/txt_product_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="¥200.00"
+                                android:text="¥00.00"
                                 android:textColor="#ffff0000"
                                 android:textSize="15sp"
                                 />
@@ -284,7 +284,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="挖斗机"
+                                android:text=""
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />
@@ -311,7 +311,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="10吨以下"
+                                android:text=""
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />
@@ -349,7 +349,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="国一"
+                                android:text=""
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />
@@ -376,7 +376,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="5台"
+                                android:text=""
                                 android:textColor="#ff222222"
                                 android:textSize="12sp"
                                 />

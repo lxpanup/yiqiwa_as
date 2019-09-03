@@ -135,7 +135,6 @@ public class NavHomeFragment extends BaseFragment implements View.OnClickListene
             }
         });
 
-        refreshLayout.setFooterHeight(100);
 
 
         //添加Header
@@ -188,6 +187,7 @@ public class NavHomeFragment extends BaseFragment implements View.OnClickListene
 
 
     public void getHomeBanner(){
+        hideDialog();
         Api request = getRetrofit().create(Api.class);
         Call<BaseBeanList<HomeBannerImages>> call = request.homeBanner();
         call.enqueue(new Callback<BaseBeanList<HomeBannerImages>>() {

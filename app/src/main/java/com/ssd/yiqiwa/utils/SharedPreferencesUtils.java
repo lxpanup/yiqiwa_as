@@ -136,8 +136,14 @@ public class SharedPreferencesUtils {
      */
     public static <T> boolean putListData(String key, List<T> list) {
         boolean result;
-        String type = list.get(0).getClass().getSimpleName();
+
         SharedPreferences.Editor editor = sp.edit();
+        if(list.size()==0){
+            editor.putString(key, "");
+            editor.apply();
+            return true;
+        }
+        String type = list.get(0).getClass().getSimpleName();
         JsonArray array = new JsonArray();
         try {
             switch (type) {

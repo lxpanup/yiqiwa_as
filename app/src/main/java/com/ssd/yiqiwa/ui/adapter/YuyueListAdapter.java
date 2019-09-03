@@ -2,6 +2,7 @@ package com.ssd.yiqiwa.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ import static com.blankj.utilcode.util.ActivityUtils.startActivity;
 /**
  * Create by SunnyDay on 2019/03/21
  * <p>
- *  发布列表商品
+ *  预约列表商品
  */
 public class YuyueListAdapter extends RecyclerView.Adapter<YuyueListAdapter.MyHolder> {
     private Context context;
@@ -67,8 +68,22 @@ public class YuyueListAdapter extends RecyclerView.Adapter<YuyueListAdapter.MyHo
 
         holder.txt_product_stutas.setText(Constants.getOrderType(Integer.parseInt(macRentOutPoBean.getOrderType())));
 
-
         holder.txt_zongjinge.setText(macRentOutPoBean.getPrice());
+
+        if(macRentOutPoBean.getStatus().equals("3")){
+            holder.txt_cart_status.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+            holder.txt_cart_status.setText("订单成功");
+        }else if(macRentOutPoBean.getStatus().equals("4")){
+            holder.txt_cart_status.setText("订单失败");
+            holder.txt_cart_status.setTextColor(context.getResources().getColor(R.color.red));
+        }else if(macRentOutPoBean.getStatus().equals("2")){
+        }else{
+            holder.txt_cart_status.setVisibility(View.GONE);
+            holder.txt_gengjing.setVisibility(View.VISIBLE);
+
+        }
+
+
 
         holder.txt_gengjing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +96,8 @@ public class YuyueListAdapter extends RecyclerView.Adapter<YuyueListAdapter.MyHo
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, YuyueDetailedActivity.class);
-                intent.putExtra("productRoId",macRentOutPoBean.getOsId());
+                intent.putExtra("productId",macRentOutPoBean.getOsId());
+                intent.putExtra("ordertype",macRentOutPoBean.getOrderType());
                 startActivity(intent);
             }
         });
@@ -115,6 +131,9 @@ public class YuyueListAdapter extends RecyclerView.Adapter<YuyueListAdapter.MyHo
         @BindView(R.id.txt_gengjing)
         TextView txt_gengjing;
 
+        @BindView(R.id.txt_cart_status)
+        TextView txt_cart_status;
+
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -130,6 +149,7 @@ public class YuyueListAdapter extends RecyclerView.Adapter<YuyueListAdapter.MyHo
 
     public interface OnClickGengjing{
         void onClickGengjing(int postion,int osId);
+
     }
 
 }

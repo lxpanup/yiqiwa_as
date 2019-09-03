@@ -6,7 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.api.Api;
@@ -23,6 +25,7 @@ import com.ssd.yiqiwa.utils.SharedPreferencesUtils;
 import com.ssd.yiqiwa.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,7 +50,7 @@ public class CartConfirmActivity extends BaseActivity {
 
     private CartConfirmAdapter cartListAdapter;
     private List<CartProductBean> cartProductBeanList;
-
+    private List<CartProductBean> listData;
 
     @Override
     public Object offerLayout() {
@@ -62,7 +65,7 @@ public class CartConfirmActivity extends BaseActivity {
         recy_cart_confirm.setLayoutManager(new LinearLayoutManager(activity));
 
         cartProductBeanList = new ArrayList<>();
-        List<CartProductBean> listData = SharedPreferencesUtils.getListData(Constants.SP_CART_LIST_MESSAGE, CartProductBean.class);
+        listData = SharedPreferencesUtils.getListData(Constants.SP_CART_LIST_MESSAGE, CartProductBean.class);
         for(CartProductBean item:listData){
             if(item.isCartCheckbox()){
                 cartProductBeanList.add(item);
@@ -100,13 +103,15 @@ public class CartConfirmActivity extends BaseActivity {
      */
     public void addOrderMessage(int postion,String count,String remarks,String productPriceUint){
         CartProductBean cartProductBean = cartProductBeanList.get(postion);
-        if(count!=null) {
+        if(null!=count) {
             cartProductBean.setProductCount(count);
+        }else{
+            cartProductBean.setProductCount("1");
         }
-        if(remarks!=remarks) {
+        if(null!=remarks) {
             cartProductBean.setProductRemarks(remarks);
         }
-        if(productPriceUint!=productPriceUint) {
+        if(null!=productPriceUint) {
             cartProductBean.setProductPriceUint(productPriceUint);
         }
     }
@@ -116,8 +121,26 @@ public class CartConfirmActivity extends BaseActivity {
      * 提交预约
      */
     public void getOrderProduceOrderJson(){
+
+        List<HashMap<String,String>> hashMapList = new ArrayList<>();
+        HashMap<String,String> hashMap;
+        for(CartProductBean item:cartProductBeanList){
+            if(item.getProductCount().isEmpty()||Integer.parseInt(item.getProductCount())<=0){
+                ToastUtils.showShort(item.getProductTile()+"数量不能小于1");
+                return;
+            }
+            hashMap = new HashMap<>();
+            hashMap.put("userId", SPStaticUtils.getInt(Constants.SP_USER_ID)+"");
+            hashMap.put("count",item.getProductCount());
+            hashMap.put("type",item.getProductType());
+            hashMap.put("produceId",item.getProductId());
+            hashMap.put("describes",item.getProductRemarks());
+            hashMapList.add(hashMap);
+        }
+
         Api request = getRetrofit().create(Api.class);
-        String jsonStr = "[   {     \"userId\" : \"18\",     \"count\" : \"11\",     \"type\" : 2,     \"produceId\" : 1,     \"describes\" : \" \"   }]";
+        String jsonStr = GsonUtils.toJson(hashMapList);
+        LogUtils.e(jsonStr);
         Call<JsonEntity> call = request.orderProduceOrderJson(jsonStr);
         call.enqueue(new Callback<JsonEntity>() {
             //请求成功时回调
@@ -126,7 +149,8 @@ public class CartConfirmActivity extends BaseActivity {
                 hideDialog();
                 JsonEntity baseBeanList = response.body();
                 if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
-                    ToastUtils.showLong(baseBeanList.getMsg());
+                    ToastUtils.showLong("预约成功,稍后区域经理与你联系");
+                    deleteCheckBoxCartList();
                     finish();
                 }else{
                     ToastUtils.showLong(baseBeanList.getMsg());
@@ -140,6 +164,22 @@ public class CartConfirmActivity extends BaseActivity {
                 LogUtils.e(throwable.getMessage());
             }
         });
+    }
+
+
+    /**
+     * 删除购物侧
+     */
+    private void deleteCheckBoxCartList(){
+        List<CartProductBean> list = new ArrayList<>();
+        for(CartProductBean item:listData){
+            if(!item.isCartCheckbox()){
+                list.add(item);
+            }
+        }
+        listData.clear();
+        listData.addAll(list);
+        SharedPreferencesUtils.putListData(Constants.SP_CART_LIST_MESSAGE,listData);
     }
 
 }

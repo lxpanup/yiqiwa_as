@@ -3,6 +3,7 @@ package com.ssd.yiqiwa.ui.activities.gerenzhongxing;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,10 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ssd.yiqiwa.R;
 import com.ssd.yiqiwa.api.Api;
 import com.ssd.yiqiwa.model.entity.BaseBean;
@@ -48,9 +53,12 @@ public class YuyueListActivity extends BaseActivity {
     private Activity activity;
     private Context context;
 
-
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout refreshLayout;
     @BindView(R.id.recy_yuyue_list)
     RecyclerView recyYuyueList;
+
+    private int pageNo = 1;
 
     private YuyueListAdapter yuyueListAdapter;
 
@@ -76,8 +84,24 @@ public class YuyueListActivity extends BaseActivity {
         recyYuyueList.setLayoutManager(new LinearLayoutManager(activity));
         yuyueListAdapter = new YuyueListAdapter(activity, macOrderSubPos, this::getOderFollowOrder);
         recyYuyueList.setAdapter(yuyueListAdapter);
-
+        showDialog();
         getOrderMangerReserveOrder();
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
+                macOrderSubPos.clear();
+                pageNo = 0;
+                getOrderMangerReserveOrder();
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                pageNo++;
+                getOrderMangerReserveOrder();
+            }
+        });
     }
 
     @Override
@@ -101,17 +125,21 @@ public class YuyueListActivity extends BaseActivity {
      * 获取产品信息
      */
     public void getOrderMangerReserveOrder(){
+        LogUtils.e("数量:"+pageNo);
         Api request = getRetrofit().create(Api.class);
-        Call<BaseBean<PagesBean<MacOrderSubPo>>> call = request.orderMangerReserveOrder(18,1);
+        Call<BaseBean<PagesBean<MacOrderSubPo>>> call = request.orderMangerReserveOrder(18,pageNo);
         call.enqueue(new Callback<BaseBean<PagesBean<MacOrderSubPo>>>() {
             //请求成功时回调
             @Override
             public void onResponse(Call<BaseBean<PagesBean<MacOrderSubPo>>> call, Response<BaseBean<PagesBean<MacOrderSubPo>>> response) {
                 hideDialog();
+                refreshLayout.finishRefresh();
+                refreshLayout.finishLoadMore();
                 BaseBean<PagesBean<MacOrderSubPo>> baseBeanList = response.body();
                 if(baseBeanList.getCode()== Constants.HTTP_RESPONSE_OK){
                     macOrderSubPos.addAll(baseBeanList.getData().getRecords());
                     yuyueListAdapter.notifyDataSetChanged();
+
                 }else{
                     ToastUtils.showLong(baseBeanList.getMsg());
                 }
@@ -121,6 +149,9 @@ public class YuyueListActivity extends BaseActivity {
             public void onFailure(Call<BaseBean<PagesBean<MacOrderSubPo>>> call, Throwable throwable) {
                 LogUtils.e("请求失败");
                 LogUtils.e(throwable.getMessage());
+                hideDialog();
+                refreshLayout.finishRefresh();
+                refreshLayout.finishLoadMore();
             }
         });
     }
@@ -130,6 +161,7 @@ public class YuyueListActivity extends BaseActivity {
      * 跟进低订单
      */
     public void getOderFollowOrder(int postion,int osId){
+
         Api request = getRetrofit().create(Api.class);
         Call<JsonEntity> call = request.orderFollowOrder(18,osId);
         call.enqueue(new Callback<JsonEntity>() {

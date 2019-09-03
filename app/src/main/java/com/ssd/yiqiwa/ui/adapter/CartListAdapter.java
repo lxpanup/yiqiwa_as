@@ -73,6 +73,37 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyHold
 //                startActivity(intent);
 //            }
 //        });
+
+        if (macRentOutPoBean.getProductPrice().isEmpty()) {
+            holder.lil_amount_postion.setVisibility(View.GONE);
+            if(macRentOutPoBean.getPriceHour().isEmpty()&&macRentOutPoBean.getPriceDay().isEmpty()
+                    &&macRentOutPoBean.getPriceMonth().isEmpty()){
+                holder.lil_amount_postion_2.setVisibility(View.VISIBLE);
+            }else{
+                holder.lil_amount_postion_1.setVisibility(View.VISIBLE);
+                if (macRentOutPoBean.getPriceDay().isEmpty()) {
+                    holder.lil_product_price_1.setVisibility(View.GONE);
+                }else{
+                    holder.txt_product_price_1.setText(macRentOutPoBean.getPriceDay());
+                }
+                if (macRentOutPoBean.getPriceHour().isEmpty()) {
+                    holder.lil_product_price_2.setVisibility(View.GONE);
+                }else{
+                    holder.txt_product_price_2.setText(macRentOutPoBean.getPriceHour());
+                }
+                if (macRentOutPoBean.getPriceMonth().isEmpty()) {
+                    holder.lil_product_price_3.setVisibility(View.GONE);
+                }else{
+                    holder.txt_product_price_3.setText(macRentOutPoBean.getPriceMonth());
+                }
+            }
+        }else{
+            holder.txt_product_price.setText(macRentOutPoBean.getProductPrice());
+        }
+
+
+
+
         holder.chx_cart.setChecked(macRentOutPoBean.isCartCheckbox());
         holder.chx_cart.setOnCheckedChangeListener((buttonView, isChecked) -> {
             onCartCheckbox.onCartChebox(position,isChecked);
@@ -96,10 +127,32 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyHold
         TextView txt_cart_product_title;
         @BindView(R.id.txt_cart_product_type)
         TextView txt_cart_product_type;
-        @BindView(R.id.txt_product_price)
-        TextView txt_product_price;
         @BindView(R.id.txt_gerenqiye)
         TextView txt_gerenqiye;
+
+        @BindView(R.id.lil_amount_postion)
+        LinearLayout lil_amount_postion;
+        @BindView(R.id.lil_amount_postion_1)
+        LinearLayout lil_amount_postion_1;
+        @BindView(R.id.lil_amount_postion_2)
+        LinearLayout lil_amount_postion_2;
+
+        @BindView(R.id.lil_product_price_1)
+        LinearLayout lil_product_price_1;
+        @BindView(R.id.lil_product_price_2)
+        LinearLayout lil_product_price_2;
+        @BindView(R.id.lil_product_price_3)
+        LinearLayout lil_product_price_3;
+
+        @BindView(R.id.txt_product_price)
+        TextView txt_product_price;
+        @BindView(R.id.txt_product_price_1)
+        TextView txt_product_price_1;
+        @BindView(R.id.txt_product_price_2)
+        TextView txt_product_price_2;
+        @BindView(R.id.txt_product_price_3)
+        TextView txt_product_price_3;
+
 
         public MyHolder(View itemView) {
             super(itemView);

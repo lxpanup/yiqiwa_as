@@ -14,6 +14,7 @@ import com.ssd.yiqiwa.model.entity.MacSellPoBean;
 import com.ssd.yiqiwa.model.entity.MachineBrandBean;
 import com.ssd.yiqiwa.model.entity.MachineModelBean;
 import com.ssd.yiqiwa.model.entity.MachineTypeBean;
+import com.ssd.yiqiwa.model.entity.OrderDetailBean;
 import com.ssd.yiqiwa.model.entity.PagesBean;
 import com.ssd.yiqiwa.model.entity.ProductBean;
 
@@ -149,6 +150,7 @@ public interface Api {
     @POST("machineModel/type")
     Call<BaseBeanList<MachineModelBean>> machineModelType(@Query("mbId") int mbId,@Query("type") int type);
 
+    /** ******************** 发布信息 **************************** */
     /**
      * 出租发布
      * @return .
@@ -238,6 +240,13 @@ public interface Api {
 
 
 
+    /**
+     * 我的出租信息
+     * @return .
+     */
+    @POST("user/rentOutInfo")
+    Call<BaseBeanList<MacRentOutPoBean>> userRentOutInfo(@Query("uId") int uId);
+
 
 
     /** ******************** 购物车 **************************** */
@@ -258,6 +267,49 @@ public interface Api {
     @POST("order/mangerReserveOrder")
     Call<BaseBean<PagesBean<MacOrderSubPo>>> orderMangerReserveOrder(@Query("uId") int uId, @Query("pageNo") int pageNo);
 
+    /**
+     * 区域经理的订单 跟进订单
+     * @return .
+     */
+    @POST("order/mangerFollowOrder")
+    Call<BaseBean<PagesBean<MacOrderSubPo>>> orderMangerFollowOrder(@Query("uId") int uId, @Query("pageNo") int pageNo);
+
+    /**
+     * 区域经理的订单 历史订单
+     * @return .
+     */
+    @POST("order/mangerHistoryOrder")
+    Call<BaseBean<PagesBean<MacOrderSubPo>>> orderMangerHistoryOrder(@Query("uId") int uId, @Query("pageNo") int pageNo);
+
+
+    /**
+     * 区域经理的订单详情-购买
+     * @return .
+     */
+    @POST("order/detail")
+    Call<BaseBean<OrderDetailBean<MacBuyPoBean>>> orderMangerReserveOrder(@Query("theId") String theId);
+
+    /**
+     * 区域经理的订单详情-出售
+     * @return .
+     */
+    @POST("order/detail")
+    Call<BaseBean<OrderDetailBean<MacSellPoBean>>> orderMangerReserveOrder2(@Query("theId") String theId);
+
+    /**
+     * 区域经理的订单详情-出租
+     * @return .
+     */
+    @POST("order/detail")
+    Call<BaseBean<OrderDetailBean<MacRentOutPoBean>>> orderMangerReserveOrder3(@Query("theId") String theId);
+
+    /**
+     * 区域经理的订单详情-承租
+     * @return .
+     */
+    @POST("order/detail")
+    Call<BaseBean<OrderDetailBean<MacRentIntPoBean>>> orderMangerReserveOrder4(@Query("theId") String theId);
+
 
     /**
      * 跟进订单
@@ -266,6 +318,34 @@ public interface Api {
     @POST("order/followOrder")
     Call<JsonEntity> orderFollowOrder(@Query("uId") int uId,@Query("osId") int osId);
 
+
+
+    /**
+     * 修改跟进订单状态
+     * @return .
+     */
+    @POST("order/opOrder")
+    Call<JsonEntity> orderOpOrder(@Query("uId") int uId, @Query("osId") String osId,
+                                     @Query("remark")String remark,@Query("managerFlowNo") String managerFlowNo,
+                                    @Query("managerConfirmPic")String managerConfirmPic,@Query("status") String status);
+
+
+
+
+
+    /** ******************** 订单历史信息 **************************** */
+    /**
+     * 我的交易记录_买卖记录
+     * @return .
+     */
+    @POST("order/userBuySellOrder")
+    Call<BaseBean<PagesBean<MacOrderSubPo>>> orderUserBuySellOrder(@Query("uId") int uId, @Query("pageNo") int pageNo);
+    /**
+     * 我的交易记录_租赁记录
+     * @return .
+     */
+    @POST("order/userRentOrder")
+    Call<BaseBean<PagesBean<MacOrderSubPo>>> orderUserRentOrder(@Query("uId") int uId, @Query("pageNo") int pageNo);
 
 
     /**

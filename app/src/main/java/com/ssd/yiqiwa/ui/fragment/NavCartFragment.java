@@ -109,6 +109,15 @@ public class NavCartFragment extends BaseFragment {
     public void onViewClick(View v){
         switch (v.getId()){
             case R.id.txt_cart_commint:
+                for(int i = 0; i< cartProductBeanList.size();i++){
+                    if(cartProductBeanList.get(i).isCartCheckbox()){
+                        break;
+                    }
+                    if(i == cartProductBeanList.size()-1 ){
+                        ToastUtils.showShort("未选择商品");
+                        return;
+                    }
+                }
                 SharedPreferencesUtils.putListData(Constants.SP_CART_LIST_MESSAGE,cartProductBeanList);
                 startActivity(new Intent(getActivity(), CartConfirmActivity.class));
                 break;
@@ -151,7 +160,9 @@ public class NavCartFragment extends BaseFragment {
         cartListAdapter.notifyDataSetChanged();
     }
 
-
+    /**
+     * 删除购物侧
+     */
     private void deleteCheckBoxCartList(){
         List<CartProductBean> list = new ArrayList<>();
         for(CartProductBean item:cartProductBeanList){

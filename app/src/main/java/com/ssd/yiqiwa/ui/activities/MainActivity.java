@@ -25,19 +25,6 @@ import com.ssd.yiqiwa.widget.common.CommomDialog;
 import com.zaaach.citypicker.CityPicker;
 import com.zaaach.citypicker.adapter.OnPickListener;
 import com.zaaach.citypicker.model.City;
-import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.PicassoEngine;
-import com.zhihu.matisse.filter.Filter;
-import com.zhihu.matisse.internal.entity.IncapableCause;
-import com.zhihu.matisse.internal.entity.Item;
-//import com.ssd.yiqiwa.utils.StatusBarUtil;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import butterknife.BindView;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
@@ -76,6 +63,27 @@ public class MainActivity extends BaseActivity {
 
         //自动适配ViewPager页面切换
         navigationController.setupWithViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if(i==4){
+                    if(SPStaticUtils.getInt(Constants.SP_USER_ID)==-1){
+                        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
 
     }
 

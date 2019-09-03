@@ -24,7 +24,11 @@ import com.ssd.yiqiwa.ui.activities.gerenzhongxing.BankActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.CollectActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.IntegralActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.MyJianliActivity;
+import com.ssd.yiqiwa.ui.activities.gerenzhongxing.OrderBuySellActivity;
+import com.ssd.yiqiwa.ui.activities.gerenzhongxing.OrderRentActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.PingzujiluListActivity;
+import com.ssd.yiqiwa.ui.activities.gerenzhongxing.QYGengJinListActivity;
+import com.ssd.yiqiwa.ui.activities.gerenzhongxing.QYLishiListActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.QrCodeActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.SettingActivity;
 import com.ssd.yiqiwa.ui.activities.gerenzhongxing.UpdateUserActivity;
@@ -32,6 +36,7 @@ import com.ssd.yiqiwa.ui.activities.gerenzhongxing.YuyueListActivity;
 import com.ssd.yiqiwa.ui.activities.jizhu.JizhuListActivity;
 import com.ssd.yiqiwa.ui.activities.publish.MyPublishActivity;
 import com.ssd.yiqiwa.ui.adapter.MessageListAdapter;
+import com.ssd.yiqiwa.ui.adapter.OrderBuySellListAdapter;
 import com.ssd.yiqiwa.utils.Constants;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -65,11 +70,8 @@ public class NavMyFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(SPStaticUtils.getInt(Constants.SP_USER_ID)==-1){
-            startActivity(new Intent(getActivity(),LoginActivity.class));
-        }else{
+        if(SPStaticUtils.getInt(Constants.SP_USER_ID)!=-1){
             getUserDetail();
-
         }
 
     }
@@ -156,16 +158,17 @@ public class NavMyFragment extends BaseFragment {
                 YuyueListActivity.start(getActivity());
                 break;
             case R.id.txt_quyujl_gengjingdindan:
-                YuyueListActivity.start(getActivity());
+                QYGengJinListActivity.start(getActivity());
                 break;
             case R.id.txt_quyujl_lishidingdan:
-                YuyueListActivity.start(getActivity());
+                QYLishiListActivity.start(getActivity());
+
                 break;
             case R.id.txt_pingzhu_jilu:
-                PingzujiluListActivity.start(getActivity());
+                OrderRentActivity.start(getActivity());
                 break;
             case R.id.txt_goumai_jilu:
-                PingzujiluListActivity.start(getActivity());
+                OrderBuySellActivity.start(getActivity());
                 break;
 
 

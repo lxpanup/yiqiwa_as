@@ -16,7 +16,7 @@
         android:id="@+id/txt_gerenqiye"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="个人"
+        android:text=""
         android:textColor="#ff222222"
         android:textSize="20sp"
         />
@@ -33,8 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginLeft="5dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/test_wjj" />
+            android:scaleType="fitXY" />
 
 
         <LinearLayout
@@ -47,7 +46,7 @@
                 android:id="@+id/txt_cart_product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="龙工2019机型大型挖掘机"
+                android:text=""
                 android:lines="1"
                 android:ellipsize="end"
                 android:textColor="#ff000000"
@@ -63,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:ellipsize="end"
-                android:text="四川成都   |  2015  |  3000h"
+                android:text=""
                 android:textColor="#ff222222"
                 android:textSize="12sp" />
 
@@ -84,7 +83,7 @@
                     android:id="@+id/txt_product_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="200.00"
+                    android:text="00.00"
                     android:textColor="#ffff0000"
                     android:textSize="19sp"
                     />
@@ -92,12 +91,124 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="元/天"
+                    android:text="元/台"
                     android:textColor="#ff000000"
                     android:textSize="13sp"
                     />
 
 
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lil_amount_postion_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="bottom">
+                <LinearLayout
+                    android:id="@+id/lil_product_price_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="¥"
+                        android:textColor="#ffff0000"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:id="@+id/txt_product_price_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00.00"
+                        android:textColor="#ffff0000"
+                        android:textSize="19sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="元/天"
+                        android:textColor="#ff000000"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/lil_product_price_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="¥"
+                            android:textColor="#ffff0000"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:id="@+id/txt_product_price_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00.00"
+                            android:textColor="#ffff0000"
+                            android:textSize="19sp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="元/时"
+                            android:textColor="#ff000000"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lil_product_price_3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="¥"
+                            android:textColor="#ffff0000"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:id="@+id/txt_product_price_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="00.00"
+                            android:textColor="#ffff0000"
+                            android:textSize="19sp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="元/月"
+                            android:textColor="#ff000000"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lil_amount_postion_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffff0000"
+                    android:textSize="16sp"
+                    android:text="价格面议"/>
             </LinearLayout>
 
             <LinearLayout
@@ -127,7 +238,7 @@
                         android:paddingLeft="4dp"
                         android:background="@drawable/bg_edit_publish"
                         android:textColor="#222222"
-                        android:text="200" />
+                        android:text="1" />
 
 
                     <LinearLayout
@@ -138,7 +249,8 @@
                         android:background="@drawable/bg_edit_publish">
 
                         <Spinner
-                            android:layout_width="65dp"
+                            android:id="@+id/spr_cart"
+                            android:layout_width="60dp"
                             android:gravity="right"
                             android:layout_height="wrap_content"
                             android:entries="@array/date_dange">
@@ -152,6 +264,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+             android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -170,6 +283,7 @@
                 android:gravity="right">
 
                 <TextView
+                    android:id="@+id/txt_yujiprice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5200"
@@ -191,6 +305,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+                android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -234,7 +349,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:text="备注信息："
                 android:textColor="#ff000000"
                 android:textSize="15sp"
@@ -245,6 +359,7 @@
                 android:id="@+id/edt_remarks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:background="@drawable/bg_edit_publish"/>
         </LinearLayout>
 

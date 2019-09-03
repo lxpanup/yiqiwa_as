@@ -102,8 +102,6 @@ public class CSDetailActivity extends BaseActivity {
         productRoId = getIntent().getStringExtra("productRoId");
 
 
-
-
         getRentOutDetail(Integer.parseInt(productRoId));
     }
 
@@ -169,6 +167,7 @@ public class CSDetailActivity extends BaseActivity {
      * 获取产品信息
      */
     public void getRentOutDetail(int roId){
+        showDialog();
         Api request = getRetrofit().create(Api.class);
         Call<BaseBean<MacBuyPoBean>> call = request.buyDetail(roId);
         call.enqueue(new Callback<BaseBean<MacBuyPoBean>>() {
@@ -188,6 +187,7 @@ public class CSDetailActivity extends BaseActivity {
             public void onFailure(Call<BaseBean<MacBuyPoBean>> call, Throwable throwable) {
                 LogUtils.e("请求失败");
                 LogUtils.e(throwable.getMessage());
+                hideDialog();
             }
         });
     }
